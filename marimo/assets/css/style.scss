@@ -643,15 +643,7 @@ body {
   }
   // ロゴのモチーフ
   .section05 {
-    background-image: url("./../img/section05_bg.jpg");
-    background-position: center center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-color: #fff;
-    @include bpTb {
-      background-image: url("./../img/section05_bg_sp.jpg");
-      background-position: center center;
-    }
+    background: transparent;
     &_content {
       width: px-vw(1044);
       margin: auto;
@@ -682,7 +674,6 @@ body {
   }
   // 経営理念
   .section06 {
-    background-color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -779,7 +770,6 @@ body {
   }
   // ニュース
   .news {
-    background-color: #fff;
     &_content {
       width: px-vw(1700);
       padding-top: px-vw(160);
@@ -852,7 +842,7 @@ body {
 // フッター
 // ------------------------------
 .l-footer {
-  background-color: #fff;
+  background: transparent;
   &_logo {
     width: px-vw(514);
     margin: 0 auto px-vw(530);

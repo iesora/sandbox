@@ -1398,17 +1398,7 @@ body {
   }
 }
 .l-main .section05 {
-  background-image: url("./../img/section05_bg.jpg");
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-color: #fff;
-}
-@media screen and (max-width: 768px) {
-  .l-main .section05 {
-    background-image: url("./../img/section05_bg_sp.jpg");
-    background-position: center center;
-  }
+  background: transparent;
 }
 .l-main .section05_content {
   width: 34.8vw;
@@ -1445,7 +1435,6 @@ body {
   }
 }
 .l-main .section06 {
-  background-color: #fff;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1568,9 +1557,6 @@ body {
 .l-main .section06_btn a:hover::after {
   background-color: rgba(0, 0, 0, 0.1);
 }
-.l-main .news {
-  background-color: #fff;
-}
 .l-main .news_content {
   width: 56.6666666667vw;
   padding-top: 5.3333333333vw;
@@ -1650,7 +1636,7 @@ body {
   font-family: "Poppins", sans-serif;
 }
 .l-footer {
-  background-color: #fff;
+  background: transparent;
 }
 .l-footer_logo {
   width: 17.1333333333vw;
