@@ -65,37 +65,6 @@ const slides = Array.isArray([
       </section>
     `,
   },
-  {
-    id: "section03",
-    label: "(TVCM)",
-    centerText: "TVCM",
-    html: `
-      <section class="l-main_section section03" id="section03">
-        <div class="section03_content">
-          <div class="section03_title">
-            <p>(TVCM)</p>
-            <h2>
-              <img src="./assets/img/section03_title.png" alt="テレビCM">
-            </h2>
-          </div>
-          <div class="section03_video">
-            <figure class="js-modal-btn" data-video-id="EwcFG22YRdk">
-              <img src="./assets/img/section03_thumb01.jpg" alt="">
-              <figcaption>〇〇篇 30秒</figcaption>
-            </figure>
-            <figure class="js-modal-btn" data-video-id="EwcFG22YRdk">
-              <img src="./assets/img/section03_thumb02.jpg" alt="">
-              <figcaption>〇〇篇 30秒</figcaption>
-            </figure>
-            <figure class="js-modal-btn" data-video-id="EwcFG22YRdk">
-              <img src="./assets/img/section03_thumb03.jpg" alt="">
-              <figcaption>メイキング映像</figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
-    `,
-  },
 ])
   ? window.stageSlides
   : [];
@@ -165,6 +134,8 @@ const TAIL_OVERLAY_EXIT_THRESHOLD = Math.max(
   LAST_SLIDE_BRIDGE_START + 0.02,
   TAIL_MODE_THRESHOLD - 0.18
 ); // ≈0.74
+// section03 ⇄ section04 のブリッジ演出を無効化し、常時シームレスに見せる
+const DISABLE_BRIDGE_SECTION03_04 = true;
 
 let viewportHeight = window.innerHeight;
 let currentIndex = 0;
@@ -511,6 +482,7 @@ function onScroll() {
 // ========================================
 // 進捗更新（メイン処理）
 // ========================================
+let lastSectionChange = { oldIndex: null, newIndex: null };
 function updateProgress() {
   const scrollY = window.scrollY;
   let activeUnitHeight = getUnitHeightForIndex(activeSectionIndex);
@@ -554,8 +526,46 @@ function updateProgress() {
     }
   }
 
+  // Active section changed: only log if not immediately repeated
+  if (activeSectionIndex !== currentIndex) {
+    const oldIndex = currentIndex;
+    const newIndex = activeSectionIndex;
+    const oldSlide = slides[oldIndex] || {};
+    const newSlide = slides[newIndex] || {};
+    // Check for duplicate logs
+    if (
+      lastSectionChange.oldIndex === oldIndex &&
+      lastSectionChange.newIndex === newIndex
+    ) {
+      // Prevent duplicate log and update from occurring
+      return;
+    }
+    // Store last
+    lastSectionChange.oldIndex = oldIndex;
+    lastSectionChange.newIndex = newIndex;
+    console.log(
+      `[stage-gallery] Section changed: ${oldIndex} (${
+        oldSlide.id || "?"
+      }) -> ${newIndex} (${newSlide.id || "?"})`
+    );
+    currentIndex = activeSectionIndex;
+    nextIndex =
+      currentIndex === slideCount - 1 ? currentIndex : currentIndex + 1;
+    refreshLayers();
+  }
+
   // インデックスに変更があれば画像とインジケータを更新
   if (activeSectionIndex !== currentIndex) {
+    // 画面が切り替わる時にログを出す
+    const oldIndex = currentIndex;
+    const newIndex = activeSectionIndex;
+    const oldSlide = slides[oldIndex] || {};
+    const newSlide = slides[newIndex] || {};
+    console.log(
+      `[stage-gallery] Section changed: ${oldIndex} (${
+        oldSlide.id || "?"
+      }) -> ${newIndex} (${newSlide.id || "?"})`
+    );
     currentIndex = activeSectionIndex;
     nextIndex =
       currentIndex === slideCount - 1 ? currentIndex : currentIndex + 1;
@@ -754,6 +764,24 @@ function renderFrame(progress) {
   );
   const rippleDisplayActive = updateRipplePlaybackState(rippleBoundaryActive);
   setRippleBodyState(rippleDisplayActive);
+
+  // 最終スライド（section03）では、グラデーション帯やマスク処理を行わず常時フル表示にする
+  if (DISABLE_BRIDGE_SECTION03_04 && currentIndex >= slideCount - 1) {
+    // マスク・クリップを解除してレイヤーをそのまま表示
+    currentLayer.style.clipPath = "none";
+    nextLayer.style.clipPath = "none";
+    currentLayer.style.webkitClipPath = "none";
+    nextLayer.style.webkitClipPath = "none";
+    setLayerMask(currentLayer, MASK_FULLY_VISIBLE);
+    setLayerMask(nextLayer, MASK_FULLY_VISIBLE);
+    currentLayer.style.opacity = "1";
+    nextLayer.style.opacity = "1";
+    if (gradientBand) {
+      gradientBand.style.opacity = "0";
+      gradientBand.style.visibility = "hidden";
+    }
+    return;
+  }
 
   // 装飾バンドはしきい値手前でフェードイン、終端手前でフェードアウトしてテレポートを不可視化
   const bandFadeInStart = Math.max(0, GRADIENT_START - BAND_FADE_RANGE);
@@ -1422,6 +1450,18 @@ function prepareTailBridgeLayer() {
 
 function setStageBridgeProgress(portion) {
   if (!rootElement) {
+    return;
+  }
+  if (DISABLE_BRIDGE_SECTION03_04) {
+    // ブリッジ演出を全て無効化（常にステージ表示、ブリッジレイヤー非表示）
+    rootElement.style.setProperty("--stage-bridge-tail", "0.0000");
+    rootElement.style.setProperty("--stage-bridge-stage", "1.0000");
+    if (document.body) {
+      document.body.classList.remove("is-stage-bridging");
+    }
+    if (tailBridgeLayer) {
+      tailBridgeLayer.setAttribute("data-bridge-active", "false");
+    }
     return;
   }
   const value = clamp(portion, 0, 1);
