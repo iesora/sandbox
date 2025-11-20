@@ -160,6 +160,7 @@ let lastTailProgressHint = 0;
 let lastScrollDirection = 1;
 let tailModeReentryLock = null;
 let rippleLatchActive = false;
+let scrollFreezeUntil = 0; // 一時的にスクロールを無効化する期限（msのタイムスタンプ）
 const SUPPORTS_INTERSECTION_OBSERVER =
   typeof window !== "undefined" && "IntersectionObserver" in window;
 const LAST_SLIDE_ID =
@@ -552,6 +553,18 @@ function updateProgress() {
     nextIndex =
       currentIndex === slideCount - 1 ? currentIndex : currentIndex + 1;
     refreshLayers();
+    // 04 -> 03 へ上方向に到達した場合は一時的にスクロールをフリーズ
+    const section03Index = slideIdMap.get("section03");
+    const section04Index = slideIdMap.get("section04");
+    if (
+      section03Index !== undefined &&
+      section04Index !== undefined &&
+      lastScrollDirection < 0 &&
+      oldIndex === section04Index &&
+      newIndex === section03Index
+    ) {
+      startScrollFreeze(700, section03Index);
+    }
   }
 
   // インデックスに変更があれば画像とインジケータを更新
@@ -595,6 +608,18 @@ function easeInOutCubic(t) {
 function quantize(value, step) {
   if (!step || step <= 0) return value;
   return Math.round(value / step) * step;
+}
+
+function isScrollFrozen() {
+  return Date.now() < scrollFreezeUntil;
+}
+
+function startScrollFreeze(durationMs = 700, alignIndex) {
+  if (Number.isFinite(alignIndex)) {
+    const targetY = getScrollTargetForIndex(alignIndex);
+    window.scrollTo(0, targetY);
+  }
+  scrollFreezeUntil = Date.now() + Math.max(0, durationMs);
 }
 
 // ========================================
@@ -765,24 +790,6 @@ function renderFrame(progress) {
   const rippleDisplayActive = updateRipplePlaybackState(rippleBoundaryActive);
   setRippleBodyState(rippleDisplayActive);
 
-  // 最終スライド（section03）では、グラデーション帯やマスク処理を行わず常時フル表示にする
-  if (DISABLE_BRIDGE_SECTION03_04 && currentIndex >= slideCount - 1) {
-    // マスク・クリップを解除してレイヤーをそのまま表示
-    currentLayer.style.clipPath = "none";
-    nextLayer.style.clipPath = "none";
-    currentLayer.style.webkitClipPath = "none";
-    nextLayer.style.webkitClipPath = "none";
-    setLayerMask(currentLayer, MASK_FULLY_VISIBLE);
-    setLayerMask(nextLayer, MASK_FULLY_VISIBLE);
-    currentLayer.style.opacity = "1";
-    nextLayer.style.opacity = "1";
-    if (gradientBand) {
-      gradientBand.style.opacity = "0";
-      gradientBand.style.visibility = "hidden";
-    }
-    return;
-  }
-
   // 装飾バンドはしきい値手前でフェードイン、終端手前でフェードアウトしてテレポートを不可視化
   const bandFadeInStart = Math.max(0, GRADIENT_START - BAND_FADE_RANGE);
   const bandFadeOutStart = Math.max(0, 1 - BAND_FADE_RANGE);
@@ -907,10 +914,24 @@ function isRippleBoundary(currentSlide, nextSlide) {
   }
   const currentId = currentSlide.id ? String(currentSlide.id) : "";
   const nextId = nextSlide.id ? String(nextSlide.id) : "";
-  return (
+  // 既存: section01 ⇄ section02 は常時リップル対象
+  const isRipple12 =
     (currentId === RIPPLE_FROM_ID && nextId === RIPPLE_TO_ID) ||
-    (currentId === RIPPLE_TO_ID && nextId === RIPPLE_FROM_ID)
-  );
+    (currentId === RIPPLE_TO_ID && nextId === RIPPLE_FROM_ID);
+  if (isRipple12) {
+    return true;
+  }
+  // 追加: 下から上へ（lastScrollDirection < 0）で section03 の上に到達するとき、
+  // section02 ⇄ section03 でも同じリップルを有効化
+  if (lastScrollDirection < 0) {
+    const isPair23 =
+      (currentId === "section02" && nextId === "section03") ||
+      (currentId === "section03" && nextId === "section02");
+    if (isPair23) {
+      return true;
+    }
+  }
+  return false;
 }
 
 function updateRipplePlaybackState(eligible) {
@@ -991,6 +1012,10 @@ function onResize() {
 // キーボード操作（任意）
 // ========================================
 function onKeyDown(e) {
+  if (isScrollFrozen()) {
+    e.preventDefault();
+    return;
+  }
   if (tailModeActive) {
     return;
   }
@@ -1006,6 +1031,10 @@ function onKeyDown(e) {
 }
 
 function onWheel(event) {
+  if (isScrollFrozen()) {
+    event.preventDefault();
+    return;
+  }
   if (tailModeActive) {
     return;
   }
@@ -1046,6 +1075,10 @@ function onTouchStart(event) {
 }
 
 function onTouchMove(event) {
+  if (isScrollFrozen()) {
+    event.preventDefault();
+    return;
+  }
   if (tailModeActive) {
     return;
   }
