@@ -186,7 +186,6 @@ const OVERLAP_PERCENT = 0; // 推奨: 4〜16
 const GRADIENT_START = 0.2;
 // 前段の予備ブレンド（しきい値手前で徐々に出現）
 const PRE_BLEND_RANGE = 0.04; // 0〜1 の範囲（しきい値からの幅）
-// 予備ブレンド中にもシームを少し持ち上げる（下端で「つっかえる」見え方を回避）
 const PRE_SEAM_LIFT_PERCENT = 4; // 0〜100（下端から最大どれだけ上げるか）
 // 装飾バンドのフェード幅（しきい値手前からフェードイン）
 const BAND_FADE_RANGE = 0.1; // 0〜1 の範囲
@@ -362,7 +361,8 @@ function updateIndicatorDots(activeIndex) {
 function refreshLayers() {
   const currentSlide = slides[currentIndex] || null;
   const nextSlide = slides[nextIndex] || currentSlide;
-  // 同一IDの場合は次レイヤーの再描画を避け、片側のみ更新してフリッカーを抑制
+
+  // ----------- Absolute prevention of same-section transitions (including section03) -----------
   if (
     currentSlide &&
     nextSlide &&
@@ -370,6 +370,7 @@ function refreshLayers() {
     nextSlide.id &&
     currentSlide.id === nextSlide.id
   ) {
+    // Next layer is guaranteed to never animate.
     setLayerContent(currentLayer, currentSlide);
     if (nextLayer) {
       nextLayer.innerHTML = "";
@@ -387,6 +388,8 @@ function refreshLayers() {
     updateIndicatorDots(currentIndex);
     return;
   }
+  // -------- End absolute prevention --------
+
   setLayerContent(currentLayer, currentSlide);
   setLayerContent(nextLayer, nextSlide);
   if (currentLayer) currentLayer.style.visibility = "";
@@ -463,17 +466,17 @@ function navigateByButton(direction) {
   // これにより「一度目のクリックで少しだけ上スクロールし、二度目で section01 へ飛ぶ」
   // 現象を防ぎ、section03→section02 への自然な切替を実現する。
   if (direction < 0 && tailOverlayActive) {
-    // 即時にオーバーレイを外し、ブリッジ復帰を安全な進捗（0.5付近）で行う
-    // LAST_SLIDE_BRIDGE_START(=0.35)より十分上に設定して、直後の自動スナップで
-    // そのまま section01 へ落ちないようにする。
     setTailOverlayActive(false);
     prepareTailBridgeReentry(Math.max(LAST_SLIDE_BRIDGE_START + 0.05, 0.5));
-    // 進捗とボタン状態を即時反映
     updateProgress();
     updateNavigationDisabledStates();
     return;
   }
   const targetIndex = clamp(activeSectionIndex + direction, 0, slideCount - 1);
+  // Prevent navigating to same section (prevents same-section jump, e.g., section03 to section03)
+  if (targetIndex === activeSectionIndex) {
+    return;
+  }
   requestSnapToIndex(targetIndex);
 }
 
@@ -482,11 +485,19 @@ function scrollToStageIndex(targetIndex, duration = SNAP_DURATION_MS) {
     return false;
   }
   const clamped = clamp(Math.round(targetIndex), 0, slideCount - 1);
+  // Prevent same-section scroll
+  if (clamped === activeSectionIndex) {
+    return false;
+  }
   return requestSnapToIndex(clamped, duration);
 }
 
 function requestSnapToIndex(targetIndex, duration = SNAP_DURATION_MS) {
   const clamped = clamp(targetIndex, 0, slideCount - 1);
+  // Prevent same-section snap ("absolute prevention")
+  if (clamped === activeSectionIndex) {
+    return false;
+  }
   const targetY = getScrollTargetForIndex(clamped);
   if (Math.abs(window.scrollY - targetY) < 1) {
     return false;
