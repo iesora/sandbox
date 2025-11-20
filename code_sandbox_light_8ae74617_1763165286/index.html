@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>水滴波紋トランジション - WebGLアニメーション</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Loading Screen -->
+    <div id="loading">
+      <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <p>読み込み中...</p>
+      </div>
+    </div>
+
+    <!-- Canvas for WebGL -->
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Scroll Instruction -->
+    <div id="scroll-instruction" class="scroll-instruction">
+      <div class="instruction-content">
+        <svg
+          width="40"
+          height="40"
+          viewBox="0 0 40 40"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle
+            cx="20"
+            cy="20"
+            r="18"
+            stroke="white"
+            stroke-width="2"
+            opacity="0.6"
+          />
+          <path
+            d="M20 12V28M20 28L15 23M20 28L25 23"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            opacity="0.8"
+          />
+        </svg>
+        <p>スクロールして画像を切り替え</p>
+      </div>
+    </div>
+
+    <!-- Navigation UI -->
+    <div class="nav-container">
+      <button id="prev-btn" class="nav-btn" aria-label="前の画像">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M15 18L9 12L15 6"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+      <button id="next-btn" class="nav-btn" aria-label="次の画像">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M9 18L15 12L9 6"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Progress Indicators -->
+    <div class="progress-container">
+      <div class="progress-dots" id="progress-dots"></div>
+    </div>
+
+    <!-- Image Info -->
+    <div class="image-info">
+      <div class="image-title" id="image-title">Image 1</div>
+      <div class="image-counter">
+        <span id="current-index">1</span> / <span id="total-images">5</span>
+      </div>
+    </div>
+
+    <!-- Three.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script src="js/shaders.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
