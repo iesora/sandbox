@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+@use "../_setting" as *;
+@use "../_mixin" as *;
+
+// フェードイン
+.fadeIn {
+  opacity: 0;
+  transition: 1s;
+  &.is-show {
+    opacity: 1;
+  }
+}
+
+// フェードインアップ
+.fadeInUp {
+  opacity: 0;
+  transition: 1s;
+  transform: translate(0, 50px);
+  &.is-show {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+// ズームイン
+.zoomIn {
+  opacity: 0;
+  transition: 1s;
+  transform: scale(0.6);
+  &.is-show {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,851 @@
+@charset "UTF-8";
+
+@use "./setting/_setting" as *;
+@use "./setting/_mixin" as *;
+@use "./setting/base/_reset" as *;
+@use "./setting/base/_body" as *;
+@use "./setting/module/_other" as *;
+@use "./setting/module/_animation" as *;
+@use "./setting/_state" as *;
+
+/*******************************
+Style
+*******************************/
+
+body {
+  background: url("./../img/body_bg.jpg") no-repeat center bottom / 100% auto;
+  @include bpTb {
+    background-image: url("./../img/body_bg_sp.jpg");
+  }
+}
+// ヘッダー
+// ------------------------------
+.l-header {
+  &_logo {
+    width: px-vw(292);
+    position: fixed;
+    top: px-vw(70);
+    left: px-vw(70);
+    z-index: 200;
+    @include bpTb {
+      width: px-vw(233, 750);
+      top: px-vw(40, 750);
+      left: px-vw(40, 750);
+    }
+  }
+  &_topics {
+    width: px-vw(230);
+    height: px-vw(60);
+    position: fixed;
+    bottom: px-vw(70);
+    left: px-vw(70);
+    z-index: 100;
+    @include bpTb {
+      width: px-vw(184, 750);
+      height: px-vw(48, 750);
+      bottom: px-vw(120, 750);
+      left: px-vw(40, 750);
+    }
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      border: 1px solid #000;
+      border-radius: px-vw(30);
+      box-sizing: border-box;
+      position: relative;
+      font-family: "Poppins", sans-serif;
+      font-size: px-vw(24);
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      @include bpTb {
+        background-color: rgba(255, 255, 255, 0.5);
+        font-size: px-vw(20, 750);
+        border-radius: px-vw(24, 750);
+      }
+      &::after {
+        content: "";
+        display: block;
+        width: px-vw(16);
+        height: px-vw(16);
+        margin-top: -0.25em;
+        border-top: 1px solid #000;
+        border-right: 1px solid #000;
+        position: absolute;
+        right: px-vw(26);
+        transform: rotate(135deg);
+        @include bpTb {
+          width: px-vw(14, 750);
+          height: px-vw(14, 750);
+          right: px-vw(24, 750);
+        }
+      }
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.25);
+        @include bpTb {
+          background-color: rgba(255, 255, 255, 0.75);
+        }
+      }
+    }
+  }
+  &_btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: px-vw(12);
+    width: px-vw(150);
+    height: px-vw(150);
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 200;
+    cursor: pointer;
+    @include bpTb {
+      width: px-vw(120, 750);
+      height: px-vw(120, 750);
+      gap: px-vw(8, 750);
+    }
+    span {
+      display: block;
+      height: 1px;
+      width: px-vw(60);
+      background-color: #000;
+      transition: all 0.3s ease;
+      @include bpTb {
+        width: px-vw(48, 750);
+      }
+    }
+    &.is-active {
+      span {
+        &:nth-child(1) {
+          transform: translateY(px-vw(15)) rotate(30deg);
+          @include bpTb {
+            transform: translateY(px-vw(10, 750)) rotate(30deg);
+          }
+        }
+        &:nth-child(2) {
+          opacity: 0;
+        }
+        &:nth-child(3) {
+          transform: translateY(px-vw(-15)) rotate(-30deg);
+          @include bpTb {
+            transform: translateY(px-vw(-10, 750)) rotate(-30deg);
+          }
+        }
+      }
+    }
+  }
+  &_nav {
+    width: 100%;
+    height: 100vh;
+    background-color: #ccc;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 150;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s linear;
+    .nav_video {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0 !important;
+      @include bpTb {
+        top: auto;
+        height: 40vh;
+      }
+      video {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        @include bpTb {
+          min-height: 40vh;
+          height: 100%;
+        }
+      }
+    }
+    .nav_wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: px-vw(1100);
+      height: 100%;
+      background: url("./../img/nav_bg.jpg") no-repeat center center / cover;
+      position: absolute;
+      top: 0;
+      right: px-vw(-1100);
+      transition: right 0.3s linear;
+      @include bpTb {
+        width: 100%;
+        height: 60vh;
+        right: 0 !important;
+      }
+      &::after {
+        content: "";
+        display: block;
+        aspect-ratio: 1624 / 285;
+        width: px-vw(784);
+        background: url("./../img/mv_lead.png") no-repeat center center /
+          contain;
+        position: absolute;
+        right: px-vw(30);
+        bottom: px-vw(30);
+        @include bpTb {
+          width: px-vw(480, 750);
+          right: px-vw(20, 750);
+          bottom: px-vw(20, 750);
+        }
+      }
+    }
+    .nav_list {
+      padding: 0 px-vw(160);
+      margin-bottom: px-vw(70);
+      @include bpTb {
+        padding: 0 $baseWidthPadding;
+        margin-bottom: px-vw(40, 750);
+      }
+      li {
+        &:not(:last-child) {
+          margin-bottom: px-vw(40);
+          @include bpTb {
+            margin-bottom: px-vw(20, 750);
+          }
+        }
+        a {
+          display: inline-flex;
+          flex-direction: column;
+          justify-content: center;
+          line-height: 1.5;
+          text-decoration: none !important;
+          p {
+            font-family: "Poppins", sans-serif;
+            font-size: px-vw(24);
+            @include bpTb {
+              font-size: px-vw(20, 750);
+            }
+          }
+          div {
+            font-weight: bold;
+            font-size: px-vw(52);
+            @include bpTb {
+              font-size: px-vw(36, 750);
+            }
+          }
+          &:hover {
+            div {
+              text-decoration: underline !important;
+            }
+          }
+        }
+      }
+    }
+    .nav_link {
+      padding: 0 px-vw(160);
+      @include bpTb {
+        padding: 0 $baseWidthPadding;
+      }
+      a {
+        display: inline-flex;
+        align-items: center;
+        font-weight: bold;
+        font-size: px-vw(28);
+        @include bpTb {
+          font-size: px-vw(28, 750);
+        }
+        &::after {
+          content: "";
+          display: block;
+          width: 1em;
+          height: 1em;
+          margin-left: 0.5em;
+          background: url("./../img/icon_blank.svg") no-repeat center center /
+            contain;
+        }
+      }
+    }
+    &.is-open {
+      pointer-events: auto;
+      opacity: 1;
+      .nav_wrapper {
+        right: 0;
+      }
+    }
+  }
+}
+
+// コンテンツ
+// ------------------------------
+.l-main {
+  margin-bottom: px-vw(600);
+  overflow-x: hidden;
+  @supports (overflow-x: clip) {
+    overflow-x: clip;
+  }
+  &_section {
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    @include bpTb {
+      height: calc(var(--vh, 1vh) * 100 - px-vw(80, 750));
+      background-position: center bottom;
+      @supports (height: 100dvh) {
+        height: calc(100dvh - 40px);
+      }
+    }
+  }
+  // スライドのインジケーター
+  &_side {
+    width: px-vw(150);
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    @include bpTb {
+      width: 100%;
+      height: px-vw(80, 750);
+      top: auto;
+      bottom: 0;
+    }
+  }
+  // メインビジュアル
+  .mainv {
+    .mv_text {
+      width: px-vw(586);
+      position: absolute;
+      top: px-vw(324);
+      left: px-vw(500);
+      @include bpTb {
+        width: px-vw(406, 750);
+        left: px-vw(40, 750);
+        top: auto;
+        bottom: px-vw(160, 750);
+      }
+    }
+    .mv_lead {
+      width: px-vw(1624);
+      position: absolute;
+      right: px-vw(190);
+      bottom: px-vw(40);
+      @include bpTb {
+        width: px-vw(132, 750);
+        right: px-vw(40, 750);
+        bottom: px-vw(40, 750);
+      }
+    }
+  }
+  // 瞬間
+  .section01 {
+    background-image: url("./../img/section01_bg.jpg");
+    @include bpTb {
+      background-image: url("./../img/section01_bg_sp.jpg");
+    }
+    &::before {
+      content: "";
+      display: block;
+      width: px-vw(700);
+      height: 100%;
+      background-color: #fff;
+      position: absolute;
+      top: 0;
+      left: 0;
+      @include bpTb {
+        width: px-vw(153, 750);
+      }
+    }
+    &_text {
+      width: px-vw(702);
+      position: absolute;
+      bottom: px-vw(304);
+      left: px-vw(530);
+      z-index: 50;
+      @include bpTb {
+        width: px-vw(491, 750);
+        left: px-vw(40, 750);
+        bottom: px-vw(252, 750);
+      }
+    }
+    &_lead {
+      display: flex;
+      flex-direction: row-reverse;
+      gap: px-vw(40);
+      position: absolute;
+      top: px-vw(200);
+      right: px-vw(622);
+      @include bpTb {
+        gap: px-vw(24, 750);
+        top: px-vw(235, 750);
+        right: px-vw(40, 750);
+      }
+      div {
+        padding-top: px-vw(50);
+        width: px-vw(299);
+        @include bpTb {
+          width: px-vw(150, 750);
+          padding-top: px-vw(25, 750);
+        }
+      }
+      p {
+        font-family: "Poppins", sans-serif;
+        writing-mode: vertical-rl;
+        font-size: px-vw(28);
+        @include bpTb {
+          font-size: px-vw(14, 750);
+        }
+      }
+    }
+  }
+  // 永遠
+  .section02 {
+    background-image: url("./../img/section02_bg.jpg");
+    @include bpTb {
+      background-image: url("./../img/section02_bg_sp.jpg");
+    }
+    &::before {
+      content: "";
+      display: block;
+      width: px-vw(850);
+      height: 100%;
+      background-color: #fff;
+      position: absolute;
+      top: 0;
+      right: 0;
+      @include bpTb {
+        width: px-vw(200, 750);
+      }
+    }
+    &_text {
+      width: px-vw(823);
+      position: absolute;
+      right: px-vw(630);
+      bottom: px-vw(304);
+      z-index: 50;
+      @include bpTb {
+        width: px-vw(574, 750);
+        right: px-vw(40, 750);
+        bottom: px-vw(252, 750);
+      }
+    }
+    &_lead {
+      display: flex;
+      flex-direction: row-reverse;
+      gap: px-vw(40);
+      position: absolute;
+      top: px-vw(200);
+      left: px-vw(530);
+      @include bpTb {
+        gap: px-vw(24, 750);
+        top: px-vw(235, 750);
+        left: px-vw(40, 750);
+      }
+      div {
+        padding-top: px-vw(50);
+        width: px-vw(320);
+        @include bpTb {
+          width: px-vw(160, 750);
+          padding-top: px-vw(25, 750);
+        }
+      }
+      p {
+        font-family: "Poppins", sans-serif;
+        writing-mode: vertical-rl;
+        font-size: px-vw(28);
+        @include bpTb {
+          font-size: px-vw(14, 750);
+        }
+      }
+    }
+  }
+  // テレビCM
+  .section03 {
+    background-image: url("./../img/section03_bg.jpg");
+    @include bpTb {
+      background-image: url("./../img/section03_bg_sp.jpg");
+      background-position: center bottom;
+    }
+    &_content {
+      width: px-vw(920);
+      margin: auto;
+      position: absolute;
+      top: px-vw(280);
+      right: px-vw(500);
+      @include bpTb {
+        width: 100%;
+        top: auto;
+        left: 0;
+        right: 0;
+        bottom: px-vw(520, 750);
+      }
+    }
+    &_title {
+      margin-bottom: px-vw(100);
+      text-align: center;
+      @include bpTb {
+        margin-bottom: px-vw(70, 750);
+      }
+      p {
+        margin-bottom: px-vw(40);
+        font-family: "Poppins", sans-serif;
+        font-size: px-vw(28);
+        @include bpTb {
+          margin-bottom: px-vw(20, 750);
+          font-size: px-vw(20, 750);
+        }
+      }
+      h2 {
+        width: px-vw(347);
+        margin: 0 auto;
+        line-height: 1;
+        @include bpTb {
+          width: px-vw(217, 750);
+        }
+      }
+    }
+    &_video {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: px-vw(40) 10.88%;
+      @include bpTb {
+        gap: px-vw(25, 750) px-vw(66, 750);
+      }
+      figure {
+        width: 44.56%;
+        transition: opacity 0.3s ease;
+        cursor: pointer;
+        @include bpTb {
+          width: px-vw(270, 750);
+        }
+        &:hover {
+          opacity: 0.75;
+        }
+        figcaption {
+          margin-top: px-vw(18);
+          font-weight: bold;
+          font-size: px-vw(28);
+          text-align: center;
+          @include bpTb {
+            font-size: px-vw(24, 750);
+          }
+        }
+      }
+    }
+  }
+  // イメージキャラクター
+  .section04 {
+    background-image: url("./../img/section04_bg.jpg");
+    @include bpTb {
+      background-image: url("./../img/section04_bg_sp.jpg");
+      background-position: center bottom;
+    }
+    &_content {
+      width: px-vw(1000);
+      margin: auto;
+      position: absolute;
+      top: px-vw(250);
+      left: px-vw(500);
+      @include bpTb {
+        width: px-vw(630, 750);
+        top: auto;
+        right: 0;
+        bottom: px-vw(500, 750);
+        left: 0;
+      }
+    }
+    &_title {
+      margin-bottom: px-vw(40);
+      @include bpTb {
+        margin-bottom: px-vw(23, 750);
+      }
+      p {
+        font-family: "Poppins", sans-serif;
+        font-size: px-vw(28);
+        @include bpTb {
+          font-size: px-vw(20, 750);
+        }
+      }
+      h2 {
+        font-weight: bold;
+        font-size: px-vw(80);
+        @include bpTb {
+          font-size: px-vw(50, 750);
+        }
+      }
+    }
+    &_text {
+      div {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+        margin-bottom: px-vw(25);
+        font-weight: bold;
+        font-size: px-vw(48);
+        @include bpTb {
+          margin-bottom: px-vw(17, 750);
+          font-size: px-vw(32, 750);
+        }
+        span {
+          font-weight: normal;
+          font-size: px-vw(24);
+          @include bpTb {
+            font-size: px-vw(16, 750);
+          }
+        }
+      }
+      p {
+        font-weight: bold;
+        font-size: px-vw(28);
+        @include line-h(28, 50);
+        @include bpTb {
+          font-size: px-vw(18, 750);
+          @include line-h(18, 32);
+        }
+      }
+    }
+  }
+  // ロゴのモチーフ
+  .section05 {
+    background-image: url("./../img/section05_bg.jpg");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #fff;
+    @include bpTb {
+      background-image: url("./../img/section05_bg_sp.jpg");
+      background-position: center center;
+    }
+    &_content {
+      width: px-vw(1044);
+      margin: auto;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      @include bpTb {
+        width: px-vw(520, 750);
+      }
+    }
+    &_logo {
+      width: px-vw(791);
+      margin: 0 auto px-vw(100);
+      @include bpTb {
+        width: px-vw(454, 750);
+        margin: 0 auto px-vw(60, 750);
+      }
+    }
+    &_text {
+      width: px-vw(1044);
+      margin: 0 auto;
+      @include bpTb {
+        width: 100%;
+      }
+    }
+  }
+  // 経営理念
+  .section06 {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: px-vw(90);
+    width: 100%;
+    padding-top: px-vw(160);
+    margin-bottom: px-vw(80);
+    @include bpTb {
+      flex-direction: column-reverse;
+      gap: px-vw(100, 750);
+      width: $baseWidthSp;
+      margin: 0 auto px-vw(160, 750);
+      padding-top: px-vw(140, 750);
+    }
+    &_img {
+      width: px-vw(1309);
+      @include bpTb {
+        width: 100%;
+      }
+    }
+    &_content {
+      width: px-vw(968);
+      @include bpTb {
+        width: 100%;
+      }
+    }
+    &_title {
+      margin-bottom: px-vw(65);
+      @include bpTb {
+        margin-bottom: px-vw(58, 750);
+      }
+      p {
+        margin-bottom: px-vw(40);
+        font-family: "Poppins", sans-serif;
+        font-size: px-vw(28);
+        @include bpTb {
+          margin-bottom: px-vw(34, 750);
+          font-size: px-vw(20, 750);
+        }
+      }
+      div {
+        @include bpTb {
+          width: px-vw(615, 750);
+        }
+      }
+    }
+    &_text {
+      margin-bottom: px-vw(80);
+      font-weight: bold;
+      font-size: px-vw(28);
+      @include line-h(28, 50);
+      @include bpTb {
+        margin-bottom: px-vw(50, 750);
+        font-size: px-vw(24, 750);
+      }
+    }
+    &_btn {
+      a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: px-vw(91);
+        gap: px-vw(30);
+        font-family: "Poppins", sans-serif;
+        font-size: px-vw(28);
+        @include bpTb {
+          height: px-vw(80, 750);
+          gap: px-vw(20, 750);
+          font-size: px-vw(25, 750);
+        }
+        &::after {
+          content: "";
+          display: block;
+          width: px-vw(91);
+          height: px-vw(91);
+          border-radius: 50%;
+          border: 1px solid #000;
+          background: rgba(255, 255, 255, 1) url("./../img/icon_blank.svg")
+            no-repeat center center / px-vw(26) auto;
+          transition: background-color 0.3s ease;
+          @include bpTb {
+            width: px-vw(80, 750);
+            height: px-vw(80, 750);
+            background-size: px-vw(23, 750) auto;
+          }
+        }
+        &:hover {
+          &::after {
+            background-color: rgba(0, 0, 0, 0.1);
+          }
+        }
+      }
+    }
+  }
+  // ニュース
+  .news {
+    background-color: #fff;
+    &_content {
+      width: px-vw(1700);
+      padding-top: px-vw(160);
+      margin: 0 auto;
+      @include bpTb {
+        width: $baseWidthSp;
+        padding-top: px-vw(160, 750);
+        margin-bottom: px-vw(300, 750);
+      }
+    }
+    &_title {
+      margin-bottom: px-vw(100);
+      @include bpTb {
+        margin-bottom: px-vw(60, 750);
+      }
+      p {
+        margin-bottom: px-vw(40);
+        font-family: "Poppins", sans-serif;
+        font-size: px-vw(28);
+        @include bpTb {
+          margin-bottom: px-vw(23, 750);
+          font-size: px-vw(20, 750);
+        }
+      }
+      h2 {
+        width: px-vw(309);
+        @include bpTb {
+          width: px-vw(193, 750);
+        }
+      }
+    }
+    &_list {
+      border-top: 1px solid #000;
+      ul {
+        li {
+          padding: px-vw(60) 0;
+          border-bottom: 1px solid #000;
+          @include bpTb {
+            padding: px-vw(35, 750) 0;
+          }
+          div {
+            margin-bottom: px-vw(12);
+            font-size: px-vw(26);
+            @include bpTb {
+              margin-bottom: px-vw(10, 750);
+              font-size: px-vw(24, 750);
+            }
+          }
+          p {
+            width: 100%;
+            font-weight: bold;
+            font-size: px-vw(36);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            @include bpTb {
+              font-size: px-vw(24, 750);
+            }
+          }
+        }
+      }
+    }
+    &_date {
+      margin-right: px-vw(50);
+      font-family: "Poppins", sans-serif;
+    }
+  }
+}
+
+// フッター
+// ------------------------------
+.l-footer {
+  background-color: #fff;
+  &_logo {
+    width: px-vw(514);
+    margin: 0 auto px-vw(530);
+    @include bpTb {
+      width: px-vw(375, 750);
+      margin: 0 auto px-vw(300, 750);
+    }
+  }
+  &_text {
+    padding-bottom: px-vw(60) 0;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    font-size: px-vw(20);
+    @include bpTb {
+      padding: 0 0 px-vw(220, 750);
+      font-size: px-vw(18, 750);
+    }
+  }
+}

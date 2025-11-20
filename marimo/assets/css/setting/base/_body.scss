@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+@use "../_setting" as *;
+@use "../_mixin" as *;
+
+html {
+  font-family: $Gothic;
+}
+body {
+  color: $textColor;
+  @include fz($baseFont);
+  font-family: "游ゴシック体", "Yu Gothic", "YuGothic", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+  //font-weight: $baseWeight;
+  font-weight: normal;
+  line-height: $lineHeight;
+  font-feature-settings: "palt";
+  letter-spacing: 0.05em;
+  @include bpTb {
+    @include fz($baseFontSp);
+  }
+}
+a {
+  &:hover {
+    text-decoration: underline;
+    img {
+      opacity: .8;
+    }
+  }
+  img {
+    transition-property: opacity;
+    transition-duration: .2s;
+    backface-visibility: hidden;
+  }
+}
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+button,
+input,
+optgroup,
+select,
+textarea {
+  &:focus {
+    outline: -webkit-focus-ring-color auto 1px;
+    outline-color: -webkit-focus-ring-color;
+    outline-style: auto;
+    outline-width: 1px;
+  }
+}
+small {
+  font-size: inherit;
+}

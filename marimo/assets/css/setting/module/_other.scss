@@ -1,0 +1,136 @@
+@charset "UTF-8";
+
+@use "../_setting" as *;
+@use "../_mixin" as *;
+
+// 中央寄せのクラス
+.m-wrapper {
+  @include wrapper;
+}
+
+// 電話番号のリンク 768pxからクリック（タップ）可能に
+.m-tellink {
+  pointer-events: none;
+  @include bpTb {
+    pointer-events: auto;
+    text-decoration: underline;
+  }
+}
+
+// IE終了
+.for-ie {
+  display: none;
+  width: 100%;
+  color: #fff;
+  letter-spacing: 0.05em;
+  padding: 25px $baseWidthPadding;
+  background-color: $primaryColor;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  .m-wrapper {
+    position: relative;
+    padding-right: 100px;
+  }
+  a {
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  button {
+    width: 120px;
+    text-align: center;
+    line-height: 1;
+    padding: 10px 10px 12px;
+    border: 1px solid #fff;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+
+// 汎用クラス
+.tCenter {text-align: center !important;}
+.tRight {text-align: right !important;}
+.tLeft {text-align: left !important;}
+
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.mT0 {margin-top: 0px !important;}
+.mT5 {margin-top: 5px !important;}
+.mT10 {margin-top: 10px !important;}
+.mT15 {margin-top: 15px !important;}
+.mT20 {margin-top: 20px !important;}
+.mT25 {margin-top: 25px !important;}
+.mT30 {margin-top: 30px !important;}
+.mT35 {margin-top: 35px !important;}
+.mT40 {margin-top: 40px !important;}
+.mT45 {margin-top: 45px !important;}
+.mT50 {margin-top: 50px !important;}
+
+.mB0 {margin-bottom: 0px !important;}
+.mB5 {margin-bottom: 5px !important;}
+.mB10 {margin-bottom: 10px !important;}
+.mB15 {margin-bottom: 15px !important;}
+.mB20 {margin-bottom: 20px !important;}
+.mB25 {margin-bottom: 25px !important;}
+.mB30 {margin-bottom: 30px !important;}
+.mB35 {margin-bottom: 35px !important;}
+.mB40 {margin-bottom: 40px !important;}
+.mB45 {margin-bottom: 45px !important;}
+.mB50 {margin-bottom: 50px !important;}
+
+.mL0 {margin-left: 0px !important;}
+.mL10 {margin-left: 10px !important;}
+.mL20 {margin-left: 20px !important;}
+.mL30 {margin-left: 30px !important;}
+
+.mR0 {margin-right: 0px !important;}
+.mR10 {margin-right: 10px !important;}
+.mR20 {margin-right: 20px !important;}
+.mR30 {margin-right: 30px !important;}
+
+.pT0 {padding-top: 0px !important;}
+.pT5 {padding-top: 5px !important;}
+.pT10 {padding-top: 10px !important;}
+.pT15 {padding-top: 15px !important;}
+.pT20 {padding-top: 20px !important;}
+.pT25 {padding-top: 25px !important;}
+.pT30 {padding-top: 30px !important;}
+.pT35 {padding-top: 35px !important;}
+.pT40 {padding-top: 40px !important;}
+.pT45 {padding-top: 45px !important;}
+.pT50 {padding-top: 50px !important;}
+
+.pB0 {padding-bottom: 0px !important;}
+.pB5 {padding-bottom: 5px !important;}
+.pB10 {padding-bottom: 10px !important;}
+.pB15 {padding-bottom: 15px !important;}
+.pB20 {padding-bottom: 20px !important;}
+.pB25 {padding-bottom: 25px !important;}
+.pB30 {padding-bottom: 30px !important;}
+.pB35 {padding-bottom: 35px !important;}
+.pB40 {padding-bottom: 40px !important;}
+.pB45 {padding-bottom: 45px !important;}
+.pB50 {padding-bottom: 50px !important;}
+
+.pL0 {padding-left: 0px !important;}
+.pL10 {padding-left: 10px !important;}
+.pL20 {padding-left: 20px !important;}
+.pL30 {padding-left: 30px !important;}
+
+.pR0 {padding-right: 0px !important;}
+.pR10 {padding-right: 10px !important;}
+.pR20 {padding-right: 20px !important;}
+.pR30 {padding-right: 30px !important;}

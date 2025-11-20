@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+@use "./_setting" as *;
+@use "./_mixin" as *;
+
+.m-pc-hidden {
+  display: none;
+  @include bpTb {
+    display: inline-block;
+  }
+}
+
+.m-sp-hidden {
+  display: inline-block;
+  @include bpTb {
+    display: none;
+  }
+}
+
+.visually-hidden {
+  /**
+   * a11y-css-resetから引用
+   * https://github.com/mike-engel/a11y-css-reset
+  **/
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}

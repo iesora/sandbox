@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+@use 'sass:math';
+@use './_setting' as *;
+
+@mixin fz($size: $baseFont) {
+  font-size: $size + px;
+  font-size: ($size / 16) + rem;
+}
+
+@mixin line-h($fontsize, $lin) {
+  line-height: math.div($lin, $fontsize);
+}
+
+// カンプと実寸を合わせる
+@function half($value) {
+  @return math.div($value, 2) * 1px; // ×1pxしないとpxが省略される
+}
+
+// vwを自動計算（カンプの3000px基準）
+@function px-vw($px, $spVw: 3000) {
+  @return math.div($px, $spVw) * 100vw;
+}
+
+// hoverをPCのみに制御
+@mixin hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin wrapper($width: $bpPcs) {
+  // width: unquote("min(calc(100% - 4.375% * 2), 1000px)");
+  // margin-inline: auto;
+  max-width: $width;
+  margin-left: auto;
+  margin-right: auto;
+  @include breakpoint($baseWidth) {
+    max-width: $baseWidthSp;
+  }
+}
+
+@mixin breakpoint($width: $bpSp) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+@mixin bpTb {
+  @media screen and (max-width: $bpTb) {
+    @content;
+  }
+}
+
+@mixin bpSp {
+  @media screen and (max-width: $bpSp) {
+    @content;
+  }
+}
+
+@mixin bpSps {
+  @media screen and (max-width: $bpSps) {
+    @content;
+  }
+}
+
+//@mixin iconFont() {
+//  font-family: "Font Awesome 5 Free", sans-serif;
+//  font-weight: 900;
+//  line-height: 1;
+//}
+
+@mixin visually-hidden() {
+  // スクリーンリーダー向けの隠しコンテンツ
+  // a11y-css-resetから引用
+  // https://github.com/mike-engel/a11y-css-reset
+  border: 0 !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  white-space: nowrap !important;
+  width: 1px !important;
+}

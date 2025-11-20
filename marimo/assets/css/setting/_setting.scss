@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+// color
+$primaryColor: #141437;
+//$secondaryColor: #122e7e;
+$textColor: #000;
+
+// font
+$baseFont: 15;
+$baseFontSp: 14;
+$baseWeight: 400;
+$baseWeightBold: 700;
+$lineHeight: 1.8;
+$mincho: "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", serif;
+$Gothic: "Noto Sans JP","ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+
+// コンテンツ幅
+$baseWidth: 1000px;
+$baseWidthSp: 89.3%;
+$baseWidthPadding: 5.35%;
+
+// キャンバスサイズ
+$maxWidth: 2000px;
+
+// ブレークポイント
+$bpPcs: 1000px;
+$bpTb: 768px;
+$bpSp: 640px;
+$bpSps: 425px;
+
+// z-index
+// ↑レイヤー上
+// ↓レイヤー下
+// eg. z-index: z(child);
+$z-index:(
+  nav,
+  header
+);
+// リストを逆転させる
+@function list-reverse($map) {
+  $result: ();
+  @for $i from length($map)*-1 through -1 {
+    $result: append($result, nth($map, abs($i)), comma);
+  }
+  @return $result;
+}
+$z-index: list-reverse($z-index);
+
+@function z($name) {
+  @return index($z-index, $name);
+}

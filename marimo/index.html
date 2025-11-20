@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>株式会社マリモホールディングス</title>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="keyword" content="" />
+    <meta name="description" content="" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="canonical" href="https://www.marimo-hd.co.jp/" />
+
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:type" content="article" />
+    <meta property="og:description" content="" />
+    <meta property="og:title" content="" />
+    <meta property="og:url" content="https://www.marimo-hd.co.jp/" />
+    <meta property="og:site_name" content="株式会社マリモホールディングス" />
+    <meta property="og:image" content="https://www.marimo-hd.co.jp/ogp.png" />
+
+    <link rel="apple-touch-icon" href="./assets/img/ico_favicon.png" />
+    <link rel="shortcut icon" href="./assets/img/ico_favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/modal-video.min.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/stage-gallery.css" />
+    <script
+      type="text/javascript"
+      src="./assets/js/jquery-3.5.1.min.js"
+      defer
+    ></script>
+    <script
+      type="text/javascript"
+      src="./assets/js/modal-video.min.js"
+      defer
+    ></script>
+    <script type="text/javascript" src="./assets/js/script.js" defer></script>
+    <script
+      type="text/javascript"
+      src="./assets/js/stage-slides.js"
+      defer
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"
+      defer
+    ></script>
+    <script
+      type="text/javascript"
+      src="./assets/js/stage-ripple.js"
+      defer
+    ></script>
+    <script
+      type="text/javascript"
+      src="./assets/js/stage-gallery.js"
+      defer
+    ></script>
+  </head>
+  <body>
+    <!-- IE終了メッセージ -->
+    <div class="for-ie">
+      <div class="m-wrapper">
+        Internet Explorer11はサポートされていません。<br />
+        恐れ入りますが<a
+          href="https://www.google.com/intl/ja_jp/chrome/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Google Chrome</a
+        >や<a
+          href="https://www.microsoft.com/ja-jp/edge"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Microsoft Edge</a
+        >等の最新ブラウザからご覧ください。<br />
+        すでにMicrosoft Edgeをお持ちの方は<a
+          href="microsoft-edge:https://www.marimo-hd.co.jp/"
+          class="for-ie-redirect"
+          >Edgeでご覧ください</a
+        >。
+        <button class="js-ieClose">× 閉じる</button>
+      </div>
+    </div>
+    <header class="l-header">
+      <div class="l-header_logo">
+        <a href="/"
+          ><img
+            src="./assets/img/header_logo.png"
+            alt="株式会社マリモホールディングス"
+        /></a>
+      </div>
+      <div class="l-header_topics">
+        <a data-scroll-link="" href="#news">TOPICS</a>
+      </div>
+      <div class="l-header_btn"><span></span><span></span><span></span></div>
+      <div class="l-header_nav">
+        <div class="nav_video">
+          <video
+            src="./assets/movie/sample.mp4"
+            autoplay
+            loop
+            muted
+            playsinline
+          >
+            <img src="./assets/img/nav_movie.jpg" alt="Placeholder" />
+          </video>
+        </div>
+        <div class="nav_wrapper">
+          <ul class="nav_list">
+            <li>
+              <a data-scroll-link="" href="#section03">
+                <p>(TVCM)</p>
+                <div>テレビCM</div>
+              </a>
+            </li>
+            <li>
+              <a data-scroll-link="" href="#image_character">
+                <p>(Image Character)</p>
+                <div>イメージキャラクター</div>
+              </a>
+            </li>
+            <li>
+              <a data-scroll-link="" href="#our_purpose">
+                <p>(Our Purpose)</p>
+                <div>マリモホールディングスについて</div>
+              </a>
+            </li>
+            <li>
+              <a data-scroll-link="" href="#news">
+                <p>(News)</p>
+                <div>お知らせ</div>
+              </a>
+            </li>
+          </ul>
+          <p class="nav_link">
+            <a href="https://www.marimo-hd.co.jp/" target="_blank"
+              >コーポレートサイト</a
+            >
+          </p>
+        </div>
+      </div>
+    </header>
+    <main class="l-main l-main--stage">
+      <div class="l-main_side"></div>
+      <div class="scroll-spacer" aria-hidden="true"></div>
+      <div class="gallery-stage" aria-live="polite">
+        <div class="image-layer" id="currentLayer"></div>
+        <div class="image-layer" id="nextLayer"></div>
+        <div class="gradient-band" id="gradientBand"></div>
+        <div class="stage-ripple" id="stageRippleLayer" aria-hidden="true">
+          <canvas id="stageRippleCanvas"></canvas>
+          <div class="stage-ripple__label">
+            <span>瞬間</span>
+            <span class="stage-ripple__divider" aria-hidden="true"></span>
+            <span>永遠</span>
+          </div>
+        </div>
+        <div
+          class="tail-bridge-layer"
+          id="tailBridgeLayer"
+          aria-hidden="true"
+        ></div>
+      </div>
+      <!-- <div class="indicator" id="indicator">1 / 1</div> -->
+      <div class="indicator-dots" id="indicatorDots" aria-hidden="true"></div>
+      <div class="arrow-controls" aria-label="ステージナビゲーション">
+        <button
+          type="button"
+          class="nav-button nav-button--up"
+          id="navButtonUp"
+          aria-label="前のセクションへ"
+        >
+          <span class="nav-button__icon" aria-hidden="true"></span>
+        </button>
+        <button
+          type="button"
+          class="nav-button nav-button--down"
+          id="navButtonDown"
+          aria-label="次のセクションへ"
+        >
+          <span class="nav-button__icon" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div
+        class="stage-tail-sentinel"
+        id="stageTailSentinel"
+        aria-hidden="true"
+      ></div>
+      <div class="stage-tail" id="stageTail">
+        <section class="l-main_section section04" id="image_character">
+          <div class="section04_content">
+            <div class="section04_title">
+              <p>(Image Character)</p>
+              <h2>イメージキャラクター</h2>
+            </div>
+            <div class="section04_text">
+              <div>絢香<span>AYAKA</span></div>
+              <p>
+                シンガーソングライター。<br />
+                2006年に「I
+                believe」でデビュー。同年リリースした1stアルバム「First
+                Message」がミリオンヒットを記録。自身初のオリコン週間ランキング1位を獲得した「三日月」、2014年NHK朝の連続テレビ小説『花子とアン』の主題歌「にじいろ」がストリーミング1億回再生を突破。発表してきた楽曲は、今も世代を超えて歌い継がれている。デビュー以来、唯一無二の歌声と豊かな表現力で幅広い層から支持を集める。<br />
+                ギター・ピアノ・歌のみのシンプルな編成から、バンドスタイル、ディナーライブ、シンフォニックコンサートまで、多彩な形で精力的にライブ活動を展開中。<br />
+                2025年には、地元・大阪で開催された「日本国際博覧会
+                開会式」にて日本国歌独唱を務める。9月には通算8枚目となるアルバム『Wonder!』をリリースし、全国25箇所を巡る「絢香
+                Wonder! Tour
+                2025」を開催。そして、2026年2月1日、デビュー20周年を迎える。
+              </p>
+            </div>
+          </div>
+        </section>
+        <section class="l-main_section section05" id="section05">
+          <div class="section05_content">
+            <div class="section05_logo">
+              <img
+                src="./assets/img/section05_logo.png"
+                alt="瞬間を積み重ね、永遠へ。"
+              />
+            </div>
+            <p class="section05_text">
+              <picture>
+                <source
+                  srcset="./assets/img/section05_text_sp.png"
+                  media="(max-width: 768px)"
+                />
+                <img
+                  src="./assets/img/section05_text.png"
+                  alt="マリモホールディングスのロゴマークのモチーフは、“永遠”を意味するメビウスの輪です。しあわせを表すブルーのリボンがメビウスの輪を形づくり、わたしたちが永遠のしあわせを願う企業であることを象徴しています。"
+                />
+              </picture>
+            </p>
+          </div>
+        </section>
+        <section class="section06" id="our_purpose">
+          <div class="section06_img">
+            <img src="./assets/img/section06_img.png" alt="" />
+          </div>
+          <div class="section06_content">
+            <div class="section06_title">
+              <p>(Our Purpose)</p>
+              <div>
+                <img
+                  src="./assets/img/section06_lead.png"
+                  alt="ヒューマニティとビジネスの力で社会の課題を解決し、人々の豊かな暮らしを創造し続ける。"
+                />
+              </div>
+            </div>
+            <p class="section06_text">
+              お客様のために、そして社会全体の利に寄与すること。<br />
+              「利他と感謝」の経営理念のもと展開してきた<br
+                class="m-sp-hidden"
+              />
+              マリモグループの事業の多様性は<br class="m-pc-hidden" />
+              社会の未来を切り拓く可能性でもあります。<br />
+              めざすのは、ビジネスとソーシャルの割合が50対50で共存する<br
+                class="m-sp-hidden"
+              />
+              「ソーシャルビジネスカンパニー」。<br />
+              私たちは、利他を喜びとするヒューマニティとビジネスの力で<br
+                class="m-sp-hidden"
+              />
+              社会の課題を解決し、人々の豊かな暮らしを創造し続けます。
+            </p>
+            <div class="section06_btn">
+              <a href="https://www.marimo-hd.co.jp/group" target="_blank"
+                >View more</a
+              >
+            </div>
+          </div>
+        </section>
+        <section class="news" id="news">
+          <div class="news_content">
+            <div class="news_title">
+              <p>(News)</p>
+              <h2>
+                <img src="./assets/img/news_title.png" alt="お知らせ" />
+              </h2>
+            </div>
+            <div class="news_list">
+              <ul>
+                <li>
+                  <div>
+                    <span class="news_date">2025.00.00</span>
+                    <span class="news_category">#お知らせ</span>
+                  </div>
+                  <p>
+                    <a href="#">企業CM「〇〇篇30秒」追加</a>
+                  </p>
+                </li>
+                <li>
+                  <div>
+                    <span class="news_date">2025.00.00</span>
+                    <span class="news_category">#お知らせ</span>
+                  </div>
+                  <p>
+                    新商品・新サービスの発売のお知らせ新商品・新サービスの発売のお知らせ
+                  </p>
+                </li>
+                <li>
+                  <div>
+                    <span class="news_date">2025.00.00</span>
+                    <span class="news_category">#お知らせ</span>
+                  </div>
+                  <p>
+                    新商品・新サービスの発売のお知らせ新商品・新サービスの発売のお知らせ
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer class="l-footer" id="footer">
+      <div class="l-footer_logo">
+        <img
+          src="./assets/img/footer_logo.png"
+          alt="株式会社マリモホールディングス"
+        />
+      </div>
+      <p class="l-footer_text">
+        Copyright &copy; Marimo Holdings,<br class="m-pc-hidden" />
+        Inc. All Rights Reserved.
+      </p>
+    </footer>
+  </body>
+</html>
