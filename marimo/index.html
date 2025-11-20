@@ -145,7 +145,27 @@
       </div>
     </header>
     <main class="l-main l-main--stage">
-      <div class="l-main_side"></div>
+      <div class="l-main_side">
+        <div class="indicator-dots" id="indicatorDots" aria-hidden="true"></div>
+        <div class="arrow-controls" aria-label="ステージナビゲーション">
+          <button
+            type="button"
+            class="nav-button nav-button--up"
+            id="navButtonUp"
+            aria-label="前のセクションへ"
+          >
+            <span class="nav-button__icon" aria-hidden="true"></span>
+          </button>
+          <button
+            type="button"
+            class="nav-button nav-button--down"
+            id="navButtonDown"
+            aria-label="次のセクションへ"
+          >
+            <span class="nav-button__icon" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
       <div class="scroll-spacer" aria-hidden="true"></div>
       <div class="gallery-stage" aria-live="polite">
         <div class="image-layer" id="currentLayer"></div>
@@ -166,25 +186,6 @@
         ></div>
       </div>
       <!-- <div class="indicator" id="indicator">1 / 1</div> -->
-      <div class="indicator-dots" id="indicatorDots" aria-hidden="true"></div>
-      <div class="arrow-controls" aria-label="ステージナビゲーション">
-        <button
-          type="button"
-          class="nav-button nav-button--up"
-          id="navButtonUp"
-          aria-label="前のセクションへ"
-        >
-          <span class="nav-button__icon" aria-hidden="true"></span>
-        </button>
-        <button
-          type="button"
-          class="nav-button nav-button--down"
-          id="navButtonDown"
-          aria-label="次のセクションへ"
-        >
-          <span class="nav-button__icon" aria-hidden="true"></span>
-        </button>
-      </div>
 
       <div class="stage-tail" id="stageTail">
         <section class="l-main_section section03" id="section03">

@@ -316,11 +316,34 @@ body {
     right: 0;
     bottom: 0;
     z-index: 100;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    align-items: center;
+    justify-items: center;
+    gap: clamp(20px, 3vh, 40px);
+    padding: clamp(24px, 4vh, 56px) 0;
+    box-sizing: border-box;
+    .indicator-dots {
+      align-self: center;
+      justify-self: center;
+    }
     @include bpTb {
+      display: flex;
+      flex-direction: row;
       width: 100%;
-      height: px-vw(80, 750);
+      min-height: px-vw(140, 750);
+      height: auto;
       top: auto;
       bottom: 0;
+      justify-content: center;
+      align-items: center;
+      gap: px-vw(40, 750);
+      padding: px-vw(20, 750) px-vw(60, 750);
+    }
+    .arrow-controls {
+      @include bpTb {
+        margin-left: auto;
+      }
     }
   }
   // メインビジュアル

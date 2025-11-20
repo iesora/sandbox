@@ -32,7 +32,7 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.45s ease, visibility 0.45s ease;
+  transition: none;
 }
 
 body.is-stage-tail .stage-tail,
@@ -262,110 +262,106 @@ body.is-stage-ripple-boundary .gradient-band {
 }
 
 .indicator-dots {
-  position: fixed;
-  top: 50%;
-  right: calc(36px + 5vw);
-  transform: translateY(-50%);
+  position: relative;
+  top: auto;
+  right: auto;
+  transform: none;
   display: flex;
   flex-direction: column;
   gap: 16px;
   z-index: 110;
   pointer-events: none;
-  padding: 20px 14px;
-  background: rgba(0, 0, 0, 0.35);
-  border-radius: 999px;
-  backdrop-filter: blur(12px);
-  align-items: center;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  backdrop-filter: none;
+  align-items: flex-start;
 }
 
 .indicator-dot {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.28);
-  opacity: 0.55;
-  transition: background-color 200ms ease, transform 200ms ease,
-    opacity 200ms ease;
+  background: #d7d7d7;
+  opacity: 1;
+  transition: background-color 200ms ease, transform 200ms ease;
 }
 
 .indicator-dot.is-active {
-  background: #ffffff;
-  opacity: 1;
-  transform: scale(1.15);
+  background: #111111;
+  transform: scale(1.1);
+}
+
+.l-main_side .indicator-dots {
+  margin-top: clamp(12px, 6vh, 60px);
+  align-self: center;
 }
 
 .arrow-controls {
-  position: fixed;
-  right: calc(24px + 5vw);
-  bottom: 40px;
+  position: relative;
+  right: auto;
+  bottom: auto;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 8px;
+  align-items: center;
   z-index: 120;
 }
 
 .nav-button {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  background: rgba(0, 0, 0, 0.45);
-  color: #fff;
+  width: auto;
+  height: auto;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 12px;
+  color: #111111;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color 180ms ease, transform 180ms ease,
-    border-color 180ms ease, opacity 180ms ease;
-  backdrop-filter: blur(14px);
+  transition: color 180ms ease, transform 180ms ease, opacity 180ms ease;
+  backdrop-filter: none;
 }
 
 .nav-button:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.55);
+  color: #000000;
   transform: translateY(-1px);
 }
 
 .nav-button:active:not(:disabled) {
-  transform: translateY(1px) scale(0.97);
+  transform: translateY(1px);
 }
 
 .nav-button:disabled {
-  opacity: 0.35;
+  opacity: 0.3;
   cursor: not-allowed;
 }
 
 .nav-button__icon {
   position: relative;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   display: block;
-}
-
-.nav-button__icon::before,
-.nav-button__icon::after {
-  content: "";
-  position: absolute;
-  width: 2px;
-  height: 12px;
-  background: currentColor;
-  top: 3px;
+  transform: rotate(-90deg);
+  transition: transform 180ms ease;
 }
 
 .nav-button__icon::before {
-  left: 8px;
-  transform-origin: top center;
-  transform: rotate(-45deg);
-}
-
-.nav-button__icon::after {
-  right: 8px;
-  transform-origin: top center;
-  transform: rotate(45deg);
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  border-left: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: translate(-50%, -50%) rotate(-135deg);
+  transform-origin: center;
 }
 
 .nav-button--down .nav-button__icon {
-  transform: rotate(180deg);
+  transform: rotate(90deg);
 }
 
 .gallery-stage,
@@ -373,7 +369,7 @@ body.is-stage-ripple-boundary .gradient-band {
 .indicator-dots,
 .arrow-controls,
 .indicator {
-  transition: opacity 0.4s ease, visibility 0.4s ease;
+  transition: none;
 }
 
 body.is-stage-tail-overlay .gallery-stage,
@@ -386,10 +382,6 @@ body.is-stage-tail-overlay .indicator {
   pointer-events: none;
 }
 
-body.is-stage-tail-overlay .gallery-stage {
-  transition: opacity 0.5s ease, visibility 0.5s ease;
-}
-
 @media screen and (max-width: 768px) {
   .indicator {
     top: 80px;
@@ -399,9 +391,9 @@ body.is-stage-tail-overlay .gallery-stage {
   }
 
   .indicator-dots {
-    right: 16px;
-    gap: 12px;
-    padding: 16px 12px;
+    flex-direction: row;
+    gap: 10px;
+    padding: 0;
   }
 
   .indicator-dot {
@@ -409,34 +401,23 @@ body.is-stage-tail-overlay .gallery-stage {
     height: 8px;
   }
 
+  .l-main_side .indicator-dots {
+    margin-top: 0;
+    align-self: auto;
+  }
+
   .arrow-controls {
-    right: 16px;
-    bottom: 24px;
-    gap: 10px;
+    flex-direction: row;
+    gap: 8px;
   }
 
   .nav-button {
-    width: 48px;
-    height: 48px;
+    padding: 10px;
   }
 
   .nav-button__icon {
-    width: 16px;
-    height: 16px;
-  }
-
-  .nav-button__icon::before,
-  .nav-button__icon::after {
-    height: 10px;
-    top: 3px;
-  }
-
-  .nav-button__icon::before {
-    left: 7px;
-  }
-
-  .nav-button__icon::after {
-    right: 7px;
+    width: 18px;
+    height: 18px;
   }
 
   .stage-ripple__label {

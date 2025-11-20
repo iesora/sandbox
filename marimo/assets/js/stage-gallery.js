@@ -181,7 +181,7 @@ function getUnitHeightForIndex(index) {
 // シームのぼかし幅（% of viewport height）。大きいほど境界がなだらか
 const FEATHER_PERCENT = 20; // 0〜100 の範囲で調整
 // オーバーラップ幅（% of viewport height）。重ねて黒っぽさ（背景透け）を防ぐ
-const OVERLAP_PERCENT = 0; // 推奨: 4〜16
+const OVERLAP_PERCENT = 4; // 推奨: 4〜16（0にすると境界で暗転しやすい）
 // グラデーション（ブレンド）が始まる進捗（0〜1）。大きいほど遅く始まる
 const GRADIENT_START = 0.2;
 // 前段の予備ブレンド（しきい値手前で徐々に出現）
@@ -466,7 +466,7 @@ function navigateByButton(direction) {
   // これにより「一度目のクリックで少しだけ上スクロールし、二度目で section01 へ飛ぶ」
   // 現象を防ぎ、section03→section02 への自然な切替を実現する。
   if (direction < 0 && tailOverlayActive) {
-    setTailOverlayActive(false);
+    setTailOverlayActive(false, { reason: "nav-button-up" });
     prepareTailBridgeReentry(Math.max(LAST_SLIDE_BRIDGE_START + 0.05, 0.5));
     updateProgress();
     updateNavigationDisabledStates();
@@ -523,7 +523,7 @@ function updateNavigationDisabledStates(indexOverride) {
     slideCount - 1
   );
 
-  console.log("effectiveIndex", effectiveIndex);
+  //console.log("effectiveIndex", effectiveIndex);
 
   if (navButtonUp) {
     navButtonUp.disabled = effectiveIndex <= 0;
@@ -593,8 +593,8 @@ function updateProgress() {
     }
   }
 
-  console.log("activeSectionIndex", activeSectionIndex);
-  console.log("currentIndex", currentIndex);
+  //console.log("activeSectionIndex", activeSectionIndex);
+  //console.log("currentIndex", currentIndex);
 
   // Active section changed: only log if not immediately repeated
   if (activeSectionIndex !== currentIndex) {
@@ -1262,7 +1262,7 @@ function isStageTailInView() {
 }
 
 function setTailMode(active, options = {}) {
-  const { skipOverlayUpdate = false } = options;
+  const { skipOverlayUpdate = false, reason = "" } = options;
   if (!document.body) {
     tailModeActive = active;
     return;
@@ -1278,6 +1278,22 @@ function setTailMode(active, options = {}) {
   }
   tailModeActive = active;
   document.body.classList.toggle(STAGE_TAIL_CLASS, tailModeActive);
+  if (typeof console !== "undefined" && typeof console.info === "function") {
+    const meta = {
+      scrollY:
+        typeof window !== "undefined" && Number.isFinite(window.scrollY)
+          ? Math.round(window.scrollY)
+          : 0,
+      progressHint: lastTailProgressHint,
+      activeSectionIndex,
+    };
+    console.info(
+      `[stage-gallery] tailMode ${tailModeActive ? "ENTER" : "EXIT"}${
+        reason ? ` <- ${reason}` : ""
+      }`,
+      meta
+    );
+  }
   if (!tailModeActive) {
     document.body.classList.remove("is-stage-bridging");
   } else if (tailOverlayActive) {
@@ -1294,24 +1310,48 @@ function setTailMode(active, options = {}) {
   }
 }
 
-function setTailOverlayActive(active) {
-  if (!document.body || tailOverlayActive === active) {
+function setTailOverlayActive(active, meta = {}) {
+  const { reason = "" } = meta;
+  if (!document.body) {
     tailOverlayActive = active;
     return;
   }
-  const previous = tailOverlayActive;
+  if (tailOverlayActive === active) {
+    return;
+  }
   tailOverlayActive = active;
   document.body.classList.toggle(STAGE_TAIL_OVERLAY_CLASS, tailOverlayActive);
+  if (typeof console !== "undefined" && typeof console.info === "function") {
+    const overlayMeta = {
+      scrollY:
+        typeof window !== "undefined" && Number.isFinite(window.scrollY)
+          ? Math.round(window.scrollY)
+          : 0,
+      progressHint: lastTailProgressHint,
+    };
+    console.info(
+      `[stage-gallery] tailOverlay ${tailOverlayActive ? "ENTER" : "EXIT"}${
+        reason ? ` <- ${reason}` : ""
+      }`,
+      overlayMeta
+    );
+  }
   if (tailOverlayActive) {
     tailModeReentryLock = null;
-    setTailMode(true, { skipOverlayUpdate: true });
+    setTailMode(true, {
+      skipOverlayUpdate: true,
+      reason: "force-tail-mode-for-overlay",
+    });
     alignStageTailToViewport();
   } else {
     tailModeReentryLock = Math.max(
       TAIL_OVERLAY_EXIT_THRESHOLD - 0.02,
       LAST_SLIDE_BRIDGE_START + 0.01
     );
-    setTailMode(false, { skipOverlayUpdate: true });
+    setTailMode(false, {
+      skipOverlayUpdate: true,
+      reason: "overlay-exit",
+    });
     prepareTailBridgeReentry(lastTailProgressHint);
   }
 }
@@ -1327,7 +1367,11 @@ function updateTailOverlayState(entry, progressHint) {
     lastTailProgressHint = effectiveProgress;
   }
   const shouldOverlay = computeTailOverlayActivation(entry, effectiveProgress);
-  setTailOverlayActive(shouldOverlay);
+  const overlayReason =
+    entry && entry.target === stageTailSentinel
+      ? "observer-sentinel"
+      : "progress-threshold";
+  setTailOverlayActive(shouldOverlay, { reason: overlayReason });
 }
 
 function isTailModeLockActive() {
@@ -1380,10 +1424,9 @@ function computeTailOverlayActivation(entry, progressHint) {
     resolvedProgress <= TAIL_OVERLAY_EXIT_THRESHOLD;
   let exitByPosition = false;
   if (tailRect && Number.isFinite(tailRect.top)) {
-    const marginPx =
-      viewportHeight *
-      STAGE_TAIL_EXIT_MARGIN_RATIO *
-      (tailOverlayActive ? 1 : 0.8);
+    const marginPx = tailOverlayActive
+      ? 0
+      : viewportHeight * STAGE_TAIL_EXIT_MARGIN_RATIO * 0.8;
     exitByPosition = tailRect.top >= -marginPx;
   }
 
@@ -1459,7 +1502,8 @@ function updateTailMode(scrollPosition = window.scrollY || 0) {
       : false;
   const nearLastSlide = activeSectionIndex >= slideCount - 1;
   setTailMode(
-    tailVisible || crossedBoundary || sentinelPastTop || nearLastSlide
+    tailVisible || crossedBoundary || sentinelPastTop || nearLastSlide,
+    { reason: "updateTailMode-scroll" }
   );
   updateTailOverlayState();
 }
@@ -1467,7 +1511,7 @@ function updateTailMode(scrollPosition = window.scrollY || 0) {
 function updateTailModeFromStageState(index, progress) {
   lastTailProgressHint = progress;
   if (slideCount === 0) {
-    setTailMode(false);
+    setTailMode(false, { reason: "stage-progress-empty" });
     updateLastSlideBridge(0);
     updateTailOverlayState(undefined, progress);
     return;
@@ -1480,11 +1524,11 @@ function updateTailModeFromStageState(index, progress) {
   }
   if (index >= slideCount - 1) {
     const reachedTail = progress >= TAIL_MODE_THRESHOLD;
-    setTailMode(reachedTail);
+    setTailMode(reachedTail, { reason: "stage-progress-last" });
     updateLastSlideBridge(reachedTail ? 1 : progress);
     updateTailOverlayState(undefined, progress);
   } else {
-    setTailMode(false);
+    setTailMode(false, { reason: "stage-progress-pre-tail" });
     updateLastSlideBridge(0);
     updateTailOverlayState(undefined, progress);
   }
@@ -1500,7 +1544,7 @@ function setupTailObserver() {
         const rect = entry.boundingClientRect;
         const pastTop = rect ? rect.top <= 0 : false;
         const shouldTail = entry.isIntersecting || pastTop;
-        setTailMode(shouldTail);
+        setTailMode(shouldTail, { reason: "tail-observer" });
         updateTailOverlayState(entry, lastTailProgressHint);
       });
     },
