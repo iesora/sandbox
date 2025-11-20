@@ -420,6 +420,21 @@ function setupNavigationButtons() {
 
 function navigateByButton(direction) {
   if (direction === 0) return;
+  // Tail overlay から「上へ」押下時は、まずオーバーレイを解除して
+  // ステージ最終スライド（section02）に安定して着地させる。
+  // これにより「一度目のクリックで少しだけ上スクロールし、二度目で section01 へ飛ぶ」
+  // 現象を防ぎ、section03→section02 への自然な切替を実現する。
+  if (direction < 0 && tailOverlayActive) {
+    // 即時にオーバーレイを外し、ブリッジ復帰を安全な進捗（0.5付近）で行う
+    // LAST_SLIDE_BRIDGE_START(=0.35)より十分上に設定して、直後の自動スナップで
+    // そのまま section01 へ落ちないようにする。
+    setTailOverlayActive(false);
+    prepareTailBridgeReentry(Math.max(LAST_SLIDE_BRIDGE_START + 0.05, 0.5));
+    // 進捗とボタン状態を即時反映
+    updateProgress();
+    updateNavigationDisabledStates();
+    return;
+  }
   const targetIndex = clamp(activeSectionIndex + direction, 0, slideCount - 1);
   requestSnapToIndex(targetIndex);
 }
@@ -453,12 +468,14 @@ function requestSnapToIndex(targetIndex, duration = SNAP_DURATION_MS) {
 }
 
 function updateNavigationDisabledStates(indexOverride) {
-  if (!navButtonUp && !navButtonDown) return;
   const effectiveIndex = clamp(
     indexOverride !== undefined ? indexOverride : activeSectionIndex,
     0,
     slideCount - 1
   );
+
+  console.log("effectiveIndex", effectiveIndex);
+
   if (navButtonUp) {
     navButtonUp.disabled = effectiveIndex <= 0;
   }
@@ -527,6 +544,8 @@ function updateProgress() {
     }
   }
 
+  console.log("activeSectionIndex", activeSectionIndex);
+
   // Active section changed: only log if not immediately repeated
   if (activeSectionIndex !== currentIndex) {
     const oldIndex = currentIndex;
@@ -591,6 +610,7 @@ function updateProgress() {
 
   // フレーム描画
   renderFrame(progressForRender);
+
   updateNavigationDisabledStates();
   updateTailMode(scrollY);
   updateTailModeFromStageState(activeSectionIndex, progressForRender);
