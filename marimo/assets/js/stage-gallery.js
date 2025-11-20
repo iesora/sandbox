@@ -545,6 +545,7 @@ function updateProgress() {
   }
 
   console.log("activeSectionIndex", activeSectionIndex);
+  console.log("currentIndex", currentIndex);
 
   // Active section changed: only log if not immediately repeated
   if (activeSectionIndex !== currentIndex) {
@@ -553,6 +554,7 @@ function updateProgress() {
     const oldSlide = slides[oldIndex] || {};
     const newSlide = slides[newIndex] || {};
     // Check for duplicate logs
+    /*
     if (
       lastSectionChange.oldIndex === oldIndex &&
       lastSectionChange.newIndex === newIndex
@@ -560,6 +562,7 @@ function updateProgress() {
       // Prevent duplicate log and update from occurring
       return;
     }
+    */
     // Store last
     lastSectionChange.oldIndex = oldIndex;
     lastSectionChange.newIndex = newIndex;
