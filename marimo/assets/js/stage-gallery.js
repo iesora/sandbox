@@ -361,6 +361,27 @@ function updateIndicatorDots(activeIndex) {
 function refreshLayers() {
   const currentSlide = slides[currentIndex] || null;
   const nextSlide = slides[nextIndex] || currentSlide;
+  // 同一IDの場合は次レイヤーの再描画を避け、片側のみ更新してフリッカーを抑制
+  if (
+    currentSlide &&
+    nextSlide &&
+    currentSlide.id &&
+    nextSlide.id &&
+    currentSlide.id === nextSlide.id
+  ) {
+    setLayerContent(currentLayer, currentSlide);
+    if (nextLayer) {
+      nextLayer.innerHTML = "";
+      nextLayer.dataset.stageSlideId = "";
+      setLayerMask(nextLayer, MASK_FULLY_HIDDEN);
+      nextLayer.style.opacity = "0";
+    }
+    if (indicator && slideCount > 0) {
+      indicator.textContent = `${currentIndex + 1} / ${slideCount}`;
+    }
+    updateIndicatorDots(currentIndex);
+    return;
+  }
   setLayerContent(currentLayer, currentSlide);
   setLayerContent(nextLayer, nextSlide);
   if (indicator && slideCount > 0) {
@@ -371,9 +392,16 @@ function refreshLayers() {
 
 function setLayerContent(layer, slide) {
   if (!layer) return;
+  const nextId = slide && slide.id ? slide.id : "";
+  // すでに同一IDならDOM再構築を回避
+  if (layer.dataset && layer.dataset.stageSlideId === nextId) {
+    return;
+  }
   layer.innerHTML = "";
-  layer.dataset.stageSlideId = slide && slide.id ? slide.id : "";
-  if (!slide) return;
+  layer.dataset.stageSlideId = nextId;
+  if (!slide) {
+    return;
+  }
   layer.innerHTML = slide.html;
 
   if (slide.id === "mainv" && typeof window.applyMvBackground === "function") {
@@ -806,6 +834,20 @@ function drawCurvedMasks(
 function renderFrame(progress) {
   const currentSlideData = slides[currentIndex] || null;
   const upcomingSlideData = slides[nextIndex] || null;
+  // 同一セクション間の遷移は無効化（例: section03 → section03）
+  if (
+    !currentSlideData ||
+    !upcomingSlideData ||
+    currentSlideData.id === upcomingSlideData.id
+  ) {
+    setLayerMask(currentLayer, MASK_FULLY_VISIBLE);
+    setLayerMask(nextLayer, MASK_FULLY_HIDDEN);
+    if (currentLayer) currentLayer.style.opacity = "1";
+    if (nextLayer) nextLayer.style.opacity = "0";
+    updateGradientBandVisibility(0, true);
+    setRippleBodyState(false);
+    return;
+  }
   const rippleBoundaryActive = isRippleBoundary(
     currentSlideData,
     upcomingSlideData
