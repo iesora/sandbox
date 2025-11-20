@@ -65,6 +65,7 @@ const slides = Array.isArray([
       </section>
     `,
   },
+  {},
 ])
   ? window.stageSlides
   : [];
@@ -375,6 +376,10 @@ function refreshLayers() {
       nextLayer.dataset.stageSlideId = "";
       setLayerMask(nextLayer, MASK_FULLY_HIDDEN);
       nextLayer.style.opacity = "0";
+      nextLayer.style.visibility = "hidden";
+    }
+    if (currentLayer) {
+      currentLayer.style.visibility = "";
     }
     if (indicator && slideCount > 0) {
       indicator.textContent = `${currentIndex + 1} / ${slideCount}`;
@@ -384,6 +389,8 @@ function refreshLayers() {
   }
   setLayerContent(currentLayer, currentSlide);
   setLayerContent(nextLayer, nextSlide);
+  if (currentLayer) currentLayer.style.visibility = "";
+  if (nextLayer) nextLayer.style.visibility = "";
   if (indicator && slideCount > 0) {
     indicator.textContent = `${currentIndex + 1} / ${slideCount}`;
   }
@@ -395,13 +402,16 @@ function setLayerContent(layer, slide) {
   const nextId = slide && slide.id ? slide.id : "";
   // すでに同一IDならDOM再構築を回避
   if (layer.dataset && layer.dataset.stageSlideId === nextId) {
+    layer.style.visibility = "";
     return;
   }
   layer.innerHTML = "";
   layer.dataset.stageSlideId = nextId;
   if (!slide) {
+    layer.style.visibility = "";
     return;
   }
+  layer.style.visibility = "";
   layer.innerHTML = slide.html;
 
   if (slide.id === "mainv" && typeof window.applyMvBackground === "function") {
@@ -840,6 +850,17 @@ function renderFrame(progress) {
     !upcomingSlideData ||
     currentSlideData.id === upcomingSlideData.id
   ) {
+    // 前フレームの残留効果を完全にリセット
+    if (currentLayer) {
+      currentLayer.style.clipPath = "inset(0% 0% 0% 0%)";
+      currentLayer.style.webkitClipPath = "inset(0% 0% 0% 0%)";
+      currentLayer.style.visibility = "";
+    }
+    if (nextLayer) {
+      nextLayer.style.clipPath = "inset(0% 0% 0% 0%)";
+      nextLayer.style.webkitClipPath = "inset(0% 0% 0% 0%)";
+      nextLayer.style.visibility = "hidden";
+    }
     setLayerMask(currentLayer, MASK_FULLY_VISIBLE);
     setLayerMask(nextLayer, MASK_FULLY_HIDDEN);
     if (currentLayer) currentLayer.style.opacity = "1";
@@ -885,6 +906,8 @@ function renderFrame(progress) {
     nextLayer.style.clipPath = "inset(0% 0% 0% 0%)";
     currentLayer.style.webkitClipPath = "inset(0% 0% 0% 0%)";
     nextLayer.style.webkitClipPath = "inset(0% 0% 0% 0%)";
+    currentLayer.style.visibility = "";
+    nextLayer.style.visibility = "";
 
     // しきい値直前 PRE_BLEND_RANGE の間だけ、下端でうっすらブレンドを開始
     const preStart = Math.max(0, GRADIENT_START - PRE_BLEND_RANGE);
@@ -956,6 +979,8 @@ function renderFrame(progress) {
   nextLayer.style.clipPath = "inset(0% 0% 0% 0%)";
   currentLayer.style.webkitClipPath = "inset(0% 0% 0% 0%)";
   nextLayer.style.webkitClipPath = "inset(0% 0% 0% 0%)";
+  currentLayer.style.visibility = "";
+  nextLayer.style.visibility = "";
 
   currentLayer.style.maskImage = `url(${curUrl})`;
   nextLayer.style.maskImage = `url(${nxtUrl})`;
