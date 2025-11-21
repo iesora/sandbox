@@ -162,6 +162,7 @@ let lastScrollDirection = 1;
 let tailModeReentryLock = null;
 let rippleLatchActive = false;
 let scrollFreezeUntil = 0; // 一時的にスクロールを無効化する期限（msのタイムスタンプ）
+let nextLayerFrozen = false;
 const SUPPORTS_INTERSECTION_OBSERVER =
   typeof window !== "undefined" && "IntersectionObserver" in window;
 const LAST_SLIDE_ID =
@@ -370,14 +371,13 @@ function refreshLayers() {
     nextSlide.id &&
     currentSlide.id === nextSlide.id
   ) {
+    nextLayerFrozen = true;
     // Next layer is guaranteed to never animate.
     setLayerContent(currentLayer, currentSlide);
     if (nextLayer) {
-      nextLayer.innerHTML = "";
-      nextLayer.dataset.stageSlideId = "";
-      setLayerMask(nextLayer, MASK_FULLY_HIDDEN);
-      nextLayer.style.opacity = "0";
-      nextLayer.style.visibility = "hidden";
+      nextLayer.style.visibility = "";
+      nextLayer.style.opacity = "1";
+      setLayerMask(nextLayer, MASK_FULLY_VISIBLE);
     }
     if (currentLayer) {
       currentLayer.style.visibility = "";
@@ -390,6 +390,7 @@ function refreshLayers() {
   }
   // -------- End absolute prevention --------
 
+  nextLayerFrozen = false;
   setLayerContent(currentLayer, currentSlide);
   setLayerContent(nextLayer, nextSlide);
   if (currentLayer) currentLayer.style.visibility = "";
@@ -870,12 +871,17 @@ function renderFrame(progress) {
     if (nextLayer) {
       nextLayer.style.clipPath = "inset(0% 0% 0% 0%)";
       nextLayer.style.webkitClipPath = "inset(0% 0% 0% 0%)";
-      nextLayer.style.visibility = "hidden";
+      if (nextLayerFrozen) {
+        nextLayer.style.visibility = "";
+        nextLayer.style.opacity = "1";
+        setLayerMask(nextLayer, MASK_FULLY_VISIBLE);
+      } else {
+        nextLayer.style.visibility = "hidden";
+        nextLayer.style.opacity = "0";
+        setLayerMask(nextLayer, MASK_FULLY_HIDDEN);
+      }
     }
     setLayerMask(currentLayer, MASK_FULLY_VISIBLE);
-    setLayerMask(nextLayer, MASK_FULLY_HIDDEN);
-    if (currentLayer) currentLayer.style.opacity = "1";
-    if (nextLayer) nextLayer.style.opacity = "0";
     updateGradientBandVisibility(0, true);
     setRippleBodyState(false);
     return;
