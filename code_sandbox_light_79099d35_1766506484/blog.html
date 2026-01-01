@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - LR consulting</title>
+    <meta name="description" content="LR consultingのブログ。採用やコンサルティングに関する情報を発信しています。">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo">
+            <img src="https://storage.googleapis.com/studio-design-asset-files/projects/M3aALvryqe/s-500x100_webp_3151a72c-ad58-45fb-9c87-706b06e02046.webp" alt="LR consulting" class="logo-image">
+        </a>
+        <nav>
+            <ul>
+                <li><a href="recruit.html">Recruit</a></li>
+                <li><a href="job.html">Job</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <section style="margin-top: 100px; padding: 20px 40px;">
+        <div style="font-size: 14px; color: #666;">
+            <a href="index.html" style="color: #666; text-decoration: none;">TOP</a>
+            <span style="margin: 0 10px;">›</span>
+            <span>Blog</span>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section class="hero" style="min-height: 15vh; padding: 20px 40px; position: relative;">
+        <h1 class="hero-title" style="position: absolute; right: 40px; top: 50%; transform: translateY(-50%) rotate(90deg); transform-origin: center; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 8px; margin: 0;">Blog</h1>
+    </section>
+
+    <!-- Blog Categories -->
+    <section class="blog-categories">
+        <div class="container">
+            <div class="category-filters">
+                <button class="category-btn active" data-category="all">すべて</button>
+                <button class="category-btn" data-category="recruit">採用</button>
+                <button class="category-btn" data-category="consulting">コンサルティング</button>
+                <button class="category-btn" data-category="startup">スタートアップ</button>
+                <button class="category-btn" data-category="culture">企業文化</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog List Section -->
+    <section class="blog-list">
+        <div class="container">
+            <div class="blog-grid">
+                <!-- Blog Card 1 -->
+                <article class="blog-card" data-category="recruit" onclick="location.href='blog-detail.html?id=1'">
+                    <div class="blog-card-image">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=500&fit=crop" alt="採用戦略">
+                        <span class="blog-category">採用</span>
+                    </div>
+                    <div class="blog-card-content">
+                        <time class="blog-date">2024.01.15</time>
+                        <h3 class="blog-title">スタートアップの採用戦略：優秀な人材を引き寄せる5つのポイント</h3>
+                        <p class="blog-excerpt">スタートアップにとって、優秀な人材の確保は成長の鍵です。限られたリソースの中で効果的な採用を実現するための戦略をご紹介します。</p>
+                        <a href="blog-detail.html?id=1" class="blog-read-more">
+                            <span>続きを読む</span>
+                            <span class="btn-arrow">→</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Blog Card 2 -->
+                <article class="blog-card" data-category="consulting" onclick="location.href='blog-detail.html?id=2'">
+                    <div class="blog-card-image">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=500&fit=crop" alt="コンサルティング">
+                        <span class="blog-category">コンサルティング</span>
+                    </div>
+                    <div class="blog-card-content">
+                        <time class="blog-date">2024.01.10</time>
+                        <h3 class="blog-title">はじめてのコンサルティング導入：成功のための準備と心構え</h3>
+                        <p class="blog-excerpt">コンサルティングを初めて導入する企業に向けて、成功するために必要な準備と心構えについて解説します。</p>
+                        <a href="blog-detail.html?id=2" class="blog-read-more">
+                            <span>続きを読む</span>
+                            <span class="btn-arrow">→</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Blog Card 3 -->
+                <article class="blog-card" data-category="startup" onclick="location.href='blog-detail.html?id=3'">
+                    <div class="blog-card-image">
+                        <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&h=500&fit=crop" alt="スタートアップ">
+                        <span class="blog-category">スタートアップ</span>
+                    </div>
+                    <div class="blog-card-content">
+                        <time class="blog-date">2024.01.05</time>
+                        <h3 class="blog-title">スタートアップの成長フェーズ別：組織づくりのポイント</h3>
+                        <p class="blog-excerpt">創業期から成長期まで、各フェーズで必要となる組織づくりのポイントを実例を交えてご紹介します。</p>
+                        <a href="blog-detail.html?id=3" class="blog-read-more">
+                            <span>続きを読む</span>
+                            <span class="btn-arrow">→</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Blog Card 4 -->
+                <article class="blog-card" data-category="culture" onclick="location.href='blog-detail.html?id=4'">
+                    <div class="blog-card-image">
+                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&h=500&fit=crop" alt="企業文化">
+                        <span class="blog-category">企業文化</span>
+                    </div>
+                    <div class="blog-card-content">
+                        <time class="blog-date">2023.12.28</time>
+                        <h3 class="blog-title">リスペクトで繋がる組織文化：心理的安全性の作り方</h3>
+                        <p class="blog-excerpt">メンバー同士がリスペクトし合える組織文化を築くための具体的な方法と、心理的安全性の重要性について解説します。</p>
+                        <a href="blog-detail.html?id=4" class="blog-read-more">
+                            <span>続きを読む</span>
+                            <span class="btn-arrow">→</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Blog Card 5 -->
+                <article class="blog-card" data-category="recruit" onclick="location.href='blog-detail.html?id=5'">
+                    <div class="blog-card-image">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=500&fit=crop" alt="面接">
+                        <span class="blog-category">採用</span>
+                    </div>
+                    <div class="blog-card-content">
+                        <time class="blog-date">2023.12.20</time>
+                        <h3 class="blog-title">採用面接で見極めるべきポイント：スキルより大切なもの</h3>
+                        <p class="blog-excerpt">採用面接において、スキルや経験だけでなく、カルチャーフィットやポテンシャルを見極めるためのポイントをお伝えします。</p>
+                        <a href="blog-detail.html?id=5" class="blog-read-more">
+                            <span>続きを読む</span>
+                            <span class="btn-arrow">→</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Blog Card 6 -->
+                <article class="blog-card" data-category="consulting" onclick="location.href='blog-detail.html?id=6'">
+                    <div class="blog-card-image">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=500&fit=crop" alt="戦略">
+                        <span class="blog-category">コンサルティング</span>
+                    </div>
+                    <div class="blog-card-content">
+                        <time class="blog-date">2023.12.15</time>
+                        <h3 class="blog-title">小さな一歩から始める組織変革：伴走型支援の効果</h3>
+                        <p class="blog-excerpt">大きな変革は小さな一歩から。伴走型のコンサルティングがもたらす持続可能な組織変革についてご紹介します。</p>
+                        <a href="blog-detail.html?id=6" class="blog-read-more">
+                            <span>続きを読む</span>
+                            <span class="btn-arrow">→</span>
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="pagination-btn" disabled>← 前へ</button>
+                <span class="pagination-numbers">
+                    <button class="pagination-number active">1</button>
+                    <button class="pagination-number">2</button>
+                    <button class="pagination-number">3</button>
+                </span>
+                <button class="pagination-btn">次へ →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="https://storage.googleapis.com/studio-design-asset-files/projects/M3aALvryqe/s-500x100_webp_3151a72c-ad58-45fb-9c87-706b06e02046.webp" alt="LR consulting" class="logo-image">
+            </div>
+            <nav class="footer-nav">
+                <a href="index.html#philosophy">Philosophy</a>
+                <a href="recruit.html">Recruit</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+        <p class="copyright">&copy; 2024 LR consulting. All rights reserved.</p>
+    </footer>
+
+    <script src="js/blog.js"></script>
+</body>
+</html>
