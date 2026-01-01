@@ -337,6 +337,293 @@ body {
   border-radius: 4px;
 }
 
+.section-subtitle {
+  font-size: 16px;
+  text-align: center;
+  color: #666;
+  margin-bottom: 50px;
+  line-height: 1.6;
+}
+
+/* Mission Vision Value Section */
+#mvv {
+  background: #f8f8f8;
+  padding: 90px 40px;
+}
+
+#mvv .container {
+  max-width: 1400px;
+}
+
+.mvv-layout {
+  display: grid;
+  grid-template-columns: 45fr 55fr;
+  gap: 40px;
+  margin: 0 auto;
+  align-items: flex-start;
+}
+
+.mvv-cards-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  padding: 40px 0;
+}
+
+.mvv-card {
+  background: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+  box-shadow: none !important;
+  transition: none !important;
+  transform: none !important;
+  min-height: 280px;
+}
+
+.mvv-card:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  background: none !important;
+}
+
+.mvv-content-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 4 / 4.5;
+  margin: 0 auto;
+}
+
+.mvv-frame {
+  width: 100%;
+  height: 100%;
+}
+
+.mvv-frame svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* SVG visibility control */
+.mvv-svg-mobile {
+  display: none;
+}
+
+/* 768px以上では楕円形を表示 */
+@media (min-width: 768px) {
+  .mvv-svg-desktop {
+    display: block !important;
+  }
+
+  .mvv-frame {
+    display: block;
+  }
+
+  .mvv-text-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* 画面幅に応じて線の太さを調整 */
+@media (min-width: 1400px) {
+  .mvv-frame-path {
+    stroke-width: 8;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1399px) {
+  .mvv-frame-path {
+    stroke-width: 7;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .mvv-frame-path {
+    stroke-width: 6;
+  }
+}
+
+.mvv-text-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75%;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.mvv-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #2d2d2d;
+}
+
+.mvv-main-text {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.7;
+  margin-bottom: 18px;
+  color: #2d2d2d;
+}
+
+.mvv-description {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #333;
+  text-align: justify;
+}
+
+.mvv-text-inner {
+  padding: 20px;
+}
+
+.mvv-side-image-container {
+  position: relative;
+  height: 100%;
+}
+
+.mvv-side-image-sticky {
+  position: sticky;
+  top: 120px;
+  width: 100%;
+  height: 75vh;
+  max-height: 800px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.mvv-side-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.mvv-side-img.active {
+  opacity: 1;
+}
+
+/* Mobile image for MVV cards (hidden on desktop) */
+.mvv-mobile-image {
+  display: none;
+  width: 100%;
+  margin-top: 30px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.mvv-mobile-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* レスポンシブ対応：画面幅に応じて楕円のサイズを調整 */
+@media (min-width: 1400px) {
+  .mvv-content-wrapper {
+    max-width: 460px;
+  }
+
+  .mvv-title {
+    font-size: 26px;
+  }
+
+  .mvv-main-text {
+    font-size: 20px;
+  }
+
+  .mvv-description {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .mvv-content-wrapper {
+    max-width: 400px;
+  }
+
+  .mvv-title {
+    font-size: 24px;
+  }
+
+  .mvv-main-text {
+    font-size: 18px;
+  }
+
+  .mvv-description {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1199px) {
+  .mvv-content-wrapper {
+    max-width: 350px;
+  }
+
+  .mvv-title {
+    font-size: 22px;
+  }
+
+  .mvv-main-text {
+    font-size: 16px;
+  }
+
+  .mvv-description {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1024px) {
+  .mvv-content-wrapper {
+    max-width: 330px;
+  }
+
+  .mvv-title {
+    font-size: 20px;
+  }
+
+  .mvv-main-text {
+    font-size: 15px;
+  }
+
+  .mvv-description {
+    font-size: 11px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 899px) {
+  .mvv-content-wrapper {
+    max-width: 300px;
+  }
+
+  .mvv-title {
+    font-size: 17px;
+  }
+
+  .mvv-main-text {
+    font-size: 13px;
+  }
+
+  .mvv-description {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+}
+
 /* Buttons */
 .btn-orange {
   display: inline-block;
@@ -663,6 +950,345 @@ body {
   font-size: 26px;
   font-weight: 700;
   color: #2d2d2d;
+}
+
+/* Contact Wrapper (Same as contact.html) */
+.contact-wrapper {
+  display: grid;
+  grid-template-columns: 2fr 0.6fr;
+  gap: 50px;
+  align-items: flex-start;
+  margin-top: 40px;
+}
+
+/* Contact Cards (Same as contact.html) */
+.contact-cards-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Phone Contact Card */
+.phone-contact-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px 25px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0f0f0;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.phone-contact-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.phone-contact-card__icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #f3982d 0%, #f5a945 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.phone-contact-card__content {
+  flex: 1;
+}
+
+.phone-contact-card__label {
+  font-size: 13px;
+  color: #666;
+  margin: 0 0 12px 0;
+  font-weight: 400;
+}
+
+.phone-contact-card__number {
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+  color: #2d2d2d;
+  text-decoration: none;
+  margin: 0 0 8px 0;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+
+.phone-contact-card__number:hover,
+.phone-contact-card__number:focus {
+  color: #f3982d;
+  outline: none;
+}
+
+.phone-contact-card__number:focus-visible {
+  outline: 2px solid #f3982d;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.phone-contact-card__hours {
+  font-size: 12px;
+  color: #999;
+  margin: 0;
+}
+
+/* Email Contact Card */
+.email-contact-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px 25px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0f0f0;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.email-contact-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.email-contact-card__icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #f3982d 0%, #f5a945 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.email-contact-card__content {
+  flex: 1;
+}
+
+.email-contact-card__label {
+  font-size: 13px;
+  color: #666;
+  margin: 0 0 12px 0;
+  font-weight: 400;
+}
+
+.email-contact-card__address {
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+  color: #2d2d2d;
+  text-decoration: none;
+  margin: 0 0 8px 0;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+
+.email-contact-card__address:hover,
+.email-contact-card__address:focus {
+  color: #f3982d;
+  outline: none;
+}
+
+.email-contact-card__address:focus-visible {
+  outline: 2px solid #f3982d;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.email-contact-card__note {
+  font-size: 12px;
+  color: #999;
+  margin: 0;
+}
+
+/* Contact Form Card */
+.contact-form-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 40px 35px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0f0f0;
+}
+
+/* Assurance Message */
+.assurance-message {
+  background: #fff8f0;
+  border: 1px solid #ffe8cc;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+.assurance-message__icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  color: #f3982d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.assurance-message__content {
+  flex: 1;
+}
+
+.assurance-message__title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #2d2d2d;
+  margin: 0 0 8px 0;
+}
+
+.assurance-message__text {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.7;
+  margin: 0 0 6px 0;
+}
+
+.assurance-message__note {
+  font-size: 12px;
+  color: #999;
+  margin: 0;
+}
+
+.contact-form__title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2d2d2d;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.form__group {
+  margin-bottom: 25px;
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.form__label {
+  flex-shrink: 0;
+  width: 140px;
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+  text-align: left;
+  padding-top: 12px;
+}
+
+.form__input-wrapper {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.form__icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  pointer-events: none;
+  z-index: 1;
+  transition: color 0.3s;
+}
+
+.form__icon--textarea {
+  top: 16px;
+  transform: none;
+}
+
+.form__input,
+.form__textarea {
+  flex: 1;
+  padding: 12px 15px 12px 42px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: "Noto Sans JP", sans-serif;
+  color: #333;
+  background: #fff;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+
+.form__textarea {
+  padding-top: 16px;
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form__input:focus,
+.form__textarea:focus {
+  outline: none;
+  border-color: #f3982d;
+}
+
+.form__input-wrapper:focus-within .form__icon {
+  color: #f3982d;
+}
+
+.form__input::placeholder,
+.form__textarea::placeholder {
+  color: #999;
+}
+
+.form__submit {
+  background: #f3982d;
+  color: #fff;
+  border: none;
+  padding: 14px 50px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: "Noto Sans JP", sans-serif;
+  margin-top: 10px;
+  box-shadow: 0 2px 8px rgba(243, 152, 45, 0.25);
+  position: relative;
+}
+
+.form__submit:hover {
+  background: #e08825;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(243, 152, 45, 0.35);
+}
+
+.form__submit:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(243, 152, 45, 0.25);
+}
+
+.form__submit:focus-visible {
+  outline: 2px solid #f3982d;
+  outline-offset: 2px;
+}
+
+.form__submit:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.form__submit:disabled:hover {
+  background: #ccc;
+  transform: none;
+  box-shadow: none;
 }
 
 /* CEO Message */
@@ -994,6 +1620,97 @@ body {
     gap: 40px;
   }
 
+  /* MVV Section Mobile */
+  .mvv-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .mvv-cards-vertical {
+    gap: 60px;
+    padding: 50px 0;
+  }
+
+  .mvv-card {
+    min-height: 300px;
+  }
+
+  .mvv-content-wrapper {
+    max-width: 100%;
+    width: 90%;
+    aspect-ratio: auto;
+    min-height: auto;
+  }
+
+  .mvv-frame {
+    display: none;
+  }
+
+  .mvv-text-content {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 6px solid #000000;
+    border-radius: 80px;
+  }
+
+  .mvv-svg-mobile {
+    display: none !important;
+  }
+
+  .mvv-text-inner {
+    padding: 40px 30px;
+    text-align: center;
+  }
+
+  .mvv-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+
+  .mvv-main-text {
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+
+  .mvv-description {
+    font-size: 13px;
+    line-height: 1.8;
+    text-align: justify;
+  }
+
+  .mvv-side-image-container {
+    display: none !important;
+  }
+
+  .mvv-side-image-sticky {
+    position: relative;
+    top: 0;
+    height: 60vh;
+    min-height: 400px;
+  }
+
+  /* Show mobile images below each card */
+  .mvv-mobile-image {
+    display: block;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Change frame from oval to rounded rectangle */
+  .mvv-svg-desktop {
+    display: none !important;
+  }
+
+  #mvv {
+    padding: 60px 20px;
+  }
+
   .service-wrapper {
     flex-direction: column;
     gap: 40px;
@@ -1072,6 +1789,81 @@ body {
     grid-template-columns: 1fr;
   }
 
+  .contact-wrapper {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .contact-cards-wrapper {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .phone-contact-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    max-width: 100%;
+  }
+
+  .phone-contact-card__icon {
+    margin: 0 auto;
+  }
+
+  .phone-contact-card__number {
+    font-size: 24px;
+  }
+
+  .email-contact-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    max-width: 100%;
+  }
+
+  .email-contact-card__icon {
+    margin: 0 auto;
+  }
+
+  .email-contact-card__address {
+    font-size: 24px;
+  }
+
+  .contact-form-card {
+    padding: 30px 25px;
+  }
+
+  .assurance-message {
+    flex-direction: column;
+    gap: 12px;
+    padding: 18px;
+  }
+
+  .assurance-message__icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .form__group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .form__label {
+    width: 100%;
+    padding-top: 0;
+  }
+
+  .form__input-wrapper {
+    width: 100%;
+  }
+
+  .form__input,
+  .form__textarea {
+    width: 100%;
+  }
+
   .ceo-message {
     padding: 60px 0;
   }
@@ -1148,5 +1940,101 @@ body {
 
   .scroll-row-left .scroll-content {
     animation-duration: 30s;
+  }
+}
+
+/* Tablet specific adjustments for MVV */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .mvv-layout {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .mvv-cards-vertical {
+    gap: 100px;
+    padding: 80px 0;
+  }
+
+  .mvv-card {
+    min-height: 350px;
+  }
+
+  .mvv-title {
+    font-size: 26px;
+  }
+
+  .mvv-main-text {
+    font-size: 20px;
+  }
+
+  .mvv-description {
+    font-size: 14px;
+  }
+
+  .mvv-side-image-container {
+    height: 100%;
+  }
+
+  .mvv-side-image-sticky {
+    position: sticky;
+    top: 120px;
+    height: 70vh;
+    min-height: 500px;
+  }
+}
+
+@media (max-width: 480px) {
+  .phone-contact-card {
+    padding: 25px 20px;
+  }
+
+  .phone-contact-card__number {
+    font-size: 20px;
+  }
+
+  .email-contact-card {
+    padding: 25px 20px;
+  }
+
+  .email-contact-card__address {
+    font-size: 20px;
+  }
+
+  .contact-form-card {
+    padding: 25px 20px;
+  }
+
+  .contact-form__title {
+    font-size: 16px;
+  }
+
+  .assurance-message {
+    padding: 15px;
+  }
+
+  .assurance-message__title {
+    font-size: 14px;
+  }
+
+  .assurance-message__text,
+  .assurance-message__note {
+    font-size: 12px;
+  }
+
+  .form__input,
+  .form__textarea {
+    font-size: 13px;
+    padding: 10px 12px 10px 38px;
+  }
+
+  .form__icon {
+    left: 10px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .form__submit {
+    width: 100%;
+    padding: 12px 30px;
   }
 }
