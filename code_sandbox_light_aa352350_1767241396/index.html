@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NEXUS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-inner">
+        <div class="logo">
+          <div class="logo-mark">
+            <span>/</span>
+          </div>
+          <span class="logo-text">NEXUS</span>
+        </div>
+        <nav class="nav">
+          <a href="#" class="nav-link">ホーム</a>
+          <a href="/company.html" class="nav-link">会社案内</a>
+          <a href="/service.html" class="nav-link">サービス</a>
+          <a href="#news" class="nav-link">お知らせ</a>
+          <a href="#recruit" class="nav-link">採用情報</a>
+          <a href="#contact" class="nav-link">お問い合わせ</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-slider">
+        <div
+          class="hero-slide active"
+          style="
+            background-image: url('https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=1920&h=1080&fit=crop');
+          "
+        ></div>
+        <div
+          class="hero-slide"
+          style="
+            background-image: url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1920&h=1080&fit=crop');
+          "
+        ></div>
+        <div
+          class="hero-slide"
+          style="
+            background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&h=1080&fit=crop');
+          "
+        ></div>
+        <div
+          class="hero-slide"
+          style="
+            background-image: url('https://images.unsplash.com/photo-1514565131-fce0801e5785?w=1920&h=1080&fit=crop');
+          "
+        ></div>
+        <div
+          class="hero-slide"
+          style="
+            background-image: url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1920&h=1080&fit=crop');
+          "
+        ></div>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">MAKE YOUR LIFE<br />COMFORTABLE</h1>
+        <p class="hero-text">
+          豊かで快適な暮らしのために。<br />幸せと信頼を創造します。
+        </p>
+      </div>
+      <div class="hero-indicators">
+        <span class="indicator active" data-slide="0"></span>
+        <span class="indicator" data-slide="1"></span>
+        <span class="indicator" data-slide="2"></span>
+        <span class="indicator" data-slide="3"></span>
+        <span class="indicator" data-slide="4"></span>
+      </div>
+    </section>
+
+    <!-- News -->
+    <section class="news" id="news">
+      <div class="container">
+        <h2 class="section-title">お知らせ</h2>
+        <div class="news-content">
+          <div class="news-item">
+            <div class="news-header">
+              <div class="news-logo">
+                <div class="news-logo-mark">
+                  <span>/</span>
+                </div>
+                <span class="news-logo-text">NEXUS</span>
+              </div>
+            </div>
+            <div class="news-body">
+              <div class="news-meta">
+                <span class="news-label">お知らせ</span>
+                <span class="news-date">2024.12.20</span>
+              </div>
+              <p class="news-title-text">
+                新サービス「エアコンクリーニング」を開始しました
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+      <div class="container">
+        <div class="about-inner">
+          <div class="about-left">
+            <h2 class="section-title-left">私たちについて</h2>
+            <p class="about-text">
+              私たちは、お客様の豊かで快適な暮らしを実現するため、<br />
+              電気工事やダクト工事、エアコン工事など、幅広いサービスを提供しています。<br />
+              安全と品質を第一に考え、お客様に信頼していただける企業を目指しています。<br />
+              これからも技術力を磨き、より良いサービスの提供に努めてまいります。
+            </p>
+            <a href="#" class="btn-orange">会社案内はこちら</a>
+          </div>
+          <div class="about-right">
+            <img
+              src="https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?w=600&h=450&fit=crop"
+              alt="作業風景"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Service -->
+    <section class="service" id="service">
+      <div class="container">
+        <h2 class="section-title">サービス</h2>
+        <div class="service-list">
+          <div class="service-card" data-direction="left">
+            <div class="service-image">
+              <img
+                src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&h=600&fit=crop"
+                alt="電気工事"
+              />
+            </div>
+            <div class="service-content">
+              <h3 class="service-name">電気工事</h3>
+              <p class="service-desc">
+                住宅・店舗・オフィスなどの電気設備工事を承ります。照明器具の取付、コンセント増設、分電盤の交換など、確かな技術で安全・確実に施工いたします。
+              </p>
+              <a href="#" class="btn-orange-small">詳しくはこちら</a>
+            </div>
+          </div>
+          <div class="service-card" data-direction="right">
+            <div class="service-image">
+              <img
+                src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=600&fit=crop"
+                alt="ダクト工事"
+              />
+            </div>
+            <div class="service-content">
+              <h3 class="service-name">ダクト工事</h3>
+              <p class="service-desc">
+                空調・換気用ダクトの設計・施工を行います。飲食店、工場、ビルなどの空調設備工事に対応。快適な空気環境づくりをサポートします。
+              </p>
+              <a href="#" class="btn-orange-small">詳しくはこちら</a>
+            </div>
+          </div>
+          <div class="service-card" data-direction="left">
+            <div class="service-image">
+              <img
+                src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&h=600&fit=crop"
+                alt="エアコン工事・メンテナンス"
+              />
+            </div>
+            <div class="service-content">
+              <h3 class="service-name">エアコン工事・メンテナンス</h3>
+              <p class="service-desc">
+                エアコンの取付工事から定期メンテナンス、クリーニングまでトータルサポート。快適な室内環境を長く保つため、プロの技術でお手伝いします。
+              </p>
+              <a href="#" class="btn-orange-small">詳しくはこちら</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recruit -->
+    <section class="recruit" id="recruit">
+      <div class="container">
+        <div class="recruit-inner">
+          <p class="recruit-text">一緒に成長できる仲間を募集しています。</p>
+          <a href="#" class="btn-orange">採用情報はこちら</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <h2 class="section-title">お問い合わせ</h2>
+        <div class="contact-grid">
+          <div class="contact-box">
+            <div class="contact-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <p class="contact-label">お電話でのお問い合わせはこちら</p>
+            <p class="contact-value">050-234-1241</p>
+          </div>
+          <div class="contact-box">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <p class="contact-label">
+              ご相談やお見積りについてなど、<br />お気軽にご連絡ください。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h4 class="footer-heading">連絡先</h4>
+            <p class="footer-text">株式会社NEXUS</p>
+            <p class="footer-text">〒123-4567 東京都○○区○○ 1-2-3</p>
+            <p class="footer-text">TEL: 050-234-1241</p>
+            <p class="footer-text">営業時間：9:00～18:00（土日祝休み）</p>
+          </div>
+          <div class="footer-col">
+            <h4 class="footer-heading">サービス</h4>
+            <ul class="footer-links">
+              <li><a href="#">電気工事</a></li>
+              <li><a href="#">ダクト工事</a></li>
+              <li><a href="#">エアコン工事・メンテナンス</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4 class="footer-heading">お知らせ</h4>
+            <p class="footer-text">
+              新サービス「エアコンクリーニング」を開始しました
+            </p>
+            <p class="footer-text footer-small">2024.12.20</p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p class="copyright">© NEXUS 2021. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Animation Script -->
+    <script>
+      // Hero Slider
+      let currentSlide = 0;
+      const slides = document.querySelectorAll(".hero-slide");
+      const indicators = document.querySelectorAll(".indicator");
+      const totalSlides = slides.length;
+      const slideInterval = 5000; // 5秒ごとに切り替え
+
+      function showSlide(index) {
+        // 全てのスライドとインジケーターからactiveを削除
+        slides.forEach((slide) => slide.classList.remove("active"));
+        indicators.forEach((indicator) => indicator.classList.remove("active"));
+
+        // 指定されたスライドとインジケーターにactiveを追加
+        slides[index].classList.add("active");
+        indicators[index].classList.add("active");
+      }
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        showSlide(currentSlide);
+      }
+
+      // 自動スライド開始
+      let autoSlide = setInterval(nextSlide, slideInterval);
+
+      // インジケーターのクリックイベント
+      indicators.forEach((indicator, index) => {
+        indicator.addEventListener("click", () => {
+          currentSlide = index;
+          showSlide(currentSlide);
+          // 自動スライドをリセット
+          clearInterval(autoSlide);
+          autoSlide = setInterval(nextSlide, slideInterval);
+        });
+      });
+
+      // Intersection Observer for Service Card Animation
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.15,
+      };
+
+      const observerCallback = (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const cards = entry.target.querySelectorAll(".service-card");
+            cards.forEach((card, index) => {
+              setTimeout(() => {
+                card.classList.add("slide-in");
+              }, index * 1000); // 1.0秒ずつ遅延（非常に明確な間隔）
+            });
+            // 一度だけ発動
+            observer.unobserve(entry.target);
+          }
+        });
+      };
+
+      const observer = new IntersectionObserver(
+        observerCallback,
+        observerOptions
+      );
+
+      // ページ読み込み後に監視開始
+      document.addEventListener("DOMContentLoaded", () => {
+        const serviceSection = document.querySelector(".service");
+        if (serviceSection) {
+          observer.observe(serviceSection);
+        }
+      });
+    </script>
+  </body>
+</html>
