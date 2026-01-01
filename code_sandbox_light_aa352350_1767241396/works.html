@@ -54,21 +54,16 @@
     <!-- Works Section -->
     <section class="works-section">
       <div class="container">
-        <div class="works-intro">
-          <h2 class="section-heading">施工実績</h2>
-          <div class="heading-underline"></div>
-          <p class="intro-text">
-            これまでに手がけた様々な工事の実績をご紹介します。<br />
-            お客様のニーズに合わせた最適な施工を心がけています。
-          </p>
-        </div>
-
         <!-- Category Filter -->
         <div class="category-filter">
           <button class="filter-btn active" data-category="all">すべて</button>
-          <button class="filter-btn" data-category="electrical">電気工事</button>
+          <button class="filter-btn" data-category="electrical">
+            電気工事
+          </button>
           <button class="filter-btn" data-category="duct">ダクト工事</button>
-          <button class="filter-btn" data-category="aircon">エアコン工事</button>
+          <button class="filter-btn" data-category="aircon">
+            エアコン工事
+          </button>
         </div>
 
         <!-- Works Grid -->
@@ -354,30 +349,33 @@
 
     <script>
       // Category Filter Functionality
-      const filterButtons = document.querySelectorAll('.filter-btn');
-      const workCards = document.querySelectorAll('.work-card');
+      const filterButtons = document.querySelectorAll(".filter-btn");
+      const workCards = document.querySelectorAll(".work-card");
 
       filterButtons.forEach((button) => {
-        button.addEventListener('click', () => {
+        button.addEventListener("click", () => {
           // Remove active class from all buttons
-          filterButtons.forEach((btn) => btn.classList.remove('active'));
+          filterButtons.forEach((btn) => btn.classList.remove("active"));
           // Add active class to clicked button
-          button.classList.add('active');
+          button.classList.add("active");
 
-          const category = button.getAttribute('data-category');
+          const category = button.getAttribute("data-category");
 
           workCards.forEach((card) => {
-            if (category === 'all' || card.getAttribute('data-category') === category) {
-              card.style.display = 'block';
+            if (
+              category === "all" ||
+              card.getAttribute("data-category") === category
+            ) {
+              card.style.display = "block";
               setTimeout(() => {
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
+                card.style.opacity = "1";
+                card.style.transform = "translateY(0)";
               }, 10);
             } else {
-              card.style.opacity = '0';
-              card.style.transform = 'translateY(20px)';
+              card.style.opacity = "0";
+              card.style.transform = "translateY(20px)";
               setTimeout(() => {
-                card.style.display = 'none';
+                card.style.display = "none";
               }, 300);
             }
           });
@@ -386,4 +384,3 @@
     </script>
   </body>
 </html>
-
