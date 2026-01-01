@@ -760,11 +760,85 @@ body {
   margin-bottom: 0;
 }
 
-/* Image Scroll Gallery */
+/* Image Scroll Gallery / Works */
 .image-scroll-gallery {
-  padding: 60px 0;
+  padding: 90px 0 60px;
   background: #f7f7f7;
   overflow: hidden;
+  position: relative;
+}
+
+.works-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  padding: 40px 0;
+  pointer-events: none;
+}
+
+.works-header .container {
+  pointer-events: auto;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 40px;
+}
+
+.works-header-inner {
+  background: #f7f7f7;
+  padding: 40px 30px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 300px;
+  margin: 0 0 0 auto;
+  width: 300px;
+  height: 400px;
+  gap: 30px;
+}
+
+.works-title {
+  font-family: "Montserrat", sans-serif;
+  font-size: 28px;
+  padding-top: 60px;
+  font-weight: 700;
+  color: #2d2d2d;
+  margin: 0;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  letter-spacing: 8px;
+  line-height: 1.8;
+}
+
+.works-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f3982d;
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.works-more-btn:hover {
+  background: #e08825;
+  transform: translateX(3px);
+}
+
+.works-more-btn i {
+  font-size: 12px;
+  transition: transform 0.3s ease;
+}
+
+.works-more-btn:hover i {
+  transform: translateX(3px);
 }
 
 .scroll-row {
@@ -1031,7 +1105,36 @@ body {
   }
 
   .image-scroll-gallery {
-    padding: 40px 0;
+    padding: 60px 0 40px;
+  }
+
+  .works-header {
+    padding: 20px 0;
+  }
+
+  .works-header .container {
+    padding-right: 20px;
+  }
+
+  .works-header-inner {
+    padding: 30px 20px;
+    max-width: 200px;
+    width: 200px;
+    min-height: 250px;
+    margin: 0;
+  }
+
+  .works-title {
+    font-size: 24px;
+    letter-spacing: 6px;
+    padding-top: 40px;
+  }
+
+  .works-more-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 13px;
   }
 
   .scroll-content img {
