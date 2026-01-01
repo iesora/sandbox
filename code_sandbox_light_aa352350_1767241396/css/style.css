@@ -674,6 +674,16 @@ body {
   margin-right: auto;
 }
 
+/* PCサイズで2列レイアウト */
+@media (min-width: 769px) {
+  .service-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 35px;
+    max-width: 1200px;
+  }
+}
+
 .service-card {
   background: #fff;
   border-radius: 16px;
@@ -726,7 +736,7 @@ body {
 }
 
 .service-image {
-  flex: 0 0 45%;
+  flex: 0 0 50%;
   overflow: hidden;
   position: relative;
 }
@@ -765,7 +775,7 @@ body {
 
 .service-content {
   flex: 1;
-  padding: 45px 50px;
+  padding: 45px 35px;
   display: flex;
   flex-direction: column;
   justify-content: center;
