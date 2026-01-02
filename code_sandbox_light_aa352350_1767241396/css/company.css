@@ -266,7 +266,7 @@ body {
 /* 会社概要 */
 .company-info-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 30px 35px;
   margin-top: 30px;
 }
@@ -722,8 +722,8 @@ body {
   }
 
   .company-info-grid {
-    grid-template-columns: 1fr;
-    gap: 25px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 15px;
     margin-top: 25px;
   }
 
