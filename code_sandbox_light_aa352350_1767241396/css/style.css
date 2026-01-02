@@ -1832,7 +1832,7 @@ body {
 /* Responsive */
 @media (max-width: 768px) {
   .container {
-    padding: 0 20px;
+    padding: 0;
   }
 
   .header-inner {
@@ -2045,7 +2045,6 @@ body {
   }
 
   .service {
-    padding: 60px 20px;
   }
 
   .service-list {
