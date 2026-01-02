@@ -139,12 +139,12 @@ body {
 
 /* Company Content */
 .company-content {
-  padding: 60px 0 80px;
+  padding: 50px 0 60px;
   background: #fff;
 }
 
 .content-section {
-  margin-bottom: 70px;
+  margin-bottom: 50px;
 }
 
 .content-section:last-child {
@@ -162,7 +162,7 @@ body {
   width: 50px;
   height: 3px;
   background: #f3982d;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 .section-body {
@@ -186,16 +186,16 @@ body {
 
 /* 代表挨拶 */
 .ceo-section {
-  margin-bottom: 70px;
+  margin-bottom: 50px;
 }
 
 .ceo-message-wrapper {
   background: url("../images/zdK8NZHI.png") center/cover no-repeat;
   background-position: center 30%;
-  padding: 80px 20px;
+  padding: 60px 20px;
   border-radius: 8px;
   position: relative;
-  min-height: 600px;
+  min-height: 550px;
   display: flex;
   align-items: center;
 }
@@ -267,8 +267,8 @@ body {
 .company-info-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 40px 50px;
-  margin-top: 35px;
+  gap: 30px 35px;
+  margin-top: 30px;
 }
 
 .info-item {
@@ -314,7 +314,7 @@ body {
 .qualification-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 25px 40px;
+  gap: 25px 30px;
 }
 
 .qualification-item {
@@ -402,14 +402,14 @@ body {
 .footer {
   background: #2a2a2a;
   color: #ccc;
-  padding: 55px 0 30px;
+  padding: 45px 0 25px;
 }
 
 .footer-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 60px;
-  margin-bottom: 35px;
+  gap: 45px;
+  margin-bottom: 30px;
 }
 
 .footer-heading {
@@ -489,7 +489,7 @@ body {
   }
 
   .content-section {
-    margin-bottom: 50px;
+    margin-bottom: 40px;
   }
 
   .ceo-message-wrapper {
@@ -543,7 +543,8 @@ body {
 
   .company-info-grid {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 25px;
+    margin-top: 25px;
   }
 
   .qualification-list {
@@ -553,7 +554,8 @@ body {
 
   .footer-grid {
     grid-template-columns: 1fr;
-    gap: 35px;
+    gap: 30px;
+    margin-bottom: 25px;
   }
 
   .footer-bottom {
