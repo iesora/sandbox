@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/service-page.css">
 </head>
 <body>
@@ -46,42 +47,48 @@
     </section>
 
     <!-- Service List -->
-    <section class="service-list-section">
-        <div class="container">
-            <div class="service-grid">
+    <section class="service" id="service">
+        <div class="container" style="padding-top: 10px; padding-bottom: 10px">
+            <div class="service-list">
                 <!-- Service Card 1 -->
-                <div class="service-list-card">
-                    <div class="service-card-image">
-                        <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&h=500&fit=crop" alt="電気工事">
+                <div class="service-card" data-direction="left">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&h=600&fit=crop" alt="電気工事">
                     </div>
-                    <div class="service-card-content">
-                        <h3 class="service-card-title">電気工事</h3>
-                        <p class="service-card-text">住宅・店舗・オフィスなどの電気設備工事を承ります。</p>
-                        <a href="#" class="btn-detail">詳しくはこちら</a>
+                    <div class="service-content">
+                        <h3 class="service-name">電気工事</h3>
+                        <p class="service-desc">
+                            住宅・店舗・オフィスなどの電気設備工事を承ります。照明器具の取付、コンセント増設、分電盤の交換など、確かな技術で安全・確実に施工いたします。
+                        </p>
+                        <a href="#" class="btn-orange-small">詳しくはこちら</a>
                     </div>
                 </div>
 
                 <!-- Service Card 2 -->
-                <div class="service-list-card">
-                    <div class="service-card-image">
-                        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=500&fit=crop" alt="ダクト工事">
+                <div class="service-card" data-direction="right">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=600&fit=crop" alt="ダクト工事">
                     </div>
-                    <div class="service-card-content">
-                        <h3 class="service-card-title">ダクト工事</h3>
-                        <p class="service-card-text">空調・換気用ダクトの設計・施工を行います。</p>
-                        <a href="#" class="btn-detail">詳しくはこちら</a>
+                    <div class="service-content">
+                        <h3 class="service-name">ダクト工事</h3>
+                        <p class="service-desc">
+                            空調・換気用ダクトの設計・施工を行います。飲食店、工場、ビルなどの空調設備工事に対応。快適な空気環境づくりをサポートします。
+                        </p>
+                        <a href="#" class="btn-orange-small">詳しくはこちら</a>
                     </div>
                 </div>
 
                 <!-- Service Card 3 -->
-                <div class="service-list-card">
-                    <div class="service-card-image">
-                        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&h=500&fit=crop" alt="エアコン工事・メンテナンス">
+                <div class="service-card" data-direction="left">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&h=600&fit=crop" alt="エアコン工事・メンテナンス">
                     </div>
-                    <div class="service-card-content">
-                        <h3 class="service-card-title">エアコン工事・メンテナンス</h3>
-                        <p class="service-card-text">エアコンの取付工事から定期メンテナンス、クリーニングまでトータルサポート。</p>
-                        <a href="#" class="btn-detail">詳しくはこちら</a>
+                    <div class="service-content">
+                        <h3 class="service-name">エアコン工事・メンテナンス</h3>
+                        <p class="service-desc">
+                            エアコンの取付工事から定期メンテナンス、クリーニングまでトータルサポート。快適な室内環境を長く保つため、プロの技術でお手伝いします。
+                        </p>
+                        <a href="#" class="btn-orange-small">詳しくはこちら</a>
                     </div>
                 </div>
             </div>
@@ -120,5 +127,43 @@
             </div>
         </div>
     </footer>
+
+    <!-- Animation Script -->
+    <script>
+      // Intersection Observer for Service Card Animation
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.15,
+      };
+
+      const observerCallback = (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const cards = entry.target.querySelectorAll(".service-card");
+            cards.forEach((card, index) => {
+              setTimeout(() => {
+                card.classList.add("slide-in");
+              }, index * 1000); // 1.0秒ずつ遅延
+            });
+            // 一度だけ発動
+            observer.unobserve(entry.target);
+          }
+        });
+      };
+
+      const observer = new IntersectionObserver(
+        observerCallback,
+        observerOptions
+      );
+
+      // ページ読み込み後に監視開始
+      document.addEventListener("DOMContentLoaded", () => {
+        const serviceSection = document.querySelector(".service");
+        if (serviceSection) {
+          observer.observe(serviceSection);
+        }
+      });
+    </script>
 </body>
 </html>

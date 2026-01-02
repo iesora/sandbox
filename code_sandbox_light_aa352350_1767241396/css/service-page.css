@@ -137,81 +137,7 @@ body {
     color: #666;
 }
 
-/* Service List Section */
-.service-list-section {
-    padding: 60px 0 80px;
-    background: #fff;
-}
-
-.service-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-    margin-top: 20px;
-}
-
-.service-list-card {
-    background: #fff;
-    border: 1px solid #e5e5e5;
-    border-radius: 0;
-    overflow: hidden;
-    transition: box-shadow 0.3s;
-}
-
-.service-list-card:hover {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.service-card-image {
-    width: 100%;
-    height: 240px;
-    overflow: hidden;
-}
-
-.service-card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s;
-}
-
-.service-list-card:hover .service-card-image img {
-    transform: scale(1.05);
-}
-
-.service-card-content {
-    padding: 30px 25px;
-}
-
-.service-card-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: #2d2d2d;
-    margin-bottom: 12px;
-}
-
-.service-card-text {
-    font-size: 14px;
-    color: #666;
-    line-height: 1.8;
-    margin-bottom: 20px;
-}
-
-.btn-detail {
-    display: inline-block;
-    background: #F3982D;
-    color: #fff;
-    padding: 10px 24px;
-    text-decoration: none;
-    border-radius: 3px;
-    font-size: 13px;
-    font-weight: 500;
-    transition: background 0.3s;
-}
-
-.btn-detail:hover {
-    background: #e08825;
-}
+/* Service List Section - スタイルはstyle.cssから継承 */
 
 /* Footer */
 .footer {
@@ -303,10 +229,6 @@ body {
         gap: 15px;
     }
 
-    .service-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
 
     .footer-grid {
         grid-template-columns: 1fr;
