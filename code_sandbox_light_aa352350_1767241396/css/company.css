@@ -112,6 +112,7 @@ body {
   font-size: 32px;
   font-weight: 700;
   color: #2d2d2d;
+  text-align: left;
 }
 
 .breadcrumb {
@@ -156,6 +157,7 @@ body {
   font-weight: 700;
   color: #2d2d2d;
   margin-bottom: 10px;
+  text-align: left;
 }
 
 .heading-underline {
@@ -163,6 +165,7 @@ body {
   height: 3px;
   background: #f3982d;
   margin-bottom: 25px;
+  margin-left: 0;
 }
 
 .section-body {
@@ -738,8 +741,8 @@ body {
   }
 
   .partner-list {
-    grid-template-columns: 1fr;
-    gap: 25px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
     margin-top: 30px;
   }
 
