@@ -120,20 +120,44 @@
       <div class="container">
         <div class="about-inner">
           <div class="about-left">
-            <h2 class="section-title-left">私たちについて</h2>
-            <p class="about-text">
-              私たちは、お客様の豊かで快適な暮らしを実現するため、<br />
-              電気工事やダクト工事、エアコン工事など、幅広いサービスを提供しています。<br />
-              安全と品質を第一に考え、お客様に信頼していただける企業を目指しています。<br />
-              これからも技術力を磨き、より良いサービスの提供に努めてまいります。
-            </p>
-            <a href="#" class="btn-orange">会社案内はこちら</a>
+            <div class="about-content-card">
+              <div class="about-badge">ABOUT US</div>
+              <h2 class="section-title-left">私たちについて</h2>
+              <p class="about-text">
+                私たちは、お客様の豊かで快適な暮らしを実現するため、<br />
+                電気工事やダクト工事、エアコン工事など、幅広いサービスを提供しています。<br />
+                安全と品質を第一に考え、お客様に信頼していただける企業を目指しています。<br />
+                これからも技術力を磨き、より良いサービスの提供に努めてまいります。
+              </p>
+              <div class="about-features">
+                <div class="about-feature-item">
+                  <div class="about-feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                  </div>
+                  <span>安全第一</span>
+                </div>
+                <div class="about-feature-item">
+                  <div class="about-feature-icon">
+                    <i class="fas fa-award"></i>
+                  </div>
+                  <span>高品質</span>
+                </div>
+                <div class="about-feature-item">
+                  <div class="about-feature-icon">
+                    <i class="fas fa-handshake"></i>
+                  </div>
+                  <span>信頼性</span>
+                </div>
+              </div>
+              <a href="#" class="btn-orange">会社案内はこちら</a>
+            </div>
           </div>
           <div class="about-right">
-            <img
-              src="https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?w=600&h=450&fit=crop"
-              alt="作業風景"
-            />
+            <div class="about-image-wrapper">
+              <div class="about-image-overlay"></div>
+              <img src="images/zdK8NZHI.png" alt="代表挨拶" />
+              <div class="about-image-decoration"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -205,6 +229,13 @@
                   src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop"
                   alt="幅広いサービス"
                 />
+                <div class="mvv-mobile-image-overlay"></div>
+                <div class="mvv-mobile-image-content">
+                  <h3 class="mvv-mobile-image-title">幅広いサービス提供</h3>
+                  <p class="mvv-mobile-image-text">
+                    電気工事・ダクト工事・<br />エアコン工事を総合対応
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -265,6 +296,13 @@
                   src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop"
                   alt="確かな技術"
                 />
+                <div class="mvv-mobile-image-overlay"></div>
+                <div class="mvv-mobile-image-content">
+                  <h3 class="mvv-mobile-image-title">確かな技術と実績</h3>
+                  <p class="mvv-mobile-image-text">
+                    有資格者による<br />安全・高品質な施工
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -325,6 +363,15 @@
                   src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=600&fit=crop"
                   alt="迅速・丁寧な対応"
                 />
+                <div class="mvv-mobile-image-overlay"></div>
+                <div class="mvv-mobile-image-content">
+                  <h3 class="mvv-mobile-image-title">
+                    迅速な対応と丁寧なサポート
+                  </h3>
+                  <p class="mvv-mobile-image-text">
+                    ご相談・お見積りから<br />アフターケアまで安心
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -854,6 +901,141 @@
         const serviceSection = document.querySelector(".service");
         if (serviceSection) {
           observer.observe(serviceSection);
+        }
+
+        // 弊社の強みセクション：カードスクロール連動画像切り替え（PCサイズ時のみ）
+        const strengthsSection = document.querySelector("#strengths");
+        if (strengthsSection) {
+          const cards = document.querySelectorAll(".mvv-card");
+          const images = document.querySelectorAll(".mvv-side-img");
+
+          // PCサイズ判定関数
+          const isPC = () => window.innerWidth >= 768;
+
+          // 画像切り替え関数
+          const switchImage = (imageId) => {
+            images.forEach((img) => {
+              if (img.getAttribute("data-for") === imageId) {
+                img.classList.add("active");
+              } else {
+                img.classList.remove("active");
+              }
+            });
+          };
+
+          // 初期状態：最初のカードの画像を表示（PCサイズ時のみ）
+          if (isPC() && cards.length > 0) {
+            const firstCardImageId = cards[0].getAttribute("data-image");
+            if (firstCardImageId) {
+              switchImage(firstCardImageId);
+            }
+          }
+
+          // Intersection Observer の設定
+          // ビューポートの中央30%の範囲を監視して、最も中央に近いカードを検出
+          const cardObserverOptions = {
+            root: null,
+            rootMargin: "-35% 0px -35% 0px",
+            threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+          };
+
+          // 各カードの中央位置を計算して、最もビューポート中央に近いカードを選択
+          const cardObserverCallback = (entries) => {
+            // PCサイズ時のみ動作
+            if (!isPC()) return;
+
+            const viewportCenter = window.innerHeight / 2;
+            let activeCard = null;
+            let minDistance = Infinity;
+
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const cardRect = entry.boundingClientRect;
+                const cardCenter = cardRect.top + cardRect.height / 2;
+                const distance = Math.abs(cardCenter - viewportCenter);
+
+                if (distance < minDistance) {
+                  minDistance = distance;
+                  activeCard = entry.target;
+                }
+              }
+            });
+
+            // アクティブなカードが見つかった場合、対応する画像を表示
+            if (activeCard) {
+              const imageId = activeCard.getAttribute("data-image");
+              if (imageId) {
+                switchImage(imageId);
+              }
+            }
+          };
+
+          const cardObserver = new IntersectionObserver(
+            cardObserverCallback,
+            cardObserverOptions
+          );
+
+          // 各カードを監視
+          cards.forEach((card) => {
+            cardObserver.observe(card);
+          });
+
+          // スクロールイベントでも更新（Intersection Observerの補完）
+          let scrollTimer;
+          const handleScroll = () => {
+            if (!isPC()) return;
+
+            clearTimeout(scrollTimer);
+            scrollTimer = setTimeout(() => {
+              const viewportCenter = window.innerHeight / 2;
+              let activeCard = null;
+              let minDistance = Infinity;
+
+              cards.forEach((card) => {
+                const cardRect = card.getBoundingClientRect();
+                const cardCenter = cardRect.top + cardRect.height / 2;
+                const distance = Math.abs(cardCenter - viewportCenter);
+
+                // カードがビューポート内にある場合のみ考慮
+                if (cardRect.top < window.innerHeight && cardRect.bottom > 0) {
+                  if (distance < minDistance) {
+                    minDistance = distance;
+                    activeCard = card;
+                  }
+                }
+              });
+
+              if (activeCard) {
+                const imageId = activeCard.getAttribute("data-image");
+                if (imageId) {
+                  switchImage(imageId);
+                }
+              }
+            }, 50);
+          };
+
+          window.addEventListener("scroll", handleScroll, { passive: true });
+
+          // ウィンドウリサイズ時の処理
+          let resizeTimer;
+          window.addEventListener("resize", () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+              if (isPC()) {
+                // PCサイズの場合、スクロール位置に応じて画像を更新
+                handleScroll();
+              } else {
+                // PCサイズでない場合、最初の画像を表示
+                images.forEach((img, index) => {
+                  if (index === 0) {
+                    img.classList.add("active");
+                  } else {
+                    img.classList.remove("active");
+                  }
+                });
+              }
+            }, 250);
+          });
         }
       });
     </script>
