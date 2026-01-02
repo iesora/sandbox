@@ -357,6 +357,179 @@ body {
   line-height: 1.6;
 }
 
+/* 取引企業一覧 */
+.partner-section {
+  background: linear-gradient(to bottom, #fff 0%, #fafafa 100%);
+  padding: 60px 0;
+  margin: 50px -40px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.partner-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.partner-card {
+  position: relative;
+  height: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.partner-card:hover {
+  transform: translateY(-8px);
+}
+
+.partner-card-inner {
+  background: #fff;
+  border-radius: 12px;
+  padding: 35px 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 1px solid #f0f0f0;
+}
+
+.partner-card-inner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #f3982d 0%, #f5a945 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.partner-card:hover .partner-card-inner {
+  box-shadow: 0 12px 40px rgba(243, 152, 45, 0.15);
+  border-color: #f3982d;
+}
+
+.partner-card:hover .partner-card-inner::before {
+  transform: scaleX(1);
+}
+
+.partner-icon-wrapper {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.partner-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #f3982d 0%, #f5a945 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.partner-icon::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(135deg, #f3982d 0%, #f5a945 100%);
+  border-radius: 50%;
+  opacity: 0.2;
+  z-index: -1;
+  transition: all 0.3s ease;
+}
+
+.partner-card:hover .partner-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.partner-card:hover .partner-icon::after {
+  transform: scale(1.2);
+  opacity: 0.3;
+}
+
+.partner-icon i {
+  color: #fff;
+  font-size: 28px;
+  transition: transform 0.3s ease;
+}
+
+.partner-card:hover .partner-icon i {
+  transform: scale(1.1);
+}
+
+.partner-content {
+  flex: 1;
+  width: 100%;
+}
+
+.partner-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2d2d2d;
+  line-height: 1.5;
+  margin-bottom: 8px;
+  transition: color 0.3s ease;
+}
+
+.partner-card:hover .partner-name {
+  color: #f3982d;
+}
+
+.partner-category {
+  font-size: 13px;
+  color: #999;
+  font-weight: 400;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.partner-overlay {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  background: #f3982d;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s ease;
+}
+
+.partner-card:hover .partner-overlay {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.partner-overlay i {
+  color: #fff;
+  font-size: 14px;
+  transition: transform 0.3s ease;
+}
+
+.partner-card:hover .partner-overlay i {
+  transform: translateX(3px);
+}
+
 /* アクセス */
 .access-info {
   margin-top: 10px;
@@ -469,6 +642,13 @@ body {
 }
 
 /* Responsive */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .partner-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 0 20px;
@@ -550,6 +730,34 @@ body {
   .qualification-list {
     grid-template-columns: 1fr;
     gap: 25px;
+  }
+
+  .partner-section {
+    margin: 40px -20px;
+    padding: 40px 20px;
+  }
+
+  .partner-list {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin-top: 30px;
+  }
+
+  .partner-card-inner {
+    padding: 30px 25px;
+  }
+
+  .partner-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .partner-icon i {
+    font-size: 24px;
+  }
+
+  .partner-name {
+    font-size: 16px;
   }
 
   .footer-grid {
