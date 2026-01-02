@@ -14,6 +14,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
     />
+    <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/staff.css" />
   </head>
   <body>
@@ -34,7 +35,20 @@
           <a href="staff.html" class="nav-link active">スタッフ紹介</a>
           <a href="contact.html" class="nav-link">お問い合わせ</a>
         </nav>
+        <button class="mobile-menu-toggle" aria-label="メニューを開く">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
       </div>
+      <nav class="mobile-nav">
+        <a href="index.html" class="mobile-nav-link">ホーム</a>
+        <a href="company.html" class="mobile-nav-link">会社案内</a>
+        <a href="service.html" class="mobile-nav-link">サービス</a>
+        <a href="works.html" class="mobile-nav-link">事業実績</a>
+        <a href="staff.html" class="mobile-nav-link">スタッフ紹介</a>
+        <a href="contact.html" class="mobile-nav-link">お問い合わせ</a>
+      </nav>
     </header>
 
     <!-- Page Title -->
@@ -192,5 +206,53 @@
         </div>
       </div>
     </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+      // Mobile Menu Toggle
+      document.addEventListener("DOMContentLoaded", () => {
+        const menuToggle = document.querySelector(".mobile-menu-toggle");
+        const mobileNav = document.querySelector(".mobile-nav");
+        const body = document.body;
+
+        if (menuToggle && mobileNav) {
+          menuToggle.addEventListener("click", () => {
+            const isOpen = mobileNav.classList.contains("active");
+            if (isOpen) {
+              mobileNav.classList.remove("active");
+              menuToggle.classList.remove("active");
+              body.style.overflow = "";
+            } else {
+              mobileNav.classList.add("active");
+              menuToggle.classList.add("active");
+              body.style.overflow = "hidden";
+            }
+          });
+
+          // Close menu when clicking on a link
+          const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+          mobileNavLinks.forEach((link) => {
+            link.addEventListener("click", () => {
+              mobileNav.classList.remove("active");
+              menuToggle.classList.remove("active");
+              body.style.overflow = "";
+            });
+          });
+
+          // Close menu when clicking outside
+          document.addEventListener("click", (e) => {
+            if (
+              !mobileNav.contains(e.target) &&
+              !menuToggle.contains(e.target) &&
+              mobileNav.classList.contains("active")
+            ) {
+              mobileNav.classList.remove("active");
+              menuToggle.classList.remove("active");
+              body.style.overflow = "";
+            }
+          });
+        }
+      });
+    </script>
   </body>
 </html>
