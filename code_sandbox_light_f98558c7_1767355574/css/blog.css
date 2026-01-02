@@ -1,0 +1,418 @@
+/* ========================================
+   ブログ用CSS
+======================================== */
+
+/* ブログヘッダー */
+.blog-header {
+    background: linear-gradient(135deg, #e0f9ff 0%, #f0f8ff 100%);
+    padding: 40px 20px 60px;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #6EC1E4;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: #5ab3d8;
+}
+
+.back-link i {
+    font-size: 12px;
+}
+
+.blog-main-title {
+    font-size: 42px;
+    font-weight: 900;
+    color: #1a3a52;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.blog-main-subtitle {
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+    line-height: 1.8;
+}
+
+/* ブログ一覧セクション */
+.blog-list-section {
+    padding: 80px 20px;
+    background: #ffffff;
+}
+
+.blog-articles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ブログカード */
+.blog-article-card {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.blog-article-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 30px rgba(110, 193, 228, 0.25);
+}
+
+.blog-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.blog-card-image {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+}
+
+.blog-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.blog-article-card:hover .blog-card-image img {
+    transform: scale(1.05);
+}
+
+.blog-card-category {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #6EC1E4;
+    color: #ffffff;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.blog-card-content {
+    padding: 25px;
+}
+
+.blog-card-date {
+    display: block;
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 12px;
+}
+
+.blog-card-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a3a52;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.blog-card-description {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.blog-card-readmore {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #6EC1E4;
+    font-size: 14px;
+    font-weight: 600;
+    transition: gap 0.3s ease;
+}
+
+.blog-article-card:hover .blog-card-readmore {
+    gap: 12px;
+}
+
+.blog-card-readmore i {
+    font-size: 12px;
+}
+
+/* ブログ詳細ページ */
+.blog-detail-section {
+    padding: 60px 20px 80px;
+    background: #ffffff;
+}
+
+.blog-detail-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.blog-detail-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.blog-detail-category {
+    background: #6EC1E4;
+    color: #ffffff;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.blog-detail-date {
+    font-size: 14px;
+    color: #999;
+}
+
+.blog-detail-title {
+    font-size: 36px;
+    font-weight: 900;
+    color: #1a3a52;
+    line-height: 1.5;
+    margin-bottom: 40px;
+}
+
+.blog-detail-image {
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+    border-radius: 16px;
+    margin-bottom: 50px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+.blog-detail-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.blog-detail-content {
+    font-size: 16px;
+    line-height: 2;
+    color: #333;
+}
+
+.blog-detail-content h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a3a52;
+    margin: 50px 0 25px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #6EC1E4;
+}
+
+.blog-detail-content h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a3a52;
+    margin: 40px 0 20px;
+}
+
+.blog-detail-content p {
+    margin-bottom: 30px;
+}
+
+.blog-detail-content ul {
+    margin: 25px 0 30px 25px;
+    padding-left: 0;
+}
+
+.blog-detail-content li {
+    margin-bottom: 12px;
+    line-height: 1.8;
+    position: relative;
+    padding-left: 20px;
+}
+
+.blog-detail-content li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #6EC1E4;
+    font-weight: bold;
+}
+
+.blog-detail-content .note {
+    background: linear-gradient(135deg, #e3f4ff 0%, #f0f8ff 100%);
+    padding: 20px 25px;
+    border-radius: 8px;
+    border-left: 4px solid #6EC1E4;
+    font-size: 14px;
+    color: #666;
+    margin-top: 50px;
+}
+
+.blog-detail-footer {
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+.btn-back-to-list {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #6EC1E4;
+    color: #ffffff;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(110, 193, 228, 0.3);
+}
+
+.btn-back-to-list:hover {
+    background: #5ab3d8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(110, 193, 228, 0.5);
+}
+
+/* 記事が見つからない場合 */
+.article-not-found {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.article-not-found p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* 関連記事セクション */
+.related-articles-section {
+    padding: 80px 20px;
+    background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+}
+
+.related-articles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 50px auto 0;
+}
+
+.blog-article-card.small .blog-card-image {
+    height: 180px;
+}
+
+.blog-article-card.small .blog-card-content {
+    padding: 20px;
+}
+
+.blog-article-card.small .blog-card-title {
+    font-size: 18px;
+}
+
+/* ========================================
+   レスポンシブデザイン
+======================================== */
+
+/* タブレット */
+@media (max-width: 1024px) {
+    .blog-articles-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+    
+    .related-articles-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* スマホ */
+@media (max-width: 768px) {
+    .blog-header {
+        padding: 30px 20px 40px;
+    }
+    
+    .blog-main-title {
+        font-size: 32px;
+    }
+    
+    .blog-main-subtitle {
+        font-size: 14px;
+    }
+    
+    .blog-list-section {
+        padding: 60px 20px;
+    }
+    
+    .blog-articles-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .blog-card-image {
+        height: 200px;
+    }
+    
+    .blog-card-title {
+        font-size: 18px;
+    }
+    
+    .blog-detail-section {
+        padding: 40px 20px 60px;
+    }
+    
+    .blog-detail-title {
+        font-size: 26px;
+    }
+    
+    .blog-detail-image {
+        height: 250px;
+        margin-bottom: 35px;
+    }
+    
+    .blog-detail-content {
+        font-size: 15px;
+    }
+    
+    .blog-detail-content h2 {
+        font-size: 24px;
+        margin: 40px 0 20px;
+    }
+    
+    .blog-detail-content h3 {
+        font-size: 20px;
+        margin: 30px 0 15px;
+    }
+    
+    .related-articles-section {
+        padding: 60px 20px;
+    }
+    
+    .related-articles-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .btn-back-to-list {
+        padding: 12px 30px;
+        font-size: 14px;
+    }
+}

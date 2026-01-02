@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>院内ブログ | スマナビ</title>
+    <meta name="description" content="歯科に関する役立つ情報をお届けします。予防歯科、歯周病、むし歯治療など、お口の健康に関するコラムを掲載しています。">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/blog.css">
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="blog-header">
+        <div class="container">
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                <span>トップページへ戻る</span>
+            </a>
+            <h1 class="blog-main-title">院内ブログ</h1>
+            <p class="blog-main-subtitle">歯科に関する役立つ情報をお届けします</p>
+        </div>
+    </header>
+
+    <!-- ブログ一覧セクション -->
+    <section class="blog-list-section">
+        <div class="container">
+            <div id="blog-articles-list" class="blog-articles-grid">
+                <!-- JavaScriptで記事が挿入されます -->
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo-area">Smile Navigation</div>
+            <p class="footer-tagline">あなたの笑顔を、もっと素敵に</p>
+            <p class="footer-copyright">&copy; 2024 Smile Navigation. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/blog-data.js"></script>
+    <script>
+        // ブログ記事一覧を表示
+        function renderBlogList() {
+            const listContainer = document.getElementById('blog-articles-list');
+            
+            blogArticles.forEach(article => {
+                const articleCard = document.createElement('article');
+                articleCard.className = 'blog-article-card';
+                articleCard.innerHTML = `
+                    <a href="blog-detail.html?id=${article.id}" class="blog-card-link">
+                        <div class="blog-card-image">
+                            <img src="${article.image}" alt="${article.title}">
+                            <span class="blog-card-category">${article.category}</span>
+                        </div>
+                        <div class="blog-card-content">
+                            <time class="blog-card-date">${formatDate(article.date)}</time>
+                            <h2 class="blog-card-title">${article.title}</h2>
+                            <p class="blog-card-description">${article.description}</p>
+                            <span class="blog-card-readmore">
+                                詳しく見る
+                                <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </div>
+                    </a>
+                `;
+                listContainer.appendChild(articleCard);
+            });
+        }
+
+        // 日付をフォーマット
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}.${month}.${day}`;
+        }
+
+        // ページ読み込み時に記事一覧を表示
+        document.addEventListener('DOMContentLoaded', renderBlogList);
+    </script>
+</body>
+</html>

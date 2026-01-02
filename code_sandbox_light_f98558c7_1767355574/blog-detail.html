@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">記事詳細 | スマナビ</title>
+    <meta name="description" content="スマナビの院内ブログ記事詳細ページ">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/blog.css">
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="blog-header">
+        <div class="container">
+            <a href="blog.html" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                <span>ブログ一覧へ戻る</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- 記事詳細セクション -->
+    <article class="blog-detail-section">
+        <div class="container">
+            <div id="blog-article-detail" class="blog-detail-wrapper">
+                <!-- JavaScriptで記事が挿入されます -->
+            </div>
+        </div>
+    </article>
+
+    <!-- 関連記事セクション -->
+    <section class="related-articles-section">
+        <div class="container">
+            <h2 class="section-heading">その他の記事</h2>
+            <div id="related-articles" class="related-articles-grid">
+                <!-- JavaScriptで関連記事が挿入されます -->
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo-area">Smile Navigation</div>
+            <p class="footer-tagline">あなたの笑顔を、もっと素敵に</p>
+            <p class="footer-copyright">&copy; 2024 Smile Navigation. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/blog-data.js"></script>
+    <script>
+        // URLパラメータから記事IDを取得
+        function getArticleIdFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('id');
+        }
+
+        // 記事詳細を表示
+        function renderArticleDetail() {
+            const articleId = getArticleIdFromUrl();
+            const article = getBlogArticleById(articleId);
+            
+            if (!article) {
+                document.getElementById('blog-article-detail').innerHTML = `
+                    <div class="article-not-found">
+                        <p>記事が見つかりませんでした。</p>
+                        <a href="blog.html" class="btn-back-to-list">ブログ一覧へ戻る</a>
+                    </div>
+                `;
+                return;
+            }
+
+            // ページタイトルを更新
+            document.getElementById('page-title').textContent = `${article.title} | スマナビ`;
+
+            // 記事詳細を表示
+            const detailContainer = document.getElementById('blog-article-detail');
+            detailContainer.innerHTML = `
+                <div class="blog-detail-header">
+                    <span class="blog-detail-category">${article.category}</span>
+                    <time class="blog-detail-date">${formatDate(article.date)}</time>
+                </div>
+                <h1 class="blog-detail-title">${article.title}</h1>
+                <div class="blog-detail-image">
+                    <img src="${article.image}" alt="${article.title}">
+                </div>
+                <div class="blog-detail-content">
+                    ${article.content}
+                </div>
+                <div class="blog-detail-footer">
+                    <a href="blog.html" class="btn-back-to-list">
+                        <i class="fas fa-list"></i>
+                        ブログ一覧へ戻る
+                    </a>
+                </div>
+            `;
+
+            // 関連記事を表示（現在の記事以外）
+            renderRelatedArticles(article.id);
+        }
+
+        // 関連記事を表示
+        function renderRelatedArticles(currentArticleId) {
+            const relatedContainer = document.getElementById('related-articles');
+            const relatedArticles = blogArticles
+                .filter(article => article.id !== parseInt(currentArticleId))
+                .slice(0, 3);
+
+            relatedArticles.forEach(article => {
+                const articleCard = document.createElement('article');
+                articleCard.className = 'blog-article-card small';
+                articleCard.innerHTML = `
+                    <a href="blog-detail.html?id=${article.id}" class="blog-card-link">
+                        <div class="blog-card-image">
+                            <img src="${article.image}" alt="${article.title}">
+                            <span class="blog-card-category">${article.category}</span>
+                        </div>
+                        <div class="blog-card-content">
+                            <time class="blog-card-date">${formatDate(article.date)}</time>
+                            <h3 class="blog-card-title">${article.title}</h3>
+                            <span class="blog-card-readmore">
+                                詳しく見る
+                                <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </div>
+                    </a>
+                `;
+                relatedContainer.appendChild(articleCard);
+            });
+        }
+
+        // 日付をフォーマット
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}.${month}.${day}`;
+        }
+
+        // ページ読み込み時に記事詳細を表示
+        document.addEventListener('DOMContentLoaded', renderArticleDetail);
+    </script>
+</body>
+</html>
