@@ -842,7 +842,6 @@ body {
 
 /* Service */
 .service {
-  padding: 60px 0;
   background: #f7f7f7;
   overflow-x: hidden;
 }
@@ -873,6 +872,7 @@ body {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   display: flex;
+  flex-direction: column;
   opacity: 0;
   filter: blur(8px);
   transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
@@ -895,11 +895,11 @@ body {
 }
 
 .service-card[data-direction="left"] {
-  transform: translateX(-120px) scale(0.95);
+  transform: translateY(60px) scale(0.95);
 }
 
 .service-card[data-direction="right"] {
-  transform: translateX(120px) scale(0.95);
+  transform: translateY(60px) scale(0.95);
 }
 
 .service-card.slide-in {
@@ -919,7 +919,9 @@ body {
 }
 
 .service-image {
-  flex: 0 0 50%;
+  flex: 0 0 auto;
+  width: 100%;
+  height: 300px;
   overflow: hidden;
   position: relative;
 }
@@ -2042,18 +2044,49 @@ body {
     padding: 50px 20px;
   }
 
+  .service {
+    padding: 60px 20px;
+  }
+
   .service-list {
     gap: 25px;
     margin-top: 35px;
+    overflow-x: hidden;
+    max-width: calc(100% - 40px);
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .service-card {
     flex-direction: column;
+    max-width: 100%;
+    width: 90%;
+  }
+
+  /* 偶数番目の画像カードはmargin-right: 10%を適用 */
+  .service-list .service-card:nth-child(even) {
+    margin-right: 10%;
+    margin-left: 0;
+  }
+
+  /* 奇数番目の画像カードはmargin-left: 10%を適用（従来通り） */
+  .service-list .service-card:nth-child(odd) {
+    margin-left: 10%;
+    margin-right: 0;
+  }
+
+  .service-card[data-direction="left"] {
+    transform: translateX(-50px) scale(0.95);
+  }
+
+  .service-card[data-direction="right"] {
+    transform: translateX(50px) scale(0.95);
   }
 
   .service-image {
-    flex: 0 0 250px;
+    flex: 0 0 auto;
     width: 100%;
+    height: 250px;
   }
 
   .service-content {
