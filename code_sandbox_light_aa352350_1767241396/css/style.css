@@ -944,8 +944,14 @@ body {
   .service-list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
     gap: 35px;
     max-width: 1200px;
+  }
+  
+  /* 3番目のカード（換気設備工事）を左側に配置 */
+  .service-card-ventilation {
+    grid-column: 1; /* 左側の列に配置 */
   }
 }
 

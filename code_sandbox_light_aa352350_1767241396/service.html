@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>サービス | NEXUS</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/service-page.css">
-</head>
-<body>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/service-page.css" />
+  </head>
+  <body>
     <!-- Header -->
     <header class="header">
       <div class="header-inner">
@@ -47,98 +53,115 @@
 
     <!-- Page Title -->
     <section class="page-title">
-        <div class="container">
-            <div class="title-area">
-                <h1 class="page-heading">サービス</h1>
-                <div class="breadcrumb">
-                    <a href="index.html">Home</a>
-                    <span class="separator">/</span>
-                    <span class="current">サービス</span>
-                </div>
-            </div>
+      <div class="container">
+        <div class="title-area">
+          <h1 class="page-heading">サービス</h1>
+          <div class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="separator">/</span>
+            <span class="current">サービス</span>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Service List -->
     <section class="service" id="service">
-        <div class="container" style="padding-top: 10px; padding-bottom: 10px">
-            <div class="service-list">
-                <!-- Service Card 1 -->
-                <div class="service-card" data-direction="left">
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&h=600&fit=crop" alt="電気工事">
-                    </div>
-                    <div class="service-content">
-                        <h3 class="service-name">電気工事</h3>
-                        <p class="service-desc">
-                            住宅・店舗・オフィスなどの電気設備工事を承ります。照明器具の取付、コンセント増設、分電盤の交換など、確かな技術で安全・確実に施工いたします。
-                        </p>
-                        <a href="#" class="btn-orange-small">詳しくはこちら</a>
-                    </div>
-                </div>
-
-                <!-- Service Card 2 -->
-                <div class="service-card" data-direction="right">
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=600&fit=crop" alt="ダクト工事">
-                    </div>
-                    <div class="service-content">
-                        <h3 class="service-name">ダクト工事</h3>
-                        <p class="service-desc">
-                            空調・換気用ダクトの設計・施工を行います。飲食店、工場、ビルなどの空調設備工事に対応。快適な空気環境づくりをサポートします。
-                        </p>
-                        <a href="#" class="btn-orange-small">詳しくはこちら</a>
-                    </div>
-                </div>
-
-                <!-- Service Card 3 -->
-                <div class="service-card" data-direction="left">
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&h=600&fit=crop" alt="エアコン工事・メンテナンス">
-                    </div>
-                    <div class="service-content">
-                        <h3 class="service-name">エアコン工事・メンテナンス</h3>
-                        <p class="service-desc">
-                            エアコンの取付工事から定期メンテナンス、クリーニングまでトータルサポート。快適な室内環境を長く保つため、プロの技術でお手伝いします。
-                        </p>
-                        <a href="#" class="btn-orange-small">詳しくはこちら</a>
-                    </div>
-                </div>
+      <div class="container" style="padding-top: 10px; padding-bottom: 10px">
+        <div class="service-list">
+          <!-- Service Card 1: 空調設備工事（左上） -->
+          <div class="service-card service-card-air" data-direction="left">
+            <div class="service-image">
+              <img
+                src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&h=600&fit=crop"
+                alt="空調設備工事"
+              />
             </div>
+            <div class="service-content">
+              <h3 class="service-name">空調設備工事</h3>
+              <p class="service-desc">
+                エアコンや空調システムの設計・施工・メンテナンスを承ります。快適な室内環境づくりをトータルサポート。確かな技術で安全・確実に施工いたします。
+              </p>
+              <a href="#" class="btn-orange-small">詳しくはこちら</a>
+            </div>
+          </div>
+
+          <!-- Service Card 2: 電気設備工事（右上） -->
+          <div
+            class="service-card service-card-electric"
+            data-direction="right"
+          >
+            <div class="service-image">
+              <img
+                src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&h=600&fit=crop"
+                alt="電気設備工事"
+              />
+            </div>
+            <div class="service-content">
+              <h3 class="service-name">電気設備工事</h3>
+              <p class="service-desc">
+                住宅・店舗・オフィスなどの電気設備工事を承ります。照明器具の取付、コンセント増設、分電盤の交換など、確かな技術で安全・確実に施工いたします。
+              </p>
+              <a href="#" class="btn-orange-small">詳しくはこちら</a>
+            </div>
+          </div>
+
+          <!-- Service Card 3: 換気設備工事（下） -->
+          <div
+            class="service-card service-card-ventilation"
+            data-direction="left"
+          >
+            <div class="service-image">
+              <img
+                src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=600&fit=crop"
+                alt="換気設備工事"
+              />
+            </div>
+            <div class="service-content">
+              <h3 class="service-name">換気設備工事</h3>
+              <p class="service-desc">
+                空調・換気用ダクトの設計・施工を行います。飲食店、工場、ビルなどの換気設備工事に対応。快適な空気環境づくりをサポートします。
+              </p>
+              <a href="#" class="btn-orange-small">詳しくはこちら</a>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h4 class="footer-heading">連絡先</h4>
-                    <p class="footer-text">電話番号:</p>
-                    <p class="footer-text">050-234-1241</p>
-                    <p class="footer-text">所在地:</p>
-                    <p class="footer-text">東京都○○区○○ 1-2-3</p>
-                    <p class="footer-text">営業時間:</p>
-                    <p class="footer-text">平日（月～金曜）9:00～17:00</p>
-                </div>
-                <div class="footer-col">
-                    <h4 class="footer-heading">サービス</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">電気工事</a></li>
-                        <li><a href="#">ダクト工事</a></li>
-                        <li><a href="#">エアコン工事・メンテナンス</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4 class="footer-heading">お知らせ</h4>
-                    <p class="footer-text">NEXUS公式ホームページができました 2021年8月26日</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p class="footer-privacy"><a href="#">プライバシーポリシー</a></p>
-                <p class="copyright">© 株式会社NEXUS 2021. All rights reserved.</p>
-            </div>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h4 class="footer-heading">連絡先</h4>
+            <p class="footer-text">電話番号:</p>
+            <p class="footer-text">050-234-1241</p>
+            <p class="footer-text">所在地:</p>
+            <p class="footer-text">東京都○○区○○ 1-2-3</p>
+            <p class="footer-text">営業時間:</p>
+            <p class="footer-text">平日（月～金曜）9:00～17:00</p>
+          </div>
+          <div class="footer-col">
+            <h4 class="footer-heading">サービス</h4>
+            <ul class="footer-links">
+              <li><a href="#">電気設備工事</a></li>
+              <li><a href="#">換気設備工事</a></li>
+              <li><a href="#">空調設備工事</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4 class="footer-heading">お知らせ</h4>
+            <p class="footer-text">
+              NEXUS公式ホームページができました 2021年8月26日
+            </p>
+          </div>
         </div>
+        <div class="footer-bottom">
+          <p class="footer-privacy"><a href="#">プライバシーポリシー</a></p>
+          <p class="copyright">© 株式会社NEXUS 2021. All rights reserved.</p>
+        </div>
+      </div>
     </footer>
 
     <!-- Animation Script -->
@@ -226,5 +249,5 @@
         }
       });
     </script>
-</body>
+  </body>
 </html>

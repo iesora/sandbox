@@ -43,6 +43,26 @@ document.addEventListener('DOMContentLoaded', () => {
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });
+    
+    // サービスカードのアニメーション
+    const serviceCards = document.querySelectorAll('.service-card');
+    const serviceObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('slide-in');
+                }, index * 200); // 各カードを順番に表示
+                serviceObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    serviceCards.forEach(card => {
+        serviceObserver.observe(card);
+    });
 });
 
 // ========================================
