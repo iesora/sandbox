@@ -2899,6 +2899,37 @@ footer {
     }
 }
 
+/* Media Partners Section - Mobile */
+@media (max-width: 768px) {
+    /* 取り扱いメディアセクション内の画像を小さく */
+    section img[alt*="マイナビ"],
+    section img[alt*="キャリタス"],
+    section img[alt*="あさがく"],
+    section img[alt*="キミスカ"],
+    section img[alt*="OfferBox"],
+    section img[alt*="転職"],
+    section img[alt*="doda"],
+    section img[alt*="エン"],
+    section img[alt*="type"],
+    section img[alt*="Re就活"],
+    section img[alt*="Green"],
+    section img[alt*="バイト"],
+    section img[alt*="AirWORK"],
+    section img[alt*="エンゲージ"],
+    section img[alt*="Wantedly"],
+    section img[alt*="トルーマッセ"],
+    section img[alt*="HRMOS"],
+    section img[alt*="コボット"] {
+        height: 28px !important;
+        width: auto !important;
+    }
+    
+    /* 取り扱いメディアセクションのギャップを調整 */
+    section > div > div > div[style*="display: flex"] {
+        gap: 20px 30px !important;
+    }
+}
+
 /* Tablet specific adjustments */
 @media (max-width: 1024px) and (min-width: 769px) {
     .mvv-layout {
