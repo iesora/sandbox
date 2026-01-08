@@ -4,7 +4,7 @@
 
 /* ブログヘッダー */
 .blog-header {
-    background: linear-gradient(135deg, #e0f9ff 0%, #f0f8ff 100%);
+    background: linear-gradient(135deg, #EDE9FE 0%, #F3E8FF 100%);
     padding: 40px 20px 60px;
 }
 
@@ -12,7 +12,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: #6EC1E4;
+    color: #8B5CF6;
     text-decoration: none;
     font-size: 14px;
     font-weight: 600;
@@ -21,7 +21,7 @@
 }
 
 .back-link:hover {
-    color: #5ab3d8;
+    color: #7C3AED;
 }
 
 .back-link i {
@@ -31,7 +31,7 @@
 .blog-main-title {
     font-size: 42px;
     font-weight: 900;
-    color: #1a3a52;
+    color: #4C1D95;
     margin-bottom: 15px;
     text-align: center;
 }
@@ -68,7 +68,7 @@
 
 .blog-article-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 8px 30px rgba(110, 193, 228, 0.25);
+    box-shadow: 0 8px 30px rgba(139, 92, 246, 0.25);
 }
 
 .blog-card-link {
@@ -99,7 +99,7 @@
     position: absolute;
     top: 15px;
     left: 15px;
-    background: #6EC1E4;
+    background: #8B5CF6;
     color: #ffffff;
     padding: 6px 16px;
     border-radius: 20px;
@@ -121,7 +121,7 @@
 .blog-card-title {
     font-size: 20px;
     font-weight: 700;
-    color: #1a3a52;
+    color: #4C1D95;
     margin-bottom: 15px;
     line-height: 1.5;
 }
@@ -137,7 +137,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: #6EC1E4;
+    color: #8B5CF6;
     font-size: 14px;
     font-weight: 600;
     transition: gap 0.3s ease;
@@ -170,7 +170,7 @@
 }
 
 .blog-detail-category {
-    background: #6EC1E4;
+    background: #8B5CF6;
     color: #ffffff;
     padding: 8px 20px;
     border-radius: 20px;
@@ -186,7 +186,7 @@
 .blog-detail-title {
     font-size: 36px;
     font-weight: 900;
-    color: #1a3a52;
+    color: #4C1D95;
     line-height: 1.5;
     margin-bottom: 40px;
 }
@@ -215,16 +215,16 @@
 .blog-detail-content h2 {
     font-size: 28px;
     font-weight: 700;
-    color: #1a3a52;
+    color: #4C1D95;
     margin: 50px 0 25px;
     padding-bottom: 15px;
-    border-bottom: 3px solid #6EC1E4;
+    border-bottom: 3px solid #8B5CF6;
 }
 
 .blog-detail-content h3 {
     font-size: 22px;
     font-weight: 700;
-    color: #1a3a52;
+    color: #4C1D95;
     margin: 40px 0 20px;
 }
 
@@ -248,15 +248,15 @@
     content: "✓";
     position: absolute;
     left: 0;
-    color: #6EC1E4;
+    color: #8B5CF6;
     font-weight: bold;
 }
 
 .blog-detail-content .note {
-    background: linear-gradient(135deg, #e3f4ff 0%, #f0f8ff 100%);
+    background: linear-gradient(135deg, #EDE9FE 0%, #F3E8FF 100%);
     padding: 20px 25px;
     border-radius: 8px;
-    border-left: 4px solid #6EC1E4;
+    border-left: 4px solid #8B5CF6;
     font-size: 14px;
     color: #666;
     margin-top: 50px;
@@ -273,7 +273,7 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: #6EC1E4;
+    background: #8B5CF6;
     color: #ffffff;
     padding: 15px 40px;
     border-radius: 50px;
@@ -281,13 +281,13 @@
     font-weight: 700;
     text-decoration: none;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(110, 193, 228, 0.3);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
 }
 
 .btn-back-to-list:hover {
-    background: #5ab3d8;
+    background: #7C3AED;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(110, 193, 228, 0.5);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
 }
 
 /* 記事が見つからない場合 */
@@ -305,7 +305,7 @@
 /* 関連記事セクション */
 .related-articles-section {
     padding: 80px 20px;
-    background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+    background: linear-gradient(180deg, #F5F3FF 0%, #ffffff 100%);
 }
 
 .related-articles-grid {

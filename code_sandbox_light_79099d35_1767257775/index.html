@@ -1197,14 +1197,14 @@
             list-style: none;
             padding: 0;
             margin: 0 auto;
-            max-width: 1400px;
+            max-width: 1000px;
         }
         
         /* ==================== DESKTOP Styles (>768px) ==================== */
         @media (min-width: 769px) {
             .service-list {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
                 gap: 30px;
             }
             
@@ -1857,6 +1857,30 @@
         
         /* Responsive Styles */
         @media (max-width: 1024px) {
+            .about-container-modern {
+                margin-left: 0;
+            }
+            
+            .company-card-modern {
+                position: relative;
+                top: auto;
+                right: auto;
+                max-width: 100%;
+                margin-bottom: 40px;
+                padding: 50px 30px;
+            }
+            
+            .about-vertical-text-outside {
+                font-size: 36px;
+                left: 10px;
+            }
+            
+            .map-container-modern {
+                height: 400px;
+            }
+        }
+        
+        @media (max-width: 768px) {
             #about {
                 padding: 60px 20px !important;
             }
@@ -1873,7 +1897,6 @@
                 font-size: 32px;
                 font-weight: 700;
                 color: #2C2C2C;
-                margin-top: -40px;
                 margin-bottom: 40px;
                 text-align: center;
                 width: 100%;
@@ -1882,7 +1905,6 @@
             
             .about-container-modern {
                 margin-left: 0;
-                margin-top: 160px;
                 position: relative;
                 order: 1;
             }
@@ -2034,63 +2056,129 @@
     </section>
 
     <!-- Media Partners Section -->
-    <section style="padding: 60px 40px; background: white;">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <h2 style="color: #2C2C2C; font-size: 32px; font-weight: bold; margin-bottom: 50px; text-align: center;">取り扱いメディア</h2>
+    <section class="media-partners-section">
+        <div class="media-partners-container">
+            <div class="media-section-header">
+                <h2 class="media-main-title">取り扱いメディア</h2>
+                <p class="media-subtitle">採用活動をサポートする多様なメディアパートナー</p>
+            </div>
             
-            <!-- 新卒メディア -->
-            <div style="margin-bottom: 50px; padding-bottom: 50px; border-bottom: 1px solid #E0E0E0;">
-                <h3 style="color: #FF8C42; font-size: 22px; font-weight: bold; margin-bottom: 30px; text-align: left;">新卒メディア</h3>
-                <div style="display: flex; flex-wrap: wrap; gap: 30px 50px; align-items: center;">
-                    <img src="https://www.genspark.ai/api/files/s/KTdc66QJ" alt="マイナビ" style="height: 40px; width: auto;">
-                    <img src="https://www.genspark.ai/api/files/s/bLeWRRvM" alt="キャリタス" style="height: 40px; width: auto;">
-                    <img src="https://www.genspark.ai/api/files/s/yZ89tDae" alt="あさがくナビ" style="height: 40px; width: auto;">
-                    <img src="https://www.genspark.ai/api/files/s/WpgfbY3H" alt="キミスカ" style="height: 40px; width: auto;">
-                    <img src="https://www.genspark.ai/api/files/s/F7YwvbMP" alt="OfferBox" style="height: 40px; width: auto;">
-                </div>
-            </div>
+            <!-- PCサイズ用の2カラムレイアウト -->
+            <div class="media-categories-layout">
+                <!-- 左側：新卒メディアとアルバイト/パートメディアのグループ -->
+                <div class="media-left-group">
+                    <!-- 新卒メディア -->
+                    <div class="media-category-card media-category-blue">
+                        <div class="media-category-header">
+                            <span class="media-category-badge">新卒</span>
+                            <h3 class="media-category-title">新卒メディア</h3>
+                        </div>
+                        <div class="media-logos-grid">
+                            <div class="media-logo-item">
+                                <img src="https://www.genspark.ai/api/files/s/KTdc66QJ" alt="マイナビ" class="media-logo-img">
+                            </div>
+                            <div class="media-logo-item">
+                                <img src="https://www.genspark.ai/api/files/s/bLeWRRvM" alt="キャリタス" class="media-logo-img">
+                            </div>
+                            <div class="media-logo-item">
+                                <img src="https://www.genspark.ai/api/files/s/yZ89tDae" alt="あさがくナビ" class="media-logo-img">
+                            </div>
+                            <div class="media-logo-item">
+                                <img src="https://www.genspark.ai/api/files/s/WpgfbY3H" alt="キミスカ" class="media-logo-img">
+                            </div>
+                            <div class="media-logo-item">
+                                <img src="https://www.genspark.ai/api/files/s/F7YwvbMP" alt="OfferBox" class="media-logo-img">
+                            </div>
+                        </div>
+                    </div>
 
-            <!-- 中途メディア -->
-            <div style="margin-bottom: 50px; padding-bottom: 50px; border-bottom: 1px solid #E0E0E0;">
-                <h3 style="color: #FF8C42; font-size: 22px; font-weight: bold; margin-bottom: 30px; text-align: left;">中途メディア</h3>
-                <div style="display: flex; flex-wrap: wrap; gap: 30px 50px; align-items: center;">
-                    <img src="https://www.genspark.ai/api/files/s/YRLAXnQI" alt="マイナビ転職" style="height: 40px; width: auto;">
-                    <img src="https://www.genspark.ai/api/files/s/SmngFe56" alt="doda" style="height: 40px; width: auto;">
-                    <img src="https://www.genspark.ai/api/files/s/wU1iypCf" alt="エン転職" style="height: 40px; width: auto;">
-                    <img src="https://www.genspark.ai/api/files/s/8fXDI6Hd" alt="type" style="height: 40px; width: auto;">
-                    <img src="https://www.genspark.ai/api/files/s/aRM4J9AA" alt="女の転職type" style="height: 40px; width: auto;">
-                    <img src="https://www.genspark.ai/api/files/s/oQGnnTyB" alt="Re就活" style="height: 40px; width: auto;">
-                    <img src="https://www.genspark.ai/api/files/s/sMWIxjNa" alt="Green" style="height: 40px; width: auto;">
-                </div>
-            </div>
+                    <!-- アルバイト/パートメディア -->
+                    <div class="media-category-card media-category-green">
+                        <div class="media-category-header">
+                            <span class="media-category-badge">バイト</span>
+                            <h3 class="media-category-title">アルバイト/パートメディア</h3>
+                        </div>
+                        <div class="media-logos-grid">
+                            <div class="media-logo-item">
+                                <img src="https://www.genspark.ai/api/files/s/T5RG1t7V" alt="マイナビバイト" class="media-logo-img">
+                            </div>
+                            <div class="media-logo-item">
+                                <img src="https://www.genspark.ai/api/files/s/1GcQqsTp" alt="バイトル" class="media-logo-img">
+                            </div>
+                        </div>
+                    </div>
 
-            <!-- アルバイト/パートメディア -->
-            <div style="margin-bottom: 50px; padding-bottom: 50px; border-bottom: 1px solid #E0E0E0;">
-                <h3 style="color: #FF8C42; font-size: 22px; font-weight: bold; margin-bottom: 30px; text-align: left;">アルバイト/パートメディア</h3>
-                <div style="display: flex; flex-wrap: wrap; gap: 30px 50px; align-items: center;">
-                    <img src="https://www.genspark.ai/api/files/s/T5RG1t7V" alt="マイナビバイト" style="height: 40px; width: auto;">
-                    <img src="https://www.genspark.ai/api/files/s/1GcQqsTp" alt="バイトル" style="height: 40px; width: auto;">
+                    <!-- HRテック -->
+                    <div class="media-category-card media-category-pink">
+                        <div class="media-category-header">
+                            <span class="media-category-badge">HR</span>
+                            <h3 class="media-category-title">HRテック</h3>
+                        </div>
+                        <div class="media-logos-grid">
+                            <div class="media-logo-item">
+                                <img src="https://www.genspark.ai/api/files/s/hrmos-logo" alt="HRMOS採用" class="media-logo-img">
+                            </div>
+                            <div class="media-logo-item">
+                                <img src="https://www.genspark.ai/api/files/s/cobott-logo" alt="コボット" class="media-logo-img">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- オウンドメディア -->
-            <div style="margin-bottom: 50px; padding-bottom: 50px; border-bottom: 1px solid #E0E0E0;">
-                <h3 style="color: #FF8C42; font-size: 22px; font-weight: bold; margin-bottom: 10px; text-align: left;">オウンドメディア</h3>
-                <p style="color: #999; font-size: 14px; margin-bottom: 30px; text-align: left;">（運用代行）</p>
-                <div style="display: flex; flex-wrap: wrap; gap: 30px 50px; align-items: center;">
-                    <img src="https://www.genspark.ai/api/files/s/airwork-logo" alt="AirWORK 採用管理" style="height: 40px; width: auto;">
-                    <img src="https://www.genspark.ai/api/files/s/engage-logo" alt="エンゲージ" style="height: 40px; width: auto;">
-                    <img src="https://www.genspark.ai/api/files/s/wantedly-logo" alt="Wantedly" style="height: 40px; width: auto;">
-                    <img src="https://www.genspark.ai/api/files/s/torumasse-logo" alt="トルーマッセ" style="height: 40px; width: auto;">
-                </div>
-            </div>
+                <!-- 右側：中途メディアとオウンドメディア -->
+                <div class="media-right-group">
+                    <div class="media-category-card media-category-orange">
+                        <div class="media-category-header">
+                            <span class="media-category-badge">中途</span>
+                            <h3 class="media-category-title">中途メディア</h3>
+                        </div>
+                        <div class="media-logos-grid">
+                            <div class="media-logo-item">
+                                <img src="https://www.genspark.ai/api/files/s/YRLAXnQI" alt="マイナビ転職" class="media-logo-img">
+                            </div>
+                            <div class="media-logo-item">
+                                <img src="https://www.genspark.ai/api/files/s/SmngFe56" alt="doda" class="media-logo-img">
+                            </div>
+                            <div class="media-logo-item">
+                                <img src="https://www.genspark.ai/api/files/s/wU1iypCf" alt="エン転職" class="media-logo-img">
+                            </div>
+                            <div class="media-logo-item">
+                                <img src="https://www.genspark.ai/api/files/s/8fXDI6Hd" alt="type" class="media-logo-img">
+                            </div>
+                            <div class="media-logo-item">
+                                <img src="https://www.genspark.ai/api/files/s/aRM4J9AA" alt="女の転職type" class="media-logo-img">
+                            </div>
+                            <div class="media-logo-item">
+                                <img src="https://www.genspark.ai/api/files/s/oQGnnTyB" alt="Re就活" class="media-logo-img">
+                            </div>
+                            <div class="media-logo-item">
+                                <img src="https://www.genspark.ai/api/files/s/sMWIxjNa" alt="Green" class="media-logo-img">
+                            </div>
+                        </div>
+                    </div>
 
-            <!-- HRテック -->
-            <div>
-                <h3 style="color: #FF8C42; font-size: 22px; font-weight: bold; margin-bottom: 30px; text-align: left;">HRテック</h3>
-                <div style="display: flex; flex-wrap: wrap; gap: 30px 50px; align-items: center;">
-                    <img src="https://www.genspark.ai/api/files/s/hrmos-logo" alt="HRMOS採用" style="height: 40px; width: auto;">
-                    <img src="https://www.genspark.ai/api/files/s/cobott-logo" alt="コボット" style="height: 40px; width: auto;">
+                    <!-- オウンドメディア -->
+                    <div class="media-category-card media-category-purple">
+                        <div class="media-category-header">
+                            <span class="media-category-badge">オウンド</span>
+                            <h3 class="media-category-title">オウンドメディア</h3>
+                            <span class="media-category-note">（運用代行）</span>
+                        </div>
+                        <div class="media-logos-grid">
+                            <div class="media-logo-item">
+                                <img src="https://www.genspark.ai/api/files/s/airwork-logo" alt="AirWORK 採用管理" class="media-logo-img">
+                            </div>
+                            <div class="media-logo-item">
+                                <img src="https://www.genspark.ai/api/files/s/engage-logo" alt="エンゲージ" class="media-logo-img">
+                            </div>
+                            <div class="media-logo-item">
+                                <img src="https://www.genspark.ai/api/files/s/wantedly-logo" alt="Wantedly" class="media-logo-img">
+                            </div>
+                            <div class="media-logo-item">
+                                <img src="https://www.genspark.ai/api/files/s/torumasse-logo" alt="トルーマッセ" class="media-logo-img">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

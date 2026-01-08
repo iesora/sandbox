@@ -1,0 +1,371 @@
+<!-- WordPress埋め込み用: サービスエリアセクション -->
+<!-- このコードをWordPressの「カスタムHTML」ブロックに貼り付けて使用してください -->
+
+<section
+  id="services-list"
+  style="padding: 80px 40px; background: #ffffff; position: relative"
+>
+  <!-- Section Title (Vertical) -->
+  <div class="service-section-title">Service</div>
+
+  <div class="service-content-wrapper">
+    <h2 class="section-title">サービス</h2>
+    <p class="section-subtitle" style="margin-bottom: 60px">
+      LR consultingは、採用に関する幅広いサービスを提供しています。
+    </p>
+
+    <!-- Service Cards Container (JS will populate this) -->
+    <ul class="service-list" id="serviceList"></ul>
+  </div>
+</section>
+
+<style>
+  /* ==================== Service Cards - Base Styles ==================== */
+
+  /* Service Section Title (Vertical) */
+  .service-section-title {
+    position: absolute;
+    top: 80px;
+    left: 20px;
+    font-size: 32px;
+    font-weight: bold;
+    color: #2c2c2c;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    letter-spacing: 4px;
+    z-index: 10;
+  }
+
+  /* Content Wrapper - 中央揃え用 */
+  .service-content-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .section-title {
+    text-align: center;
+  }
+
+  .section-subtitle {
+    text-align: center;
+  }
+
+  .service-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 1400px;
+  }
+
+  /* ==================== DESKTOP Styles (>768px) ==================== */
+  @media (min-width: 769px) {
+    .service-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+    }
+
+    .service-card {
+      display: block;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      min-height: 300px;
+      position: relative;
+    }
+
+    .service-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 2;
+      transition: background 0.3s ease;
+    }
+
+    .service-card:hover::after {
+      background: rgba(0, 0, 0, 0.35);
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .service-card-inner {
+      position: relative;
+      z-index: 3;
+      padding: 40px 30px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .service-label {
+      display: inline-block;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      padding: 6px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .service-title-jp {
+      font-size: 26px;
+      font-weight: bold;
+      color: #ffffff;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .service-title-en {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.85);
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  /* ==================== MOBILE Styles (≤768px) - 画像オーバーレイカード ==================== */
+  @media (max-width: 768px) {
+    #services-list {
+      padding: 60px 20px;
+    }
+
+    .service-section-title {
+      position: static;
+      writing-mode: horizontal-tb;
+      font-size: 24px;
+      margin-bottom: 30px;
+      text-align: center;
+      letter-spacing: 2px;
+    }
+
+    .service-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* カード全体 */
+    .service-card {
+      display: block;
+      position: relative;
+      width: 100%;
+      min-height: 220px;
+      background: #f0f0f0;
+      text-decoration: none;
+      overflow: hidden;
+
+      /* 右下斜めカット (重要) */
+      clip-path: polygon(
+        0 0,
+        /* 左上 */ 100% 0,
+        /* 右上 */ 100% calc(100% - 64px),
+        /* 右下手前 */ calc(100% - 64px) 100%,
+        /* 右下カット */ 0 100% /* 左下 */
+      );
+
+      /* 背景画像の設定 (JS側で個別に上書き) */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      transition: transform 0.3s ease;
+    }
+
+    /* アニメーション減少設定 */
+    @media (prefers-reduced-motion: reduce) {
+      .service-card {
+        transition: none;
+      }
+    }
+
+    /* hover時の効果 (PCでの確認用) */
+    .service-card:hover {
+      transform: scale(1.01);
+    }
+
+    /* オーバーレイ (黒半透明) */
+    .service-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: 1;
+      transition: background 0.3s ease;
+    }
+
+    .service-card:hover::before {
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .service-card::before {
+        transition: none;
+      }
+    }
+
+    /* カード内のテキストコンテナ (左下に配置) */
+    .service-card-inner {
+      position: relative;
+      z-index: 2;
+      padding: 24px;
+      height: 100%;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    /* 台形ラベル (枠線のみ・透明背景) */
+    .service-label {
+      display: inline-block;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      padding: 5px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      align-self: flex-start;
+
+      /* 台形シェイプ */
+      clip-path: polygon(
+        8px 0,
+        /* 左上 */ 100% 0,
+        /* 右上 */ calc(100% - 8px) 100%,
+        /* 右下 */ 0 100% /* 左下 */
+      );
+    }
+
+    /* 日本語タイトル (2行想定) */
+    .service-title-jp {
+      font-size: 26px;
+      font-weight: bold;
+      color: #ffffff;
+      line-height: 1.4;
+      margin-bottom: 6px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    /* 英語サブタイトル (1行) */
+    .service-title-en {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      line-height: 1.5;
+    }
+  }
+</style>
+
+<script>
+  /* ==================== Service Cards Generator ==================== */
+
+  /**
+   * カスタマイズ箇所:
+   * 1. servicesData 配列にサービスを追加/編集
+   * 2. 画像URL (bgImage) を実際の画像URLに差し替え
+   * 3. リンク先 (link) を実際のページに変更
+   */
+
+  (function () {
+    // サービスデータ (カード追加箇所)
+    const servicesData = [
+      {
+        label: "Service",
+        titleJp: "採用コンサルティング",
+        titleEn: "Recruitment Consulting",
+        link: "#",
+        // 画像URL差し替え箇所 (実際の画像URLに変更してください)
+        bgImage:
+          "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop",
+      },
+      {
+        label: "Service",
+        titleJp: "採用アウトソーシング",
+        titleEn: "Recruitment Outsourcing",
+        link: "#",
+        // 画像URL差し替え箇所
+        bgImage:
+          "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=600&fit=crop",
+      },
+      {
+        label: "Service",
+        titleJp: "採用ホームページ制作",
+        titleEn: "Recruitment Website Design",
+        link: "#",
+        // 画像URL差し替え箇所
+        bgImage:
+          "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&h=600&fit=crop",
+      },
+      {
+        label: "Service",
+        titleJp: "SNS運用代行",
+        titleEn: "Social Media Management",
+        link: "#",
+        // 画像URL差し替え箇所
+        bgImage:
+          "https://images.unsplash.com/photo-1611926653458-09294b3142bf?w=800&h=600&fit=crop",
+      },
+      {
+        label: "Service",
+        titleJp: "人材紹介",
+        titleEn: "Human Resources Placement",
+        link: "#",
+        // 画像URL差し替え箇所
+        bgImage:
+          "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=600&fit=crop",
+      },
+    ];
+
+    // カード生成
+    function generateServiceCards() {
+      const serviceList = document.getElementById("serviceList");
+      if (!serviceList) return;
+
+      serviceList.innerHTML = servicesData
+        .map(
+          (service) => `
+                <li>
+                    <a href="${service.link}" 
+                       class="service-card" 
+                       style="background-image: url('${service.bgImage}');">
+                        <div class="service-card-inner">
+                            <span class="service-label">${service.label}</span>
+                            <h3 class="service-title-jp">${service.titleJp}</h3>
+                            <p class="service-title-en">${service.titleEn}</p>
+                        </div>
+                    </a>
+                </li>
+            `
+        )
+        .join("");
+    }
+
+    // 初期化
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", generateServiceCards);
+    } else {
+      generateServiceCards();
+    }
+  })();
+</script>
