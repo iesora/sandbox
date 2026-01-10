@@ -450,6 +450,9 @@ body {
   margin-top: 10px;
   box-shadow: 0 2px 8px rgba(243, 152, 45, 0.25);
   position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .form__submit:hover {

@@ -40,32 +40,12 @@ body {
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
 }
 
-.logo-mark {
-  width: 36px;
-  height: 36px;
-  background: linear-gradient(135deg, #f3982d 0%, #f5a945 100%);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.logo-mark span {
-  color: #fff;
-  font-size: 22px;
-  font-weight: 700;
-  font-family: "Montserrat", sans-serif;
-}
-
-.logo-text {
-  font-family: "Montserrat", sans-serif;
-  font-size: 22px;
-  font-weight: 700;
-  color: #2d2d2d;
-  letter-spacing: 0.5px;
+.logo-img {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
 }
 
 .nav {
@@ -1677,6 +1657,9 @@ body {
   margin-top: 10px;
   box-shadow: 0 2px 8px rgba(243, 152, 45, 0.25);
   position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .form__submit:hover {
@@ -2813,5 +2796,190 @@ body {
 
   .new-strength-card-label-text {
     font-size: 11px;
+  }
+}
+
+/* ========================================
+   印刷用スタイル
+======================================== */
+@media print {
+  /* ページ設定 */
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+
+  /* 基本設定 */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 12pt;
+    line-height: 1.6;
+  }
+
+  /* ナビゲーションやボタンなどの不要な要素を非表示 */
+  .header,
+  .mobile-menu-toggle,
+  .nav,
+  button:not(.print-keep),
+  .btn,
+  .cta-button,
+  .footer,
+  .no-print {
+    display: none !important;
+  }
+
+  /* コンテンツを確実に表示 */
+  .container,
+  .content,
+  main,
+  article,
+  section {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    page-break-inside: avoid;
+  }
+
+  /* 絶対配置や固定配置の要素を通常の配置に変更 */
+  [style*="position: absolute"],
+  [style*="position: fixed"],
+  .absolute,
+  .fixed {
+    position: static !important;
+    transform: none !important;
+  }
+
+  /* 背景色と背景画像を印刷 */
+  * {
+    background-color: inherit !important;
+    background-image: inherit !important;
+  }
+
+  /* テーブルの印刷設定 */
+  table {
+    page-break-inside: auto;
+    border-collapse: collapse;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  tfoot {
+    display: table-footer-group;
+  }
+
+  /* 画像の印刷設定 */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+    page-break-inside: avoid;
+  }
+
+  /* リンクのURLを表示 */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 10pt;
+    color: #666;
+  }
+
+  a[href^="#"]:after,
+  a[href^="javascript:"]:after {
+    content: "";
+  }
+
+  /* ページ区切り */
+  .page-break {
+    page-break-before: always;
+  }
+
+  .no-page-break {
+    page-break-inside: avoid;
+  }
+
+  /* 印刷時に表示する要素 */
+  .print-only {
+    display: block !important;
+  }
+
+  /* 印刷時に非表示にする要素 */
+  .no-print,
+  .print-hide {
+    display: none !important;
+  }
+
+  /* ボックスシャドウを削除（印刷時に不要） */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* 色を調整（白背景に黒文字） */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #000 !important;
+    page-break-after: avoid;
+  }
+
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* 請求書専用のスタイル */
+  .invoice,
+  .seikyusyo,
+  [class*="invoice"],
+  [class*="seikyusyo"],
+  [id*="invoice"],
+  [id*="seikyusyo"] {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+  }
+
+  /* 請求書のコンテンツエリア */
+  .invoice-content,
+  .seikyusyo-content,
+  [class*="content"] {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: static !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 10pt !important;
+  }
+
+  /* 印刷時の余白調整 */
+  .container {
+    padding: 0 !important;
   }
 }
