@@ -31,7 +31,7 @@ img {
    ヒーローセクション
 ======================================== */
 .hero {
-  background: linear-gradient(180deg, #EDE9FE 0%, #F3E8FF 50%, #ffffff 100%);
+  background: linear-gradient(180deg, #ede9fe 0%, #f3e8ff 50%, #ffffff 100%);
   padding: 60px 20px 0;
   position: relative;
   overflow: hidden;
@@ -74,7 +74,7 @@ img {
 }
 
 .hero-catch .highlight-blue {
-  color: #8B5CF6;
+  color: #8b5cf6;
   font-weight: 700;
 }
 
@@ -102,14 +102,14 @@ img {
 .logo-with-icon {
   display: flex;
   align-items: center;
-  gap: 12px;
   position: relative;
   margin-bottom: 8px;
 }
 
 .hero-smile-icon {
-  font-size: 32px;
-  color: #8B5CF6;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
 }
 
 .hero-logo {
@@ -122,7 +122,7 @@ img {
 
 .hero-star-icon {
   font-size: 18px;
-  color: #8B5CF6;
+  color: #8b5cf6;
   position: absolute;
   animation: twinkle 2s ease-in-out infinite;
 }
@@ -166,7 +166,7 @@ img {
 
 .info-box {
   background: #ffffff;
-  border: 2px solid #8B5CF6;
+  border: 2px solid #8b5cf6;
   padding: 20px 28px;
   border-radius: 12px;
   flex: 1;
@@ -183,7 +183,7 @@ img {
 .info-value {
   font-size: 48px;
   font-weight: 900;
-  color: #8B5CF6;
+  color: #8b5cf6;
   line-height: 1;
   margin-bottom: 6px;
 }
@@ -218,7 +218,7 @@ img {
   display: flex;
   align-items: center;
   gap: 20px;
-  background: #F5F3FF;
+  background: #f5f3ff;
   padding: 24px;
   border-radius: 12px;
 }
@@ -247,12 +247,12 @@ img {
 }
 
 .benefit-item i {
-  color: #8B5CF6;
+  color: #8b5cf6;
   font-size: 18px;
 }
 
 .benefit-item strong {
-  color: #8B5CF6;
+  color: #8b5cf6;
   font-weight: 700;
   font-size: 18px;
 }
@@ -309,7 +309,7 @@ img {
 
 .fixed-btn i {
   font-size: 24px;
-  color: #8B5CF6;
+  color: #8b5cf6;
 }
 
 .fixed-btn span {
@@ -320,7 +320,7 @@ img {
 }
 
 .fixed-btn:hover {
-  background: #8B5CF6;
+  background: #8b5cf6;
   color: #ffffff;
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
@@ -331,7 +331,7 @@ img {
 }
 
 .btn-reservation {
-  background: #8B5CF6;
+  background: #8b5cf6;
   color: #ffffff;
 }
 
@@ -359,7 +359,7 @@ img {
 .info-heading {
   font-size: 32px;
   font-weight: 900;
-  color: #4C1D95;
+  color: #4c1d95;
   margin-bottom: 15px;
   line-height: 1.5;
 }
@@ -389,7 +389,7 @@ img {
 .info-description p:first-child {
   font-size: 28px;
   font-weight: 700;
-  color: #4C1D95;
+  color: #4c1d95;
   position: relative;
   padding-left: 35px;
   margin-bottom: 20px;
@@ -408,7 +408,7 @@ img {
 .info-description p:nth-child(2) {
   font-size: 26px;
   font-weight: 600;
-  color: #6D28D9;
+  color: #6d28d9;
   position: relative;
   padding-left: 35px;
   margin-bottom: 20px;
@@ -428,7 +428,7 @@ img {
   margin-bottom: 0;
   font-size: 22px;
   font-weight: 700;
-  color: #4C1D95;
+  color: #4c1d95;
   position: relative;
   display: inline-block;
   margin-top: 10px;
@@ -443,7 +443,7 @@ img {
   transform: translateX(-50%);
   width: 80%;
   height: 3px;
-  background: linear-gradient(90deg, #8B5CF6 0%, #6D28D9 100%);
+  background: linear-gradient(90deg, #8b5cf6 0%, #6d28d9 100%);
   border-radius: 2px;
 }
 
@@ -479,9 +479,9 @@ img {
 .info-notice-box {
   margin-top: 35px;
   padding: 25px 30px;
-  background: linear-gradient(135deg, #EDE9FE 0%, #F3E8FF 100%);
+  background: linear-gradient(135deg, #ede9fe 0%, #f3e8ff 100%);
   border-radius: 12px;
-  border-left: 4px solid #8B5CF6;
+  border-left: 4px solid #8b5cf6;
   display: flex;
   align-items: flex-start;
   gap: 15px;
@@ -489,7 +489,7 @@ img {
 
 .info-notice-box i {
   font-size: 22px;
-  color: #8B5CF6;
+  color: #8b5cf6;
   margin-top: 2px;
   flex-shrink: 0;
 }
@@ -497,7 +497,7 @@ img {
 .info-notice-box p {
   font-size: 15px;
   font-weight: 600;
-  color: #4C1D95;
+  color: #4c1d95;
   margin: 0;
   line-height: 1.8;
 }
@@ -513,7 +513,7 @@ img {
    30代から50代が歯医者に行かない理由セクション
 ======================================== */
 .reasons-section {
-  background: linear-gradient(180deg, #F5F3FF 0%, #ffffff 100%);
+  background: linear-gradient(180deg, #f5f3ff 0%, #ffffff 100%);
 }
 
 .reasons-list {
@@ -532,7 +532,7 @@ img {
   gap: 20px;
   box-shadow: 0 2px 12px rgba(139, 92, 246, 0.1);
   transition: all 0.3s ease;
-  border-left: 4px solid #8B5CF6;
+  border-left: 4px solid #8b5cf6;
 }
 
 .reason-item:hover {
@@ -543,7 +543,7 @@ img {
 .reason-icon {
   width: 50px;
   height: 50px;
-  background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -564,7 +564,7 @@ img {
 .reason-title {
   font-size: 18px;
   font-weight: 700;
-  color: #4C1D95;
+  color: #4c1d95;
   margin-bottom: 8px;
   line-height: 1.4;
 }
@@ -654,7 +654,7 @@ img {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #8B5CF6 0%, #6D28D9 100%);
+  background: linear-gradient(90deg, #8b5cf6 0%, #6d28d9 100%);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.4s ease;
@@ -737,7 +737,7 @@ img {
 .service-name {
   font-size: 24px;
   font-weight: 700;
-  color: #4C1D95;
+  color: #4c1d95;
   margin-bottom: 18px;
   line-height: 1.3;
   position: relative;
@@ -752,7 +752,7 @@ img {
   transform: translateY(-50%);
   width: 4px;
   height: 24px;
-  background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
+  background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
   border-radius: 2px;
 }
 
@@ -766,7 +766,7 @@ img {
 
 .btn-orange-small {
   display: inline-block;
-  background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
+  background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
   color: #fff;
   padding: 12px 28px;
   border-radius: 8px;
@@ -803,14 +803,14 @@ img {
    使い方セクション
 ======================================== */
 .howto-section {
-  background: linear-gradient(180deg, #F5F3FF 0%, #ffffff 100%);
+  background: linear-gradient(180deg, #f5f3ff 0%, #ffffff 100%);
   padding: 70px 20px;
 }
 
 .section-heading {
   font-size: 32px;
   font-weight: 900;
-  color: #4C1D95;
+  color: #4c1d95;
   text-align: center;
   margin-bottom: 20px;
 }
@@ -858,7 +858,7 @@ img {
 .step-number span {
   font-size: 12px;
   font-weight: 700;
-  color: #8B5CF6;
+  color: #8b5cf6;
   letter-spacing: 1px;
   margin-bottom: 8px;
 }
@@ -866,7 +866,7 @@ img {
 .number-circle {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -883,13 +883,13 @@ img {
 
 .step-icon i {
   font-size: 48px;
-  color: #8B5CF6;
+  color: #8b5cf6;
 }
 
 .step-title {
   font-size: 20px;
   font-weight: 700;
-  color: #4C1D95;
+  color: #4c1d95;
   margin-bottom: 15px;
 }
 
@@ -973,7 +973,7 @@ img {
 .plan-heading {
   font-size: 36px;
   font-weight: 900;
-  color: #4C1D95;
+  color: #4c1d95;
   margin-bottom: 30px;
   line-height: 1.4;
 }
@@ -985,13 +985,13 @@ img {
 .price-large {
   font-size: 72px;
   font-weight: 900;
-  color: #4C1D95;
+  color: #4c1d95;
 }
 
 .price-yen {
   font-size: 32px;
   font-weight: 700;
-  color: #4C1D95;
+  color: #4c1d95;
   margin-left: 5px;
 }
 
@@ -1009,7 +1009,7 @@ img {
 
 .plan-cta-btn {
   display: inline-block;
-  background: linear-gradient(90deg, #8B5CF6 0%, #7C3AED 100%);
+  background: linear-gradient(90deg, #8b5cf6 0%, #7c3aed 100%);
   color: white;
   padding: 18px 50px;
   border-radius: 50px;
@@ -1153,7 +1153,7 @@ img {
    比較セクション
 ======================================== */
 .comparison-section {
-  background: linear-gradient(180deg, #F5F3FF 0%, #ffffff 100%);
+  background: linear-gradient(180deg, #f5f3ff 0%, #ffffff 100%);
   padding: 70px 20px;
 }
 
@@ -1180,14 +1180,14 @@ img {
 }
 
 .smanavi-box {
-  background: linear-gradient(135deg, #EDE9FE 0%, #F3E8FF 100%);
-  border: 2px solid #8B5CF6;
+  background: linear-gradient(135deg, #ede9fe 0%, #f3e8ff 100%);
+  border: 2px solid #8b5cf6;
 }
 
 .comparison-title {
   font-size: 24px;
   font-weight: 700;
-  color: #4C1D95;
+  color: #4c1d95;
   margin-bottom: 25px;
 }
 
@@ -1200,7 +1200,7 @@ img {
 }
 
 .smanavi-box .comparison-icon-area i {
-  color: #8B5CF6;
+  color: #8b5cf6;
 }
 
 .comparison-list {
@@ -1228,7 +1228,7 @@ img {
 }
 
 .smanavi-box .comparison-list li i {
-  color: #8B5CF6;
+  color: #8b5cf6;
 }
 
 /* ========================================
@@ -1256,7 +1256,7 @@ img {
 .data-icon-circle {
   width: 100px;
   height: 100px;
-  background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1273,14 +1273,14 @@ img {
 .data-title {
   font-size: 18px;
   font-weight: 700;
-  color: #4C1D95;
+  color: #4c1d95;
   margin-bottom: 15px;
 }
 
 .data-number {
   font-size: 48px;
   font-weight: 900;
-  color: #8B5CF6;
+  color: #8b5cf6;
   margin-bottom: 10px;
 }
 
@@ -1299,7 +1299,7 @@ img {
    ドクターセクション
 ======================================== */
 .doctors-section {
-  background: linear-gradient(180deg, #F5F3FF 0%, #ffffff 100%);
+  background: linear-gradient(180deg, #f5f3ff 0%, #ffffff 100%);
   padding: 70px 20px;
 }
 
@@ -1332,7 +1332,7 @@ img {
   width: 100%;
   height: 400px;
   overflow: hidden;
-  background: linear-gradient(180deg, #EDE9FE 0%, #ffffff 100%);
+  background: linear-gradient(180deg, #ede9fe 0%, #ffffff 100%);
 }
 
 .doctor-photo img {
@@ -1414,7 +1414,7 @@ img {
    CTA最終セクション
 ======================================== */
 .final-cta-section {
-  background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 50%, #6D28D9 100%);
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6d28d9 100%);
   padding: 100px 20px;
   text-align: center;
   color: #ffffff;
@@ -1429,9 +1429,16 @@ img {
   left: 0;
   right: 0;
   bottom: 0;
-  background: 
-    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+  background: radial-gradient(
+      circle at 20% 30%,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(255, 255, 255, 0.08) 0%,
+      transparent 50%
+    );
   pointer-events: none;
   z-index: 1;
 }
@@ -1476,7 +1483,7 @@ img {
   line-height: 1.4;
   position: relative;
   display: inline-block;
-  background: linear-gradient(135deg, #ffffff 0%, #F3E8FF 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #f3e8ff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1485,7 +1492,8 @@ img {
 }
 
 @keyframes ctaTitleGlow {
-  0%, 100% {
+  0%,
+  100% {
     filter: brightness(1);
   }
   50% {
@@ -1516,7 +1524,8 @@ img {
 }
 
 @keyframes ctaStarFloat {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(-50%) scale(1);
     opacity: 0.8;
   }
@@ -1545,8 +1554,8 @@ img {
 
 .final-cta-button {
   display: inline-block;
-  background: linear-gradient(135deg, #ffffff 0%, #F9FAFB 100%);
-  color: #8B5CF6;
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  color: #8b5cf6;
   padding: 22px 70px;
   border-radius: 50px;
   font-size: 21px;
@@ -1554,9 +1563,7 @@ img {
   border: none;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 
-    0 8px 30px rgba(0, 0, 0, 0.25),
-    0 0 0 0 rgba(255, 255, 255, 0.4),
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25), 0 0 0 0 rgba(255, 255, 255, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.9);
   position: relative;
   overflow: hidden;
@@ -1584,11 +1591,9 @@ img {
 
 .final-cta-button:hover {
   transform: translateY(-5px) scale(1.05);
-  box-shadow: 
-    0 12px 40px rgba(0, 0, 0, 0.3),
-    0 0 0 4px rgba(255, 255, 255, 0.2),
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), 0 0 0 4px rgba(255, 255, 255, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  background: linear-gradient(135deg, #ffffff 0%, #F3E8FF 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #f3e8ff 100%);
 }
 
 .final-cta-button:active {
@@ -1654,7 +1659,7 @@ img {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: #8B5CF6;
+  color: #8b5cf6;
   font-size: 16px;
   font-weight: 600;
   text-decoration: none;
@@ -1662,7 +1667,7 @@ img {
 }
 
 .view-all-link:hover {
-  color: #7C3AED;
+  color: #7c3aed;
   gap: 12px;
 }
 
@@ -1682,7 +1687,7 @@ img {
    フッター
 ======================================== */
 .footer {
-  background: #4C1D95;
+  background: #4c1d95;
   color: #ffffff;
   padding: 50px 20px 30px;
 }
@@ -1735,7 +1740,7 @@ img {
 }
 
 .footer-links a:hover {
-  color: #8B5CF6;
+  color: #8b5cf6;
 }
 
 .footer-bottom {
@@ -1784,7 +1789,8 @@ img {
   }
 
   .hero-smile-icon {
-    font-size: 26px;
+    width: 60px;
+    height: 60px;
   }
 
   .hero-star-icon {
@@ -1911,7 +1917,7 @@ img {
   .info-description p:last-child {
     font-size: 21px;
     font-weight: 700;
-    color: #4C1D95;
+    color: #4c1d95;
     position: relative;
     display: inline-block;
     margin-top: 8px;
@@ -1926,7 +1932,7 @@ img {
     transform: translateX(-50%);
     width: 75%;
     height: 2px;
-    background: linear-gradient(90deg, #8B5CF6 0%, #6D28D9 100%);
+    background: linear-gradient(90deg, #8b5cf6 0%, #6d28d9 100%);
     border-radius: 2px;
   }
 
