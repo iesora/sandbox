@@ -1205,7 +1205,7 @@ img {
 ======================================== */
 .comparison-section {
   background: linear-gradient(180deg, #f5f3ff 0%, #ffffff 100%);
-  padding: 70px 20px;
+  padding: 30px 20px;
 }
 
 .comparison-boxes {
@@ -1287,7 +1287,7 @@ img {
 ======================================== */
 .data-section {
   background: #ffffff;
-  padding: 70px 20px;
+  padding: 20px 10px;
 }
 
 .data-boxes {
@@ -2120,8 +2120,8 @@ img {
   .step-item {
     flex-direction: row;
     align-items: stretch;
-    min-width: 320px;
-    max-width: 320px;
+    min-width: 360px;
+    max-width: 360px;
     flex-shrink: 0;
     gap: 12px;
   }
@@ -2240,11 +2240,87 @@ img {
   }
 
   .comparison-boxes {
-    gap: 30px;
+    gap: 12px;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: stretch;
+  }
+
+  .comparison-box {
+    flex: 1;
+    min-width: 0;
+    max-width: none;
+    padding: 25px 15px;
+  }
+
+  .comparison-title {
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+
+  .comparison-icon-area {
+    margin-bottom: 20px;
+  }
+
+  .comparison-icon-area i {
+    font-size: 2.5rem !important;
+  }
+
+  .comparison-list li {
+    font-size: 12px;
+    margin-bottom: 10px;
+    gap: 8px;
+  }
+
+  .comparison-list li i {
+    font-size: 14px;
   }
 
   .data-boxes {
-    gap: 30px;
+    gap: 4px;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 0;
+  }
+
+  .data-box {
+    flex: 1;
+    min-width: 0;
+    max-width: none;
+    padding: 0;
+  }
+
+  .data-icon-circle {
+    width: 65px;
+    height: 65px;
+    margin-bottom: 8px;
+  }
+
+  .data-icon-circle i {
+    font-size: 28px;
+  }
+
+  .data-title {
+    font-size: 13px;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .data-number {
+    font-size: 32px;
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+
+  .data-unit {
+    font-size: 16px;
+  }
+
+  .data-desc {
+    font-size: 11px;
+    line-height: 1.4;
+    color: #777;
   }
 
   .final-cta-section {
