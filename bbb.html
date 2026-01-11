@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>求人詳細 - フロントエンドエンジニア募集</title>
+    <style>
+      /* ===== テーマ側H1を非表示 ===== */
+      .single-job1 h1 {
+        display: none !important;
+      }
+
+      /* ===== ベース ===== */
+      #lr-job {
+        max-width: 920px;
+        margin: 0px auto 0;
+        padding: 0 20px;
+        font-family: "Helvetica Neue", "Hiragino Kaku Gothic ProN", Meiryo,
+          sans-serif;
+        color: #2c2c2c;
+        line-height: 1.9;
+      }
+
+      /* ===== パンくず ===== */
+      #lr-job .breadcrumb {
+        font-size: 13px;
+        color: #777;
+        margin: 0 0 18px;
+      }
+      #lr-job .breadcrumb a {
+        color: #777;
+        text-decoration: none;
+      }
+      #lr-job .breadcrumb a:hover {
+        text-decoration: underline;
+      }
+
+      /* ===== ヘッダー（ブログ風） ===== */
+      .job-header {
+        padding: 28px 0 14px;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 26px;
+      }
+      .job-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-size: 12px;
+        background: #2c2c2c;
+        color: #fff;
+      }
+      .badge.light {
+        background: #f3f3f3;
+        color: #333;
+      }
+      .job-title {
+        display: block !important;
+        font-size: 34px;
+        font-weight: 800;
+        line-height: 1.35;
+        margin: 10px 0 10px;
+      }
+      .job-submeta {
+        font-size: 13px;
+        color: #777;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      /* ===== 労働条件（カードUI） ===== */
+      .job-conditions {
+        background: #fff;
+        border: 1px solid #eee;
+        border-radius: 18px;
+        padding: 22px 20px;
+        box-shadow: 0 10px 26px rgba(0, 0, 0, 0.05);
+        margin: 26px 0 36px;
+      }
+      .job-conditions-title {
+        font-size: 18px;
+        margin: 0 0 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .job-conditions-title::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: #2c2c2c;
+        display: inline-block;
+      }
+      .job-conditions-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .cond-item {
+        border: 1px solid #eee;
+        background: #fafafa;
+        border-radius: 14px;
+        padding: 14px;
+      }
+      .cond-label {
+        font-size: 12px;
+        color: #000;
+        font-weight: 700;
+        margin-bottom: 6px;
+        letter-spacing: 0.02em;
+        background: #ffff00;
+      }
+      .cond-value {
+        font-size: 15px;
+        font-weight: 800;
+        color: #2c2c2c;
+        line-height: 1.6;
+        white-space: pre-wrap;
+      }
+
+      /* ===== 記事本文（ブログっぽく） ===== */
+      .entry-body {
+        font-size: 16px;
+      }
+      .entry-body > *:first-child {
+        margin-top: 0;
+      }
+      .entry-body p {
+        margin: 0 0 16px;
+      }
+      .entry-body h2 {
+        font-size: 22px;
+        margin: 48px 0 14px;
+        padding-left: 12px;
+        border-left: 4px solid #2c2c2c;
+      }
+      .entry-body h3 {
+        font-size: 18px;
+        margin: 30px 0 10px;
+      }
+      .entry-body ul,
+      .entry-body ol {
+        padding-left: 1.2em;
+        margin: 0 0 18px;
+      }
+      .entry-body blockquote {
+        margin: 22px 0;
+        padding: 16px 18px;
+        background: #fafafa;
+        border-left: 4px solid #ddd;
+        border-radius: 12px;
+      }
+      .entry-body hr {
+        border: 0;
+        border-top: 1px solid #eee;
+        margin: 34px 0;
+      }
+
+      /* =====================================================
+ * 応募セクション
+ * ===================================================== */
+      .job-apply-section {
+        max-width: 920px;
+        margin: 90px auto 110px;
+        padding: 0 20px;
+      }
+      .job-apply-intro {
+        text-align: center;
+        margin-bottom: 32px;
+      }
+      .job-apply-intro h2 {
+        font-size: 28px;
+        font-weight: 800;
+        margin-bottom: 10px;
+      }
+      .job-apply-intro p {
+        font-size: 15px;
+        color: #666;
+      }
+      .job-apply-card {
+        background: #fff;
+        border-radius: 20px;
+        padding: 46px 40px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+        border: 1px solid #eee;
+      }
+
+      /* ===== フォーム ===== */
+      .form-label {
+        font-weight: 700;
+        margin-bottom: -24px;
+        display: block;
+      }
+      .required {
+        background: #2c2c2c;
+        color: #fff;
+        font-size: 10px;
+        padding: 3px 8px;
+        border-radius: 4px;
+        margin-left: 6px;
+      }
+      .form-input,
+      .form-select,
+      .form-textarea {
+        width: 100%;
+        padding: 14px 16px;
+        border: 2px solid #eee;
+        border-radius: 10px;
+        font-size: 15px;
+        box-sizing: border-box;
+      }
+      .form-textarea {
+        resize: vertical;
+      }
+
+      /* ===== プライバシー同意（checkbox想定） ===== */
+      .form-checkbox-label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 8px 0 10px;
+      }
+      .form-checkbox-label input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+      }
+      .form-checkbox-label a {
+        color: #1a73e8;
+        text-decoration: underline;
+        font-weight: 500;
+      }
+      /* CF7の既存必須バッジが邪魔なら隠す（運用により不要なら消してOK） */
+      .form-checkbox-label .required {
+        position: absolute;
+        opacity: 0;
+      }
+      .form-checkbox-label .wpcf7-not-valid-tip {
+        display: block;
+        margin-top: 6px;
+        margin-left: 28px;
+        color: #d63638;
+        font-size: 13px;
+      }
+
+      /* ===== 応募ボタン中央 ===== */
+      .job-apply-card .wpcf7-form p:last-of-type {
+        display: flex;
+        justify-content: center;
+      }
+      .job-apply-card .btn {
+        width: 100%;
+        max-width: 320px;
+        padding: 18px 0;
+        font-size: 16px;
+        font-weight: 800;
+        background: #fff;
+        color: #2c2c2c;
+        border: 2px solid #2c2c2c;
+        border-radius: 999px;
+        transition: 0.25s;
+        cursor: pointer;
+      }
+      .job-apply-card .btn:hover {
+        background: #2c2c2c;
+        color: #fff;
+      }
+
+      /* ===== 求人一覧に戻る ===== */
+      .job-back-nav {
+        display: flex;
+        justify-content: center;
+        margin-top: 54px;
+      }
+      .job-back-nav .btn-back {
+        width: 100%;
+        max-width: 320px;
+        padding: 18px 0;
+        font-size: 16px;
+        font-weight: 800;
+        background: #fff;
+        color: #2c2c2c;
+        border: 2px solid #2c2c2c;
+        border-radius: 999px;
+        text-decoration: none;
+        text-align: center;
+        transition: 0.25s;
+        display: block;
+      }
+      .job-back-nav .btn-back:hover {
+        background: #2c2c2c;
+        color: #fff;
+      }
+
+      /* SP */
+      @media (max-width: 768px) {
+        .job-title {
+          font-size: 26px;
+        }
+        .job-conditions-grid {
+          grid-template-columns: 1fr;
+        }
+        .job-apply-card {
+          padding: 32px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <article id="lr-job">
+      <nav class="breadcrumb">
+        <a href="/">TOP</a> › <a href="/job/">Job</a> ›
+        <span>フロントエンドエンジニア募集</span>
+      </nav>
+
+      <header class="job-header">
+        <div class="job-badges">
+          <span class="badge">エンジニア</span>
+          <span class="badge light">正社員</span>
+          <span class="badge light">東京都渋谷区</span>
+        </div>
+
+        <h1 class="job-title">フロントエンドエンジニア募集</h1>
+
+        <div class="job-submeta">
+          <span>公開日：2024.01.15</span>
+          <span>投稿者：人事部</span>
+          <span>求人ID：123</span>
+        </div>
+      </header>
+
+      <!-- 労働条件カード -->
+      <div class="job-conditions">
+        <h3 class="job-conditions-title">労働条件</h3>
+        <div class="job-conditions-grid">
+          <div class="cond-item">
+            <div class="cond-label">雇用形態</div>
+            <div class="cond-value">正社員</div>
+          </div>
+          <div class="cond-item">
+            <div class="cond-label">勤務地</div>
+            <div class="cond-value">東京都渋谷区</div>
+          </div>
+          <div class="cond-item">
+            <div class="cond-label">給与</div>
+            <div class="cond-value">月給30万円〜50万円</div>
+          </div>
+          <div class="cond-item">
+            <div class="cond-label">勤務時間</div>
+            <div class="cond-value">9:00〜18:00（フレックスタイム制）</div>
+          </div>
+          <div class="cond-item">
+            <div class="cond-label">休日</div>
+            <div class="cond-value">土日祝、年末年始、有給休暇</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 本文（各セクション） -->
+      <div class="entry-body">
+        <h2>仕事内容</h2>
+        <p>
+          当社のWebサービスにおけるフロントエンド開発を担当していただきます。ReactやVue.jsを使用したモダンな開発環境で、ユーザー体験を向上させる機能開発に携わっていただきます。
+        </p>
+        <p>主な業務内容：</p>
+        <ul>
+          <li>React/Vue.jsを使用したコンポーネント開発</li>
+          <li>レスポンシブデザインの実装</li>
+          <li>パフォーマンス最適化</li>
+          <li>デザイナーとの協業によるUI実装</li>
+        </ul>
+
+        <h2>応募資格</h2>
+        <p>以下の条件を満たす方を募集しています：</p>
+        <ul>
+          <li>JavaScript（ES6+）の実務経験2年以上</li>
+          <li>ReactまたはVue.jsの開発経験</li>
+          <li>Gitを使用したバージョン管理の経験</li>
+          <li>チーム開発の経験</li>
+        </ul>
+
+        <h2>福利厚生</h2>
+        <ul>
+          <li>各種社会保険完備（健康保険、厚生年金、雇用保険、労災保険）</li>
+          <li>交通費全額支給</li>
+          <li>各種手当（資格手当、役職手当など）</li>
+          <li>リフレッシュ休暇制度</li>
+          <li>勉強会・セミナー参加費補助</li>
+          <li>書籍購入補助</li>
+        </ul>
+
+        <h2>会社情報</h2>
+        <p>
+          私たちは、最新のテクノロジーを活用して、ユーザーに価値のあるサービスを提供することを目指しています。フラットな組織体制で、メンバー一人ひとりの意見が尊重される環境です。
+        </p>
+        <p>
+          技術的なチャレンジを歓迎し、新しい技術の導入や改善提案を積極的に行う文化があります。
+        </p>
+
+        <h2>選考フロー</h2>
+        <ol>
+          <li>書類選考（1週間程度）</li>
+          <li>一次面接（技術面接・1時間程度）</li>
+          <li>二次面接（最終面接・1時間程度）</li>
+          <li>内定・入社手続き</li>
+        </ol>
+      </div>
+    </article>
+
+    <section class="job-apply-section">
+      <div class="job-apply-intro">
+        <h2>この求人に応募する</h2>
+        <p>
+          以下のフォームに必要事項をご記入の上、送信してください。<br />担当者より3営業日以内にご連絡いたします。
+        </p>
+      </div>
+
+      <div class="job-apply-card">
+        <form class="wpcf7-form" method="post" action="#">
+          <p>
+            <label class="form-label">
+              お名前
+              <span class="required">必須</span>
+            </label>
+            <input type="text" name="your-name" class="form-input" required />
+          </p>
+
+          <p>
+            <label class="form-label">
+              メールアドレス
+              <span class="required">必須</span>
+            </label>
+            <input type="email" name="your-email" class="form-input" required />
+          </p>
+
+          <p>
+            <label class="form-label">
+              電話番号
+              <span class="required">必須</span>
+            </label>
+            <input type="tel" name="your-tel" class="form-input" required />
+          </p>
+
+          <p>
+            <label class="form-label"> ご質問・メッセージ </label>
+            <textarea
+              name="your-message"
+              class="form-textarea"
+              rows="6"
+            ></textarea>
+          </p>
+
+          <p>
+            <label class="form-checkbox-label">
+              <input type="checkbox" name="privacy" required />
+              <span
+                ><a href="/privacy/">プライバシーポリシー</a>に同意します</span
+              >
+            </label>
+          </p>
+
+          <p>
+            <button type="submit" class="btn">応募する</button>
+          </p>
+        </form>
+      </div>
+
+      <div class="job-back-nav">
+        <a class="btn-back" href="/job/">求人一覧に戻る</a>
+      </div>
+    </section>
+  </body>
+</html>
