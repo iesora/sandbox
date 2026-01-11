@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LR Footer</title>
+    <style>
+      .lr-footer {
+        background: #000;
+        color: #fff;
+        padding: 40px 24px;
+        box-sizing: border-box;
+      }
+
+      .lr-footer-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 60px;
+      }
+
+      .lr-footer-logo img {
+        width: 200px;
+        height: auto;
+        display: block;
+      }
+
+      .lr-footer-company {
+        flex: 1;
+        font-size: 14px;
+        line-height: 1.8;
+      }
+
+      .lr-footer-company-name {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 16px;
+      }
+
+      .lr-footer-nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .lr-footer-nav a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 14px;
+      }
+
+      .lr-footer-nav a:hover {
+        opacity: 0.7;
+      }
+
+      .lr-footer-buttons {
+        display: flex;
+        gap: 16px;
+        margin-top: 30px;
+        justify-content: center;
+      }
+
+      .lr-footer-button {
+        display: inline-block;
+        padding: 12px 24px;
+        background: #fff;
+        color: #000;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 4px;
+        transition: opacity 0.3s;
+      }
+
+      .lr-footer-button:hover {
+        opacity: 0.8;
+      }
+
+      .lr-footer-copy {
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 1px solid #333;
+        text-align: center;
+        font-size: 12px;
+      }
+
+      /* モバイル対応 */
+      @media (max-width: 768px) {
+        .lr-footer {
+          padding: 30px 16px;
+        }
+
+        .lr-footer-inner {
+          flex-wrap: wrap;
+          gap: 20px;
+        }
+
+        .lr-footer-logo {
+          flex-shrink: 0;
+        }
+
+        .lr-footer-logo img {
+          width: 120px;
+        }
+
+        .lr-footer-company {
+          flex: 1;
+          min-width: 0;
+          text-align: left;
+          font-size: 13px;
+        }
+
+        .lr-footer-company-name {
+          font-size: 16px;
+          margin-bottom: 12px;
+        }
+
+        .lr-footer-nav {
+          width: 100%;
+          order: 3;
+        }
+
+        .lr-footer-nav ul {
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 16px;
+        }
+
+        .lr-footer-nav a {
+          font-size: 13px;
+        }
+
+        .lr-footer-buttons {
+          flex-direction: column;
+          gap: 12px;
+          margin-top: 20px;
+        }
+
+        .lr-footer-button {
+          width: 100%;
+          text-align: center;
+          padding: 14px 24px;
+          font-size: 13px;
+        }
+
+        .lr-footer-copy {
+          margin-top: 30px;
+          padding-top: 20px;
+          font-size: 11px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <footer class="lr-footer">
+      <div class="lr-footer-inner">
+        <!-- ロゴ -->
+        <div class="lr-footer-logo">
+          <img
+            src="http://lr.high-new.org/wp-content/uploads/2026/01/名称未設定のデザイン-3.png"
+            alt="LR consulting"
+          />
+        </div>
+
+        <!-- 会社情報 -->
+        <div class="lr-footer-company">
+          <div class="lr-footer-company-name">株式会社LRコンサルティング</div>
+          <div>
+            〒700-0823<br />
+            岡山県岡山市北区丸の内2丁目8番1号<br />
+            岡山丸の内ビル 3F<br />
+            TEL: 000-0000-0000<br />
+            Email: info@info@＊＊＊co.jp
+          </div>
+        </div>
+
+        <!-- ナビ -->
+        <nav class="lr-footer-nav">
+          <ul>
+            <li><a href="http://lr.high-new.org/">ホーム</a></li>
+            <li><a href="http://lr.high-new.org/blog/">ブログ</a></li>
+            <li><a href="http://lr.high-new.org/job/">求人</a></li>
+            <li><a href="http://lr.high-new.org/contact/">お問い合わせ</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- ボタンエリア -->
+      <div class="lr-footer-buttons">
+        <a
+          href="https://smilenavigation.net/"
+          class="lr-footer-button"
+          target="_blank"
+          rel="noopener noreferrer"
+          >無料で医院を探す</a
+        >
+        <a
+          href="https://smilenavigation.net/"
+          class="lr-footer-button"
+          target="_blank"
+          rel="noopener noreferrer"
+          >24時間Web予約</a
+        >
+      </div>
+
+      <div class="lr-footer-copy">copyright 株式会社LRコンサルティング</div>
+    </footer>
+  </body>
+</html>
