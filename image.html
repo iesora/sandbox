@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>基本セット内容一覧</title>
+  </head>
+  <body>
+    <!-- 
+【修正版】WordPress用セット内容一覧ウィジェットHTMLコード
+・スクロールに合わせて浮き上がるアニメーションを追加しました。
+・背景色、フォント、フラットなデザイン設定はそのまま維持しています。
+-->
+
+    <style>
+      /* --- ベースフォント設定 --- */
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap");
+
+      /* ウィジェットのコンテナ */
+      #equipment-sets-widget-container {
+        font-family: "Noto Sans JP", "Hiragino Kaku Gothic Pro", sans-serif;
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        box-sizing: border-box;
+        background: #ffffff;
+        padding: 60px 30px;
+        overflow: hidden;
+      }
+
+      /* コンテンツ幅制限コンテナ */
+      .equipment-widget-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      /* セクションヘッダー */
+      .section-header {
+        text-align: center;
+        margin-bottom: 50px;
+      }
+
+      .section-subtitle {
+        font-size: 14px;
+        font-weight: 600;
+        color: #ff6b35;
+        letter-spacing: 3px;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+      }
+
+      .section-title {
+        font-size: 40px;
+        font-weight: 900;
+        color: #1a1a1a;
+        margin-bottom: 15px;
+        line-height: 1.3;
+      }
+
+      .section-description {
+        font-size: 16px;
+        color: #666;
+        line-height: 1.7;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      /* グリッドレイアウト */
+      .equipment-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 25px;
+        margin-bottom: 30px;
+      }
+
+      /* 装備カード（共通） */
+      .equipment-card {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      /* セットラベル（ヘッダー） */
+      .set-label {
+        padding: 20px;
+        color: white;
+        font-size: 18px;
+        font-weight: 700;
+        text-align: center;
+      }
+
+      .set-label .item-sub {
+        font-size: 12px;
+        font-weight: 400;
+        display: block;
+        margin-top: 5px;
+      }
+
+      /* アイテムリストエリア */
+      .equipment-items {
+        padding: 20px;
+      }
+
+      /* 2列レイアウト用の行 */
+      .equipment-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .equipment-row:last-child {
+        margin-bottom: 0;
+      }
+
+      /* 個別アイテム */
+      .equipment-item {
+        text-align: center;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        height: 100%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .equipment-item:hover {
+        background: #e8f4f8;
+        transform: scale(1.05);
+      }
+
+      .item-icon {
+        font-size: 30px;
+        margin-bottom: 8px;
+        line-height: 1;
+      }
+
+      .item-name {
+        font-size: 14px;
+        font-weight: 600;
+        color: #333;
+        line-height: 1.4;
+      }
+
+      .item-name .item-sub {
+        font-size: 12px;
+        font-weight: 400;
+        color: #666;
+        display: block;
+        margin-top: 2px;
+      }
+
+      /* 注釈エリア */
+      .equipment-note {
+        background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+      }
+
+      .equipment-note p {
+        color: #555;
+        line-height: 2;
+        margin: 0;
+        font-size: 14px;
+      }
+
+      /* --- ▼ スクロールアニメーション設定（ソースコード準拠） ▼ --- */
+      .hayate-reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+      }
+
+      .hayate-reveal.is-visible {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        visibility: visible !important;
+      }
+
+      /* グリッドカードの順次表示用の遅延 */
+      .equipment-card:nth-child(1) {
+        transition-delay: 0.1s;
+      }
+      .equipment-card:nth-child(2) {
+        transition-delay: 0.2s;
+      }
+      .equipment-card:nth-child(3) {
+        transition-delay: 0.3s;
+      }
+
+      /* --- レスポンシブ --- */
+      @media (max-width: 768px) {
+        #equipment-sets-widget-container {
+          padding: 40px 20px;
+        }
+        .section-title {
+          font-size: 32px;
+        }
+        .equipment-grid {
+          grid-template-columns: 1fr;
+        }
+        .equipment-row {
+          gap: 15px;
+        }
+      }
+      /* ▼ 355px以下：Bセットのタイトル文字サイズ調整 */
+      @media (max-width: 355px) {
+        .equipment-grid .equipment-card:nth-child(2) .set-label {
+          font-size: 17px;
+        }
+      }
+    </style>
+
+    <div id="equipment-sets-widget-container">
+      <div class="equipment-widget-inner">
+        <!-- ヘッダー（アニメーションクラスを追加） -->
+        <div class="section-header hayate-reveal">
+          <div class="section-subtitle">EQUIPMENT</div>
+          <h2 class="section-title">基本セット内容</h2>
+          <p class="section-description">
+            颯風ウィンチには、現場ですぐに使える充実のセット内容をご用意。<br />
+            用途に応じて最適なセットをお選びいただけます。
+          </p>
+        </div>
+
+        <div class="equipment-grid">
+          <!-- Set A（アニメーションクラスを追加） -->
+          <div
+            class="equipment-card hayate-reveal"
+            style="border: 3px solid #e74c3c"
+          >
+            <div class="set-label" style="background: #e74c3c">
+              A 颯風ウィンチ基本セット内容
+            </div>
+            <div class="equipment-items">
+              <div class="equipment-row">
+                <div class="equipment-item">
+                  <div class="item-icon">🔧</div>
+                  <div class="item-name">
+                    UP789RC-100L<br /><span class="item-sub">ウィンチ本体</span>
+                  </div>
+                </div>
+                <div class="equipment-item">
+                  <div class="item-icon">🔩</div>
+                  <div class="item-name">
+                    ウィンチベース<br /><span class="item-sub"
+                      >(足クランプ付)</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="equipment-row">
+                <div class="equipment-item">
+                  <div class="item-icon">⚡</div>
+                  <div class="item-name">
+                    電源ボックス<br /><span class="item-sub"
+                      >(電源コード1~3m 絶縁コード3m)</span
+                    >
+                  </div>
+                </div>
+                <div class="equipment-item">
+                  <div class="item-icon">📱</div>
+                  <div class="item-name">
+                    無線リモコンスイッチ<br /><span class="item-sub">×2</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Set B（アニメーションクラスを追加） -->
+          <div
+            class="equipment-card hayate-reveal"
+            style="border: 3px solid #3498db"
+          >
+            <div class="set-label" style="background: #3498db">
+              B 旧颯風ウィンチ基本セット内容
+            </div>
+            <div class="equipment-items">
+              <div class="equipment-row">
+                <div class="equipment-item">
+                  <div class="item-icon">🔧</div>
+                  <div class="item-name">
+                    UP787A<br /><span class="item-sub">ウィンチ本体</span>
+                  </div>
+                </div>
+                <div class="equipment-item">
+                  <div class="item-icon">🔩</div>
+                  <div class="item-name">
+                    ウィンチベース<br /><span class="item-sub"
+                      >(足クランプ付)</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="equipment-row">
+                <div class="equipment-item">
+                  <div class="item-icon">⚡</div>
+                  <div class="item-name">
+                    電源ボックス<br /><span class="item-sub"
+                      >(電源コード1~3m 絶縁コード3m)</span
+                    >
+                  </div>
+                </div>
+                <div class="equipment-item">
+                  <div class="item-icon">📱</div>
+                  <div class="item-name">
+                    無線リモコンスイッチ<br /><span class="item-sub">×2</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Set C（アニメーションクラスを追加） -->
+          <div
+            class="equipment-card hayate-reveal"
+            style="border: 3px solid #2ecc71"
+          >
+            <div class="set-label" style="background: #2ecc71">
+              シルバーユニアームセット内容<br />
+              <span class="item-sub">(旧足巻セット内容)</span>
+            </div>
+            <div class="equipment-items">
+              <div class="equipment-row">
+                <div class="equipment-item">
+                  <div class="item-icon">🔗</div>
+                  <div class="item-name">補助ロープ</div>
+                </div>
+                <div class="equipment-item">
+                  <div class="item-icon">📏</div>
+                  <div class="item-name">介錯アーム</div>
+                </div>
+              </div>
+              <div class="equipment-row">
+                <div class="equipment-item">
+                  <div class="item-icon">🧵</div>
+                  <div class="item-name">介錯ロープ</div>
+                </div>
+                <div class="equipment-item">
+                  <div class="item-icon">⚙️</div>
+                  <div class="item-name">シルバーユニアーム本体</div>
+                </div>
+              </div>
+              <div class="equipment-row">
+                <div class="equipment-item">
+                  <div class="item-icon">🔧</div>
+                  <div class="item-name">シャックルSB-12</div>
+                </div>
+                <div class="equipment-item">
+                  <div class="item-icon">🔴</div>
+                  <div class="item-name">
+                    オタフク滑車<br /><span class="item-sub"
+                      >(シャックル式)</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="equipment-row">
+                <div
+                  class="equipment-item"
+                  style="grid-column: 1 / -1; width: 50%; margin: 0 auto"
+                >
+                  <div class="item-icon">⭕</div>
+                  <div class="item-name">打抜きリング</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 注釈 -->
+        <div class="equipment-note">
+          <p>
+            ✓
+            全てのセットには、安全にご使用いただくための必要な機器が含まれています。<br />
+            ✓ セット内容は予告なく変更される場合がございます。<br />
+            ✓ 詳しい仕様や使用方法については、お気軽にお問い合わせください。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* 消える問題を解決したスクロール監視スクリプト（セット内容一覧用） */
+      (function () {
+        const startEquipObserver = () => {
+          const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px",
+          };
+
+          const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const el = entry.target;
+                el.classList.add("is-visible");
+                // 直接スタイルを固定して消えないようにする
+                el.style.opacity = "1";
+                el.style.transform = "translateY(0)";
+                el.style.visibility = "visible";
+                // 監視を解除
+                observer.unobserve(el);
+              }
+            });
+          }, observerOptions);
+
+          // このコンテナ内のアニメーション対象をすべて監視
+          document
+            .querySelectorAll("#equipment-sets-widget-container .hayate-reveal")
+            .forEach((el) => {
+              observer.observe(el);
+            });
+        };
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", startEquipObserver);
+        } else {
+          startEquipObserver();
+        }
+      })();
+    </script>
+  </body>
+</html>

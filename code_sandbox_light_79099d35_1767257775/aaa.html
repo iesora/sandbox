@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>サービス一覧 - LR コンサルティング</title>
+  </head>
+  <body>
+    <section
+      id="services-list"
+      style="padding: 15px 40px; background: #ffffff; position: relative"
+    >
+      <div class="service-section-title">Service</div>
+
+      <div class="service-content-wrapper">
+        <h2 class="section-title">サービス</h2>
+        <p class="section-subtitle" style="margin-bottom: 40px">
+          LR コンサルティングは、採用に関する幅広いサービスを提供しています。
+        </p>
+
+        <ul class="service-list">
+          <li>
+            <a
+              href="#"
+              class="service-card"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800');
+              "
+            >
+              <div class="service-card-inner">
+                <span class="service-label">Service</span>
+                <h3 class="service-title-jp">採用コンサルティング</h3>
+                <p class="service-title-en">Recruitment Consulting</p>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="#"
+              class="service-card"
+              style="
+                background-image: url('http://lr.high-new.org/wp-content/uploads/2026/01/unnamed_9.webp');
+              "
+            >
+              <div class="service-card-inner">
+                <span class="service-label">Service</span>
+                <h3 class="service-title-jp">採用アウトソーシング</h3>
+                <p class="service-title-en">Recruitment Outsourcing</p>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="#"
+              class="service-card"
+              style="
+                background-image: url('http://lr.high-new.org/wp-content/uploads/2026/01/Gemini_Generated_Image_xx7wxaxx7wxaxx7w.webp');
+              "
+            >
+              <div class="service-card-inner">
+                <span class="service-label">Service</span>
+                <h3 class="service-title-jp">採用ホームページ制作</h3>
+                <p class="service-title-en">Recruitment Website Design</p>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="#"
+              class="service-card"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1611926653458-09294b3142bf?w=800');
+              "
+            >
+              <div class="service-card-inner">
+                <span class="service-label">Service</span>
+                <h3 class="service-title-jp">SNS運用代行</h3>
+                <p class="service-title-en">Social Media Management</p>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="#"
+              class="service-card"
+              style="
+                background-image: url('http://lr.high-new.org/wp-content/uploads/2026/01/wp.webp');
+              "
+            >
+              <div class="service-card-inner">
+                <span class="service-label">Service</span>
+                <h3 class="service-title-jp">人材紹介</h3>
+                <p class="service-title-en">Human Resources Placement</p>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="#"
+              class="service-card"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=800');
+              "
+            >
+              <div class="service-card-inner">
+                <span class="service-label">Service</span>
+                <h3 class="service-title-jp">各種営業</h3>
+                <p class="service-title-en">Various Sales Operations</p>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <style>
+      /* =========================
+     共通スタイル（最重要）
+    ========================= */
+
+      #services-list {
+        box-sizing: border-box;
+      }
+
+      .service-section-title {
+        position: absolute;
+        top: 80px;
+        left: 20px;
+        font-size: 32px;
+        font-weight: bold;
+        color: #2c2c2c;
+        writing-mode: vertical-rl;
+        letter-spacing: 4px;
+      }
+
+      .service-content-wrapper {
+        max-width: 1400px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .service-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 auto;
+        max-width: 1400px;
+      }
+
+      /* ★ ここが今回の原因解消ポイント */
+      .service-card {
+        display: block;
+        position: relative;
+        min-height: 220px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 12px;
+        overflow: hidden;
+        text-decoration: none;
+      }
+
+      .service-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+      }
+
+      .service-card-inner {
+        position: relative;
+        z-index: 2;
+        height: 100%;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      .service-label {
+        color: #fff;
+        font-size: 12px;
+        padding: 6px 16px;
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        margin-bottom: 12px;
+        display: inline-block;
+      }
+
+      .service-title-jp {
+        font-size: 22px;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 6px;
+      }
+
+      .service-title-en {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      /* =========================
+     PC（768px以上）
+    ========================= */
+      @media (min-width: 768px) {
+        .service-list {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          gap: 30px;
+        }
+
+        .service-card {
+          min-height: 300px;
+        }
+
+        .service-card-inner {
+          padding: 40px 30px;
+        }
+
+        .service-title-jp {
+          font-size: 26px;
+        }
+
+        .service-title-en {
+          font-size: 15px;
+        }
+      }
+
+      /* =========================
+     タブレット以下（縦書き解除）
+    ========================= */
+      @media (max-width: 1055px) {
+        .service-section-title {
+          position: static;
+          writing-mode: horizontal-tb;
+          font-size: 24px;
+          margin-bottom: 0px;
+          text-align: center;
+          letter-spacing: 2px;
+        }
+      }
+
+      /* =========================
+     スマホ（768px以下）
+    ========================= */
+      @media (max-width: 768px) {
+        #services-list {
+          padding: 60px 20px;
+        }
+
+        .service-list {
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+        }
+
+        .service-card {
+          clip-path: polygon(
+            0 0,
+            100% 0,
+            100% calc(100% - 64px),
+            calc(100% - 64px) 100%,
+            0 100%
+          );
+        }
+      }
+    </style>
+  </body>
+</html>
