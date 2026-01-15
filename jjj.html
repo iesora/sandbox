@@ -1,0 +1,2062 @@
+<!-- Google Fonts の読み込み -->
+<link
+  href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap"
+  rel="stylesheet"
+/>
+
+<div
+  id="custom-estimate-wrapper"
+  style="
+    font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic Pro', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 26px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    position: relative;
+    overflow-x: hidden;
+  "
+>
+  <style>
+    /* =========================
+       余白コントロール（ここだけ触ればOK）
+    ========================= */
+    #custom-estimate-wrapper {
+      /* ページヘッダー下（紫→白カード） */
+      --mb-header: 60px;
+
+      /* 白カード同士の間（料金表→計算 / 計算→次） */
+      --mb-section: 60px;
+
+      /* カード内：タイトル下 */
+      --mb-title: 40px;
+
+      /* 画像ブロック下（料金表画像の下） */
+      --mb-img: 40px;
+
+      /* フォーム項目ブロック下 */
+      --mb-form-group: 30px;
+
+      /* ラベル下 */
+      --mb-label: 12px;
+
+      /* 合計行下 */
+      --mb-total-row: 30px;
+
+      /* お客様情報タイトル下 */
+      --mb-contact-title: 20px;
+
+      /* 主要ブロックの上余白（結果など） */
+      --mt-result: 40px;
+
+      /* ★追加：お見積結果ボックスの内側余白（PC） */
+      --p-result: 40px;
+
+      /* ▼ フッター直前スペース（調整用） */
+      --footer-spacer: 80px; /* PC */
+      --footer-spacer-m: 16px; /* モバイル */
+
+      /* モバイル用上書き値 */
+      --mb-header-m: 40px;
+      --mb-img-m: 28px;
+      --mb-title-m: 28px;
+      --mb-section-m: 40px;
+      --mb-form-group-m: 20px;
+      --mt-result-m: 30px;
+
+      /* ★追加：お見積結果ボックスの内側余白（モバイル） */
+      --p-result-m: 17px;
+
+      /* =========================
+         ▼ 利用規約・約款ブロック：モバイル調整用パラメータ
+         触るのは変数だけでOK
+      ========================= */
+      /* 利用規約トグル（ボタン） */
+      --fs-terms-toggle: 16px;
+      --py-terms-toggle: 20px;
+      --px-terms-toggle: 25px;
+
+      /* 要約カード内 */
+      --p-terms-summary: 30px;
+      --fs-terms-h4: 18px;
+      --mb-terms-h4: 20px;
+
+      /* 箇条書き（本文） */
+      --fs-terms-li: 15px;
+      --lh-terms-li: 26px;
+      --py-terms-li: 12px;
+
+      /* 詳細リンクボタン */
+      --fs-terms-link: 15px;
+      --py-terms-link: 14px;
+      --px-terms-link: 30px;
+
+      /* 同意チェック行 */
+      --fs-agree-text: 15px;
+      --p-agree-box: 25px;
+      --agree-gap: 15px;
+
+      /* 送信ボタン */
+      --fs-submit-btn: 20px;
+      --py-submit-btn: 22px;
+    }
+
+    /* WordPressのコンテンツ幅を突き抜けて全幅にするための設定 */
+    #custom-estimate-wrapper {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      padding: 160px 0 100px; /* ヘッダー被り防止用の余白 */
+      box-sizing: border-box;
+    }
+
+    #custom-estimate-wrapper .estim-container {
+      max-width: 1205px;
+      margin: 0 auto;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+
+    /* Header style */
+    #custom-estimate-wrapper .estim-page-header {
+      text-align: center;
+      margin-bottom: var(--mb-header);
+      padding: 50px 20px;
+      background: linear-gradient(135deg, #0089ff 0%, #ffffff 100%);
+      border-radius: 24px;
+      color: #27264d;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+    }
+
+    #custom-estimate-wrapper .estim-page-header h1,
+    #custom-estimate-wrapper .estim-page-header p {
+      color: #000;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    #custom-estimate-wrapper .estim-price-table-section,
+    #custom-estimate-wrapper .estim-calculator-section {
+      background: white;
+      border-radius: 24px;
+      padding: 50px 40px;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.06);
+      margin-bottom: var(--mb-section);
+    }
+
+    #custom-estimate-wrapper .estim-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: var(--mb-title);
+      text-align: center;
+      border: none;
+    }
+
+    #custom-estimate-wrapper .estim-img-container {
+      text-align: center;
+      margin-bottom: var(--mb-img);
+    }
+
+    #custom-estimate-wrapper .estim-price-img {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      display: inline-block;
+    }
+
+    #custom-estimate-wrapper .estim-form-group {
+      margin-bottom: var(--mb-form-group);
+    }
+
+    #custom-estimate-wrapper .estim-label {
+      display: block;
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: var(--mb-label);
+    }
+
+    #custom-estimate-wrapper .estim-input,
+    #custom-estimate-wrapper .estim-select {
+      width: 100%;
+      padding: 18px 20px;
+      font-size: 16px;
+      border: 2px solid #eef2f7;
+      border-radius: 12px;
+      background-color: #fcfdfe;
+      transition: all 0.3s ease;
+      font-family: inherit;
+      color: #333;
+      box-sizing: border-box;
+    }
+
+    #custom-estimate-wrapper .estim-input:focus,
+    #custom-estimate-wrapper .estim-select:focus {
+      outline: none;
+      border-color: #667eea;
+      background-color: #fff;
+      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    }
+
+    #custom-estimate-wrapper .estim-radio-group {
+      display: flex;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    #custom-estimate-wrapper .estim-radio-option {
+      flex: 1;
+    }
+
+    #custom-estimate-wrapper .estim-radio-option input[type="radio"] {
+      display: none;
+    }
+
+    #custom-estimate-wrapper .estim-radio-option label {
+      display: block;
+      padding: 25px 20px;
+      border: 2px solid #eef2f7;
+      border-radius: 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      color: #333;
+      background-color: #fcfdfe;
+    }
+
+    #custom-estimate-wrapper
+      .estim-radio-option
+      input[type="radio"]:checked
+      + label {
+      border-color: #667eea;
+      background: linear-gradient(135deg, #adceff 0%, #bbc9db 100%);
+      color: #000;
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.25);
+    }
+
+    #custom-estimate-wrapper .estim-period-display {
+      background: linear-gradient(135deg, #adceff 0%, #bbc9db 100%);
+      color: #000;
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    #custom-estimate-wrapper .estim-result-section {
+      margin-top: var(--mt-result);
+      padding: var(--p-result); /* ★ここを変数化 */
+      background: linear-gradient(135deg, #0089ff 0%, #ffffff 100%);
+      border-radius: 20px;
+      color: #000;
+      display: none;
+      animation: estimSlideDown 0.5s ease;
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+    }
+
+    #custom-estimate-wrapper .estim-result-section h3,
+    #custom-estimate-wrapper .estim-result-section .estim-result-item,
+    #custom-estimate-wrapper .estim-result-section .estim-contact-title,
+    #custom-estimate-wrapper .estim-result-section .estim-contact-form label,
+    #custom-estimate-wrapper .estim-result-section .estim-accordion-toggle,
+    #custom-estimate-wrapper .estim-result-section .estim-terms-summary h4,
+    #custom-estimate-wrapper .estim-result-section .estim-terms-summary li,
+    #custom-estimate-wrapper
+      .estim-result-section
+      .estim-agreement-checkbox
+      span {
+      color: #000;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    @keyframes estimSlideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    #custom-estimate-wrapper .estim-result-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      align-items: center;
+    }
+
+    #custom-estimate-wrapper .estim-total-row {
+      border-bottom: none;
+      font-size: 28px;
+      font-weight: 900;
+      padding-top: 25px;
+      margin-bottom: var(--mb-total-row);
+    }
+
+    /* お客様情報入力欄のスタイル */
+    #custom-estimate-wrapper .estim-contact-form {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      margin-top: 20px;
+    }
+
+    #custom-estimate-wrapper .estim-contact-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: var(--mb-contact-title);
+      color: #000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #custom-estimate-wrapper .estim-contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    #custom-estimate-wrapper .estim-result-input {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.95);
+      color: #333;
+      font-size: 14px;
+      font-family: inherit;
+      box-sizing: border-box;
+    }
+
+    #custom-estimate-wrapper .estim-result-input::placeholder {
+      color: #999;
+    }
+
+    #custom-estimate-wrapper .estim-result-input:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+    }
+
+    /* バリデーションメッセージのスタイル */
+    #custom-estimate-wrapper .estim-error-msg {
+      color: #ffcccc;
+      font-size: 11px;
+      margin-top: 5px;
+      display: none;
+      font-weight: 600;
+    }
+
+    #custom-estimate-wrapper .estim-required-badge {
+      background: #ff4d4d;
+      color: white;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 5px;
+      vertical-align: middle;
+    }
+
+    #custom-estimate-wrapper .estim-accordion-toggle {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 25px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 15px;
+      color: #000;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 30px;
+      transition: all 0.3s ease;
+    }
+
+    #custom-estimate-wrapper .estim-accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    #custom-estimate-wrapper .estim-accordion-content.open {
+      max-height: 1000px;
+    }
+
+    #custom-estimate-wrapper .estim-terms-summary {
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 0 0 15px 15px;
+      margin-top: -10px;
+    }
+
+    #custom-estimate-wrapper .estim-terms-summary h4 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 20px;
+      border: none;
+    }
+
+    #custom-estimate-wrapper .estim-terms-summary ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #custom-estimate-wrapper .estim-terms-summary li {
+      padding: 12px 0;
+      color: #000;
+      font-size: 15px;
+      line-height: 26px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    #custom-estimate-wrapper .estim-terms-summary strong {
+      color: #ff8c42;
+    }
+
+    #custom-estimate-wrapper .estim-btn-link {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 14px 30px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #000 !important;
+      text-decoration: none !important;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    #custom-estimate-wrapper .estim-agreement-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 25px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    #custom-estimate-wrapper .estim-agreement-checkbox input[type="checkbox"] {
+      width: 26px;
+      height: 26px;
+      cursor: pointer;
+      accent-color: #ff6b35;
+    }
+
+    #custom-estimate-wrapper .estim-btn-request {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 22px;
+      background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+      color: white !important;
+      text-decoration: none !important;
+      border-radius: 16px;
+      font-size: 20px;
+      font-weight: 700;
+      margin-top: 25px;
+      box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    #custom-estimate-wrapper .estim-btn-request:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(255, 107, 53, 0.5);
+    }
+
+    #custom-estimate-wrapper .estim-btn-request.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* =========================
+       フッター直前スペース（調整ブロック）
+    ========================= */
+    #custom-estimate-wrapper .footer-spacer {
+      height: var(--footer-spacer);
+    }
+
+    @media (max-width: 768px) {
+      #custom-estimate-wrapper {
+        padding-top: 120px;
+        padding-bottom: 100px;
+        overflow-x: hidden;
+      }
+
+      #custom-estimate-wrapper .estim-container {
+        max-width: 764px;
+        margin: 0 auto;
+        /* ★ 344pxに見える原因（左右36px×2）を解消：可変paddingに */
+        padding-left: clamp(12px, 4vw, 20px);
+        padding-right: clamp(12px, 4vw, 20px);
+        box-sizing: border-box;
+      }
+
+      #custom-estimate-wrapper .estim-radio-group {
+        flex-direction: column;
+      }
+
+      #custom-estimate-wrapper .estim-page-header {
+        padding: 26px 20px;
+        margin-bottom: var(--mb-header-m);
+        border-radius: 18px;
+      }
+
+      #custom-estimate-wrapper .estim-calculator-section,
+      #custom-estimate-wrapper .estim-price-table-section {
+        padding: 30px 20px;
+        border-radius: 20px;
+        margin-bottom: var(--mb-section-m);
+      }
+
+      #custom-estimate-wrapper .estim-title {
+        margin-bottom: var(--mb-title-m);
+      }
+
+      #custom-estimate-wrapper .estim-form-group {
+        margin-bottom: var(--mb-form-group-m);
+      }
+
+      #custom-estimate-wrapper .estim-contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #custom-estimate-wrapper .estim-img-container {
+        margin-bottom: var(--mb-img-m);
+      }
+
+      #custom-estimate-wrapper .estim-result-section {
+        margin-top: var(--mt-result-m);
+        padding: var(--p-result-m); /* ★モバイル側で変更できる */
+      }
+
+      #custom-estimate-wrapper .estim-total-row {
+        font-size: 22px;
+      }
+
+      /* フッター直前スペース：モバイル上書き */
+      #custom-estimate-wrapper .footer-spacer {
+        height: var(--footer-spacer-m);
+      }
+    }
+
+    /* =========================
+       見積結果：2行レイアウト化 + アンダーバー
+    ========================= */
+    #custom-estimate-wrapper .estim-result-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    #custom-estimate-wrapper .estim-result-item > span:first-child {
+      font-size: 14px;
+      font-weight: 600;
+      opacity: 0.9;
+      position: relative;
+      padding-bottom: 6px;
+    }
+
+    #custom-estimate-wrapper .estim-result-item > span:first-child::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 1px;
+      background: rgba(0, 0, 0, 0.35);
+      margin-top: 6px;
+    }
+
+    #custom-estimate-wrapper .estim-result-item > span:last-child {
+      width: 100%;
+      text-align: right;
+      font-size: 18px;
+      font-weight: 700;
+      word-break: break-word;
+    }
+
+    #custom-estimate-wrapper .estim-total-row > span:last-child {
+      font-size: 28px;
+      font-weight: 900;
+    }
+
+    #custom-estimate-wrapper .estim-total-row > span:first-child::after {
+      height: 2px;
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    /* =========================
+       ▼ 追加：572px以下
+       ・選択セット/レンタル料はJSで<br>を入れる（確実に2行）
+       ・表示は左寄せにして読みやすく
+    ========================= */
+    @media (max-width: 572px) {
+      #custom-estimate-wrapper
+        #estim-results
+        .estim-result-item
+        > span:last-child {
+        text-align: left !important;
+        line-height: 24px;
+      }
+
+      #custom-estimate-wrapper #estim-results h3 {
+        font-size: 20px !important;
+        line-height: 25px;
+      }
+
+      #custom-estimate-wrapper
+        #estim-results
+        .estim-result-item
+        > span:first-child {
+        font-size: 12px !important;
+        line-height: 15px;
+      }
+
+      #custom-estimate-wrapper
+        #estim-results
+        .estim-total-row
+        > span:last-child {
+        font-size: 22px !important;
+        text-align: right !important;
+      }
+    }
+
+    /* =========================
+       ▼ 追加：572px以下（お客様情報の入力まわり）
+       触るのはここだけでOK
+    ========================= */
+    @media (max-width: 572px) {
+      /* 見出し：お客様情報の入力 */
+      #custom-estimate-wrapper #estim-results .estim-contact-title {
+        font-size: 16px !important;
+        line-height: 20px;
+        margin-bottom: 14px !important;
+      }
+
+      /* ラベル：お名前/会社名/メール/電話 */
+      #custom-estimate-wrapper #estim-results .estim-contact-form label {
+        font-size: 11px !important;
+        line-height: 14px;
+        margin-bottom: 6px !important;
+      }
+
+      /* 入力欄：入力文字 */
+      #custom-estimate-wrapper #estim-results .estim-result-input {
+        font-size: 14px !important;
+        line-height: 18px;
+        padding: 10px 12px !important;
+      }
+
+      /* 入力欄：placeholder */
+      #custom-estimate-wrapper #estim-results .estim-result-input::placeholder {
+        font-size: 13px !important;
+      }
+
+      /* 必須バッジ */
+      #custom-estimate-wrapper #estim-results .estim-required-badge {
+        font-size: 9px !important;
+        padding: 2px 5px !important;
+      }
+
+      /* エラーメッセージ */
+      #custom-estimate-wrapper #estim-results .estim-error-msg {
+        font-size: 10px !important;
+        margin-top: 4px !important;
+      }
+
+      /* お客様情報フォーム自体 */
+      #custom-estimate-wrapper #estim-results .estim-contact-form {
+        padding: 18px !important;
+      }
+    }
+
+    /* =========================
+       ▼ お見積もり結果：値側の文字サイズ
+       Aセット / 金額 / 日付 など
+    ========================= */
+    @media (max-width: 572px) {
+      #custom-estimate-wrapper
+        #estim-results
+        .estim-result-item
+        > span:last-child {
+        font-size: 18px !important;
+      }
+    }
+    @media (max-width: 504px) {
+      #custom-estimate-wrapper
+        #estim-results
+        .estim-result-item
+        > span:last-child {
+        font-size: 18px !important;
+      }
+    }
+    @media (max-width: 436px) {
+      #custom-estimate-wrapper
+        #estim-results
+        .estim-result-item
+        > span:last-child {
+        font-size: 17px !important;
+      }
+    }
+    @media (max-width: 401px) {
+      #custom-estimate-wrapper
+        #estim-results
+        .estim-result-item
+        > span:last-child {
+        font-size: 13px !important;
+      }
+    }
+
+    /* =========================
+       ▼ 358px以下：お客様情報の入力（見出し）
+    ========================= */
+    @media (max-width: 358px) {
+      #custom-estimate-wrapper #estim-results .estim-contact-title {
+        font-size: 14px !important;
+        line-height: 18px;
+      }
+    }
+
+    /* =========================================================
+       ▼ 追加：利用規約・約款ブロック（トグル/要約/リンク/同意/送信）
+       ・インライン style を含む箇所も確実に上書きできるようにする
+    ========================================================= */
+
+    /* 共通（PC/モバイル共通） */
+    #custom-estimate-wrapper .estim-accordion-toggle {
+      font-size: var(--fs-terms-toggle);
+      padding: var(--py-terms-toggle) var(--px-terms-toggle);
+    }
+
+    #custom-estimate-wrapper .estim-terms-summary {
+      padding: var(--p-terms-summary);
+    }
+
+    #custom-estimate-wrapper .estim-terms-summary h4 {
+      font-size: var(--fs-terms-h4);
+      margin-bottom: var(--mb-terms-h4);
+    }
+
+    #custom-estimate-wrapper .estim-terms-summary li {
+      font-size: var(--fs-terms-li);
+      line-height: var(--lh-terms-li);
+      padding: var(--py-terms-li) 0;
+    }
+
+    #custom-estimate-wrapper .estim-btn-link {
+      font-size: var(--fs-terms-link);
+      padding: var(--py-terms-link) var(--px-terms-link);
+    }
+
+    #custom-estimate-wrapper .estim-agreement-checkbox {
+      padding: var(--p-agree-box);
+      gap: var(--agree-gap);
+    }
+
+    /* 同意文言はインライン style があるため !important で上書き */
+    #custom-estimate-wrapper .estim-agreement-checkbox span {
+      font-size: var(--fs-agree-text) !important;
+      line-height: 20px;
+    }
+
+    #custom-estimate-wrapper .estim-btn-request {
+      font-size: var(--fs-submit-btn);
+      padding: var(--py-submit-btn) 22px;
+    }
+
+    /* 572px以下：利用規約ブロックの値をまとめて下げる */
+    @media (max-width: 572px) {
+      #custom-estimate-wrapper {
+        --fs-terms-toggle: 14px;
+        --py-terms-toggle: 16px;
+        --px-terms-toggle: 18px;
+
+        --p-terms-summary: 18px;
+        --fs-terms-h4: 15px;
+        --mb-terms-h4: 12px;
+
+        --fs-terms-li: 12px;
+        --lh-terms-li: 19px;
+        --py-terms-li: 8px;
+
+        --fs-terms-link: 13px;
+        --py-terms-link: 12px;
+        --px-terms-link: 18px;
+
+        --fs-agree-text: 12px;
+        --p-agree-box: 16px;
+        --agree-gap: 10px;
+
+        --fs-submit-btn: 16px;
+        --py-submit-btn: 18px;
+
+        /* ★572px以下で、結果ボックスpaddingをさらに詰めたい場合はここを変更 */
+        /* --p-result-m: 18px; */
+      }
+
+      #custom-estimate-wrapper #estim-acc-icon {
+        font-size: 14px !important;
+      }
+
+      #custom-estimate-wrapper
+        .estim-agreement-checkbox
+        input[type="checkbox"] {
+        width: 22px;
+        height: 22px;
+      }
+    }
+
+    /* 358px以下：極小端末（任意の追い込み） */
+    @media (max-width: 358px) {
+      #custom-estimate-wrapper {
+        --fs-terms-toggle: 13px;
+        --fs-terms-li: 11px;
+        --fs-agree-text: 11px;
+        --fs-submit-btn: 15px;
+      }
+    }
+
+    /* =========================
+       料金表カードスタイル
+    ========================= */
+    #custom-estimate-wrapper .hp-pricing-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      padding: 40px 0;
+    }
+
+    #custom-estimate-wrapper .hp-delivery-card {
+      flex: 1;
+      min-width: 300px;
+      max-width: 500px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      box-sizing: border-box;
+    }
+
+    #custom-estimate-wrapper .hp-delivery-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    #custom-estimate-wrapper .hp-delivery-table th,
+    #custom-estimate-wrapper .hp-delivery-table td {
+      border: 1px solid #ddd;
+      padding: 15px 10px;
+    }
+
+    #custom-estimate-wrapper .hp-pricing-only-section {
+      display: flex;
+      justify-content: center;
+      flex: 1;
+      min-width: 300px;
+      max-width: 460px;
+      background-color: transparent;
+      font-family: "Noto Sans JP", "Helvetica Neue", Arial,
+        "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    }
+
+    #custom-estimate-wrapper .hp-card.single-item {
+      background: #fff;
+      border: 2px solid #d32f2f;
+      border-radius: 16px;
+      padding: 50px 30px 40px;
+      width: 100%;
+      max-width: 460px;
+      position: relative;
+      box-sizing: border-box;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    #custom-estimate-wrapper .hp-badge {
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #d32f2f;
+      color: #fff;
+      padding: 6px 26px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: bold;
+      white-space: nowrap;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 10px rgba(211, 47, 47, 0.3);
+    }
+
+    #custom-estimate-wrapper .hp-card-header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    #custom-estimate-wrapper .hp-plan-title {
+      margin: 0 !important;
+      font-size: 24px;
+      line-height: 34px;
+      font-weight: 700;
+      color: #333;
+      border: none !important;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    #custom-estimate-wrapper .hp-set-name {
+      text-align: center;
+    }
+
+    #custom-estimate-wrapper .hp-plus-sign {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #d32f2f;
+      margin: 5px 0;
+    }
+
+    #custom-estimate-wrapper .hp-plan-title span {
+      font-size: 19px;
+      display: block;
+      margin-top: 5px;
+    }
+
+    #custom-estimate-wrapper .hp-price-box {
+      background: #fff5f5;
+      border-radius: 12px;
+      padding: 25px 20px;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    #custom-estimate-wrapper .hp-price-main {
+      font-size: 42px;
+      font-weight: 900;
+      color: #d32f2f;
+      line-height: 42px;
+      margin-bottom: 12px;
+    }
+
+    #custom-estimate-wrapper .hp-currency {
+      font-size: 22px;
+      margin-right: 2px;
+    }
+
+    #custom-estimate-wrapper .hp-unit {
+      font-size: 16px;
+      color: #666;
+      font-weight: normal;
+    }
+
+    #custom-estimate-wrapper .hp-price-sub {
+      font-size: 30px;
+      color: #444;
+      font-weight: 600;
+    }
+
+    #custom-estimate-wrapper .hp-details-single {
+      margin-bottom: 25px;
+    }
+
+    #custom-estimate-wrapper .hp-detail-item {
+      background: #f8f9fa;
+      padding: 18px;
+      border-radius: 10px;
+      text-align: center;
+      border: 1px solid #eee;
+    }
+
+    #custom-estimate-wrapper .hp-detail-label {
+      display: block;
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    #custom-estimate-wrapper .hp-detail-value {
+      display: block;
+      font-weight: 700;
+      font-size: 22px;
+      color: #333;
+    }
+
+    #custom-estimate-wrapper .hp-note {
+      font-size: 14px;
+      color: #777;
+      line-height: 24px;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+      #custom-estimate-wrapper .hp-pricing-wrapper {
+        flex-direction: column;
+        padding: 20px 0;
+      }
+      #custom-estimate-wrapper .hp-delivery-card {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+      }
+      #custom-estimate-wrapper .hp-delivery-table th,
+      #custom-estimate-wrapper .hp-delivery-table td {
+        font-size: 13px !important;
+        padding: 10px 5px !important;
+      }
+    }
+
+    @media (max-width: 500px) {
+      #custom-estimate-wrapper .hp-pricing-only-section {
+        padding: 30px 15px;
+      }
+      #custom-estimate-wrapper .hp-card.single-item {
+        padding: 45px 20px 30px;
+      }
+      #custom-estimate-wrapper .hp-plan-title {
+        font-size: 21px;
+      }
+      #custom-estimate-wrapper .hp-price-main {
+        font-size: 34px;
+      }
+      #custom-estimate-wrapper .hp-detail-value {
+        font-size: 19px;
+      }
+    }
+  </style>
+
+  <div class="estim-container">
+    <!-- ページヘッダー -->
+    <div class="estim-page-header">
+      <h1
+        style="
+          font-size: 32px;
+          font-weight: 900;
+          margin-bottom: 20px;
+          color: #000;
+          text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+          border: none;
+          line-height: 38px;
+        "
+      >
+        お見積
+      </h1>
+      <p
+        style="
+          font-size: 18px;
+          opacity: 0.9;
+          color: #000;
+          text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+        "
+      >
+        颯風ウィンチのレンタル料金を簡単計算
+      </p>
+    </div>
+
+    <!-- 料金表 -->
+    <div class="estim-price-table-section">
+      <h2 class="estim-title">料金表</h2>
+      <div class="hp-pricing-wrapper">
+        <!-- 配送料金表 -->
+        <div class="hp-delivery-card">
+          <h3 style="margin: 0 0 5px 0; font-size: 18px; font-weight: bold">
+            配送料金（税込）
+          </h3>
+          <p style="margin: 0 0 20px 0; font-size: 14px; color: #666">
+            距離制運賃料金表<br />
+            <span style="font-size: 12px">(1km未満端数切込)</span>
+          </p>
+
+          <table
+            class="hp-delivery-table"
+            style="width: 100%; border-collapse: collapse; margin-bottom: 20px"
+          >
+            <thead>
+              <tr style="background-color: #f9f9f9">
+                <th
+                  style="
+                    border: 1px solid #ddd;
+                    padding: 15px 10px;
+                    text-align: center;
+                  "
+                >
+                  距離
+                </th>
+                <th
+                  style="
+                    border: 1px solid #ddd;
+                    padding: 15px 10px;
+                    text-align: center;
+                  "
+                >
+                  料金
+                </th>
+                <th
+                  style="
+                    border: 1px solid #ddd;
+                    padding: 15px 10px;
+                    text-align: center;
+                  "
+                >
+                  単位
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td
+                  style="
+                    border: 1px solid #ddd;
+                    padding: 15px 10px;
+                    text-align: center;
+                  "
+                >
+                  ～20km
+                </td>
+                <td
+                  style="
+                    border: 1px solid #ddd;
+                    padding: 15px 10px;
+                    text-align: center;
+                    font-weight: bold;
+                    color: #0056b3;
+                  "
+                >
+                  9,000円
+                </td>
+                <td
+                  style="
+                    border: 1px solid #ddd;
+                    padding: 15px 10px;
+                    text-align: center;
+                  "
+                >
+                  基本料金
+                </td>
+              </tr>
+              <tr>
+                <td
+                  style="
+                    border: 1px solid #ddd;
+                    padding: 15px 10px;
+                    text-align: center;
+                  "
+                >
+                  21km～50km
+                </td>
+                <td
+                  style="
+                    border: 1px solid #ddd;
+                    padding: 15px 10px;
+                    text-align: center;
+                    font-weight: bold;
+                    color: #0056b3;
+                  "
+                >
+                  400円
+                </td>
+                <td
+                  style="
+                    border: 1px solid #ddd;
+                    padding: 15px 10px;
+                    text-align: center;
+                  "
+                >
+                  / km
+                </td>
+              </tr>
+              <tr>
+                <td
+                  style="
+                    border: 1px solid #ddd;
+                    padding: 15px 10px;
+                    text-align: center;
+                  "
+                >
+                  51km～100km
+                </td>
+                <td
+                  style="
+                    border: 1px solid #ddd;
+                    padding: 15px 10px;
+                    text-align: center;
+                    font-weight: bold;
+                    color: #0056b3;
+                  "
+                >
+                  350円
+                </td>
+                <td
+                  style="
+                    border: 1px solid #ddd;
+                    padding: 15px 10px;
+                    text-align: center;
+                  "
+                >
+                  / km
+                </td>
+              </tr>
+              <tr>
+                <td
+                  style="
+                    border: 1px solid #ddd;
+                    padding: 15px 10px;
+                    text-align: center;
+                  "
+                >
+                  101km～200km
+                </td>
+                <td
+                  style="
+                    border: 1px solid #ddd;
+                    padding: 15px 10px;
+                    text-align: center;
+                    font-weight: bold;
+                    color: #0056b3;
+                  "
+                >
+                  300円
+                </td>
+                <td
+                  style="
+                    border: 1px solid #ddd;
+                    padding: 15px 10px;
+                    text-align: center;
+                  "
+                >
+                  / km
+                </td>
+              </tr>
+              <tr>
+                <td
+                  style="
+                    border: 1px solid #ddd;
+                    padding: 15px 10px;
+                    text-align: center;
+                  "
+                >
+                  201km～
+                </td>
+                <td
+                  style="
+                    border: 1px solid #ddd;
+                    padding: 15px 10px;
+                    text-align: center;
+                    font-weight: bold;
+                    color: #0056b3;
+                  "
+                >
+                  250円
+                </td>
+                <td
+                  style="
+                    border: 1px solid #ddd;
+                    padding: 15px 10px;
+                    text-align: center;
+                  "
+                >
+                  / km
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="font-size: 11px; color: #d9534f">
+            <p style="margin: 0">※距離は実距離に基づいて計算致します。</p>
+            <p style="margin: 0">
+              ※別途配送距離に応じた料金が加算される場合がございます。
+            </p>
+          </div>
+        </div>
+
+        <!-- レンタル料金表 -->
+        <div class="hp-pricing-only-section">
+          <div class="hp-card single-item">
+            <div class="hp-card-header">
+              <h2 class="hp-plan-title">
+                <div class="hp-set-name">疾風ウィンチ基本セット</div>
+                <div class="hp-plus-sign">＋</div>
+                <div class="hp-set-name">シルバーアームセット</div>
+                <span>（吊具セット付）</span>
+              </h2>
+            </div>
+
+            <div class="hp-price-box">
+              <div class="hp-price-main">
+                <span class="hp-currency">¥</span>100,000<span class="hp-unit">
+                  /月(税込)</span
+                >
+              </div>
+              <div class="hp-price-sub">
+                <span class="hp-currency">¥</span>5,000<span class="hp-unit">
+                  /日(税込)</span
+                >
+              </div>
+            </div>
+
+            <div class="hp-details-single">
+              <div class="hp-detail-item">
+                <span class="hp-detail-label">補償金</span>
+                <span class="hp-detail-value">66,000円/1回</span>
+              </div>
+            </div>
+
+            <div class="hp-note">
+              ※1回ご利用毎に補償金が発生します。<br />
+              ※補償金は検品後問題がなければ返金致します。<br />
+              ※初回リース料は前払いとなります。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 計算機本体 -->
+    <div class="estim-calculator-section">
+      <h2 class="estim-title">料金計算</h2>
+
+      <form id="estim-calc-form">
+        <div class="estim-form-group">
+          <label class="estim-label">郵便番号</label>
+          <input
+            type="text"
+            class="estim-input"
+            id="estim-postal-code"
+            placeholder="例：100-0001"
+            maxlength="8"
+            pattern="\d{3}-?\d{4}"
+          />
+          <small
+            style="
+              display: block;
+              margin-top: 5px;
+              font-size: 12px;
+              color: #666;
+            "
+            >ハイフンあり・なしどちらでも入力可能</small
+          >
+        </div>
+
+        <div class="estim-form-group">
+          <label class="estim-label">住所</label>
+          <input
+            type="text"
+            class="estim-input"
+            id="estim-address"
+            placeholder="都道府県・市区町村が自動入力されます"
+          />
+          <div
+            id="estim-distance-info"
+            style="
+              margin-top: 12px;
+              padding: 12px 16px;
+              background-color: #f0f7ff;
+              border-left: 4px solid #667eea;
+              border-radius: 6px;
+              font-size: 14px;
+              color: #333;
+              display: none;
+            "
+          >
+            <span
+              style="
+                font-weight: 700;
+                color: #667eea;
+                display: block;
+                margin-bottom: 4px;
+              "
+            >
+              配送元からの道のり
+            </span>
+            <span
+              id="estim-distance-text"
+              style="font-weight: 600; color: #1a1a1a; font-size: 15px"
+            >
+              -
+            </span>
+          </div>
+        </div>
+
+        <div class="estim-form-group">
+          <label class="estim-label">レンタル期間</label>
+          <select class="estim-select" id="estim-rentalType">
+            <option value="daily">日割り</option>
+            <option value="monthly">月割り</option>
+          </select>
+        </div>
+
+        <div class="estim-form-group">
+          <label class="estim-label">レンタル開始日</label>
+          <input type="date" class="estim-input" id="estim-startDate" />
+        </div>
+
+        <div class="estim-form-group">
+          <label class="estim-label">レンタル終了日</label>
+          <input type="date" class="estim-input" id="estim-endDate" />
+        </div>
+
+        <div
+          id="estim-periodBox"
+          class="estim-period-display"
+          style="display: none"
+        >
+          <span
+            style="
+              font-size: 14px;
+              opacity: 0.9;
+              display: block;
+              margin-bottom: 5px;
+              color: #000;
+            "
+            >レンタル期間:</span
+          >
+          <span
+            id="estim-periodText"
+            style="font-size: 28px; font-weight: 700; color: #000"
+            >0日</span
+          >
+        </div>
+      </form>
+
+      <div id="estim-results" class="estim-result-section">
+        <h3
+          style="
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #000;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+            border: none;
+          "
+        >
+          お見積結果
+        </h3>
+
+        <div class="estim-result-item">
+          <span style="font-size: 16px">発送料金</span>
+          <span
+            id="estim-res-delivery"
+            style="font-weight: 700; font-size: 18px"
+            >-</span
+          >
+        </div>
+        <div class="estim-result-item">
+          <span style="font-size: 16px">レンタル料</span>
+          <span id="estim-res-rent" style="font-weight: 700; font-size: 18px"
+            >-</span
+          >
+        </div>
+        <div class="estim-result-item">
+          <span style="font-size: 16px">基本料金</span>
+          <span id="estim-res-deposit" style="font-weight: 700; font-size: 18px"
+            >-</span
+          >
+        </div>
+        <div class="estim-result-item estim-total-row">
+          <span>合計金額（税込）</span>
+          <span id="estim-res-total">-</span>
+        </div>
+
+        <div class="estim-contact-form">
+          <div class="estim-contact-title">
+            <span>お客様情報の入力</span>
+          </div>
+          <div class="estim-contact-grid">
+            <div class="estim-form-group" style="margin-bottom: 10px">
+              <label style="font-size: 12px; display: block; margin-bottom: 5px"
+                >お名前<span class="estim-required-badge">必須</span></label
+              >
+              <input
+                type="text"
+                id="estim-user-name"
+                class="estim-result-input"
+                placeholder="例：山田 太郎"
+              />
+              <div id="err-name" class="estim-error-msg">
+                お名前を入力してください
+              </div>
+            </div>
+            <div class="estim-form-group" style="margin-bottom: 10px">
+              <label style="font-size: 12px; display: block; margin-bottom: 5px"
+                >会社名</label
+              >
+              <input
+                type="text"
+                id="estim-user-company"
+                class="estim-result-input"
+                placeholder="例：株式会社ハイニュー"
+              />
+            </div>
+            <div class="estim-form-group" style="margin-bottom: 10px">
+              <label style="font-size: 12px; display: block; margin-bottom: 5px"
+                >メールアドレス<span class="estim-required-badge"
+                  >必須</span
+                ></label
+              >
+              <input
+                type="email"
+                id="estim-user-email"
+                class="estim-result-input"
+                placeholder="例：info@example.com"
+              />
+              <div id="err-email" class="estim-error-msg">
+                有効なメールアドレスを入力してください
+              </div>
+            </div>
+            <div class="estim-form-group" style="margin-bottom: 10px">
+              <label style="font-size: 12px; display: block; margin-bottom: 5px"
+                >電話番号<span class="estim-required-badge">必須</span></label
+              >
+              <input
+                type="tel"
+                id="estim-user-phone"
+                class="estim-result-input"
+                placeholder="例：03-1234-5678"
+              />
+              <div id="err-phone" class="estim-error-msg">
+                電話番号を入力してください
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          style="
+            margin-top: 30px;
+            border-top: 2px dashed rgba(0, 0, 0, 0.3);
+            padding-top: 30px;
+          "
+        >
+          <button
+            type="button"
+            class="estim-accordion-toggle"
+            onclick="estimToggleAccordion()"
+          >
+            <span>利用規約・約款を確認する</span>
+            <span id="estim-acc-icon" style="transition: transform 0.3s"
+              >▼</span
+            >
+          </button>
+          <div id="estim-acc-content" class="estim-accordion-content">
+            <div class="estim-terms-summary">
+              <h4>利用規約・約款（要約）</h4>
+              <ul>
+                <li>
+                  <strong>レンタル期間:</strong>
+                  契約期間は機器の引渡し日から返却日までとします。
+                </li>
+                <li>
+                  <strong>料金:</strong>
+                  レンタル料金、管理費、保証金は契約時に明示された金額となります。
+                </li>
+                <li>
+                  <strong>延滞料金:</strong>
+                  返却予定日を過ぎた場合、延滞料金が発生します（1日あたりレンタル料金の50%）。
+                </li>
+                <li>
+                  <strong>お客様の責任:</strong>
+                  機器を善良なる管理者の注意をもって使用・保管してください。
+                </li>
+                <li>
+                  <strong>禁止事項:</strong>
+                  機器の改造、転貸、定格荷重を超える使用等は禁止です。
+                </li>
+                <li>
+                  <strong>損害賠償:</strong>
+                  故意または過失により機器が破損・滅失した場合、修理費用または再調達価格相当額を賠償いただきます。
+                </li>
+                <li>
+                  <strong>キャンセル:</strong>
+                  レンタル開始日の3日前までの解約は、キャンセル料として契約金額の30%を申し受けます。
+                </li>
+              </ul>
+              <div style="text-align: center">
+                <a
+                  href="https://test.high-new.org/test/%e7%b4%84%e6%ac%be/"
+                  class="estim-btn-link"
+                  target="_blank"
+                  >📋 詳細な利用規約・約款はこちら</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 20px">
+          <label class="estim-agreement-checkbox">
+            <input
+              type="checkbox"
+              id="estim-agree-check"
+              onchange="estimUpdateBtn()"
+            />
+            <span style="color: #000; font-size: 15px; font-weight: 600"
+              >上記の利用規約・約款に同意します</span
+            >
+          </label>
+        </div>
+
+        <div
+          style="
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px dashed rgba(0, 0, 0, 0.3);
+          "
+        >
+          <a
+            href="https://test.high-new.org/test/%e3%81%8a%e5%95%8f%e3%81%84%e5%90%88%e3%82%8f%e3%81%9b/?preview_id=648&preview_nonce=ec448c2b2f&preview=true"
+            id="estim-submit-btn"
+            class="estim-btn-request disabled"
+          >
+            この内容でリース依頼する
+          </a>
+
+          <p
+            style="
+              text-align: center;
+              font-size: 13px;
+              color: rgba(255, 255, 255, 0.7);
+              margin-top: 15px;
+            "
+          ></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ▼▼▼ フッター直前の調整用スペース ▼▼▼ -->
+  <div class="footer-spacer" aria-hidden="true"></div>
+
+  <script>
+    (function () {
+      const pricing = {
+        admin: 12650,
+        deposit: 66000,
+        A: { daily: 3245, monthly: 64900 },
+        B: { daily: 2920, monthly: 58300 },
+      };
+
+      const sInput = document.getElementById("estim-startDate");
+      const eInput = document.getElementById("estim-endDate");
+      const typeSelect = document.getElementById("estim-rentalType");
+      const resultBox = document.getElementById("estim-results");
+      const postalCodeInput = document.getElementById("estim-postal-code");
+      const addressInput = document.getElementById("estim-address");
+      const distanceInfo = document.getElementById("estim-distance-info");
+      const distanceText = document.getElementById("estim-distance-text");
+
+      // 配送元の住所（〒700-0952 岡山県岡山市北区平田１１７−１０５）
+      const originAddress = "岡山県岡山市北区平田１１７−１０５";
+
+      // 計算された距離を保持する変数（km）
+      let calculatedDistance = null;
+
+      const uName = document.getElementById("estim-user-name");
+      const uCompany = document.getElementById("estim-user-company");
+      const uEmail = document.getElementById("estim-user-email");
+      const uPhone = document.getElementById("estim-user-phone");
+      const agreeCheck = document.getElementById("estim-agree-check");
+
+      const today = new Date();
+      const tomorrow = new Date(today);
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      sInput.valueAsDate = today;
+      eInput.valueAsDate = tomorrow;
+      sInput.min = today.toISOString().split("T")[0];
+
+      // 郵便番号から距離を取得する関数（独自APIエンドポイントを使用）
+      async function calculateDistanceByPostalCode(postalCode) {
+        // ハイフンを除去して数字のみにする
+        const code = postalCode.replace(/-/g, "");
+
+        // 7桁の数字でない場合は処理しない
+        if (!/^\d{7}$/.test(code)) {
+          calculatedDistance = null;
+          distanceInfo.style.display = "none";
+          runCalc();
+          return null;
+        }
+
+        distanceInfo.style.display = "block";
+        distanceText.innerHTML =
+          '<span style="color: #667eea;">⏳ 計算中...</span>';
+
+        try {
+          // 独自APIエンドポイントをPOST通信で呼び出し
+          const response = await fetch(
+            "https://ai-chatbot-api-584693937256.asia-northeast1.run.app/distance",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ destination: code }),
+            }
+          );
+
+          const data = await response.json();
+
+          if (data.success && data.distance) {
+            // 距離を取得（メートル単位）
+            const distanceMeters = data.distance.text;
+            // キロメートルに変換
+            const distanceKm = distanceMeters / 1000;
+            // 時間も取得
+            const durationText = data.duration.text;
+            // 距離のテキストも取得
+            const distanceText_api = data.distance.text;
+
+            // 距離を保存
+            calculatedDistance = distanceKm;
+
+            distanceText.innerHTML = `<span style="color: #d32f2f; font-size: 16px;">${distanceText_api}</span> <span style="color: #666; font-size: 13px;">（${durationText}）</span>`;
+
+            // 距離が計算できたら、料金計算を再実行
+            runCalc();
+
+            return distanceKm;
+          } else {
+            calculatedDistance = null;
+            distanceText.innerHTML =
+              '<span style="color: #d9534f;">距離を計算できませんでした</span>';
+            runCalc(); // 料金を再計算
+            return null;
+          }
+        } catch (error) {
+          console.error("距離計算エラー:", error);
+          calculatedDistance = null;
+          distanceText.innerHTML =
+            '<span style="color: #d9534f;">距離を計算できませんでした</span>';
+          runCalc(); // 料金を再計算
+          return null;
+        }
+      }
+
+      // 郵便番号から住所を自動入力する関数
+      function searchAddressByPostalCode(postalCode) {
+        // ハイフンを除去して数字のみにする
+        const code = postalCode.replace(/-/g, "");
+
+        // 7桁の数字でない場合は処理しない
+        if (!/^\d{7}$/.test(code)) {
+          distanceInfo.style.display = "none";
+          calculatedDistance = null;
+          runCalc();
+          return;
+        }
+
+        // 郵便番号検索APIを使用
+        fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${code}`)
+          .then((response) => response.json())
+          .then((data) => {
+            if (
+              data.status === 200 &&
+              data.results &&
+              data.results.length > 0
+            ) {
+              const result = data.results[0];
+              // 都道府県 + 市区町村までを自動入力
+              const address =
+                result.address1 + result.address2 + (result.address3 || "");
+              addressInput.value = address;
+
+              // 郵便番号から距離を計算
+              calculateDistanceByPostalCode(postalCode);
+            } else {
+              // 住所が見つからない場合
+              addressInput.value = "";
+              calculatedDistance = null;
+              distanceInfo.style.display = "none";
+              runCalc(); // 料金を再計算
+            }
+          })
+          .catch((error) => {
+            console.error("郵便番号検索エラー:", error);
+            addressInput.value = "";
+            calculatedDistance = null;
+            distanceInfo.style.display = "none";
+            runCalc(); // 料金を再計算
+          });
+      }
+
+      // 郵便番号入力時のイベントリスナー
+      postalCodeInput.addEventListener("input", function (e) {
+        let value = e.target.value.replace(/[^0-9-]/g, ""); // 数字とハイフンのみ許可
+
+        // ハイフンの位置を自動調整（3桁目と4桁目の間）
+        if (value.length > 3 && value.indexOf("-") === -1) {
+          value = value.slice(0, 3) + "-" + value.slice(3);
+        }
+
+        e.target.value = value;
+
+        // 7桁の数字が入力されたら住所検索
+        const code = value.replace(/-/g, "");
+        if (code.length === 7) {
+          searchAddressByPostalCode(value);
+        } else {
+          addressInput.value = "";
+          calculatedDistance = null;
+          distanceInfo.style.display = "none";
+          runCalc(); // 料金を再計算
+        }
+      });
+
+      // 郵便番号入力欄からフォーカスが外れた時も検索
+      postalCodeInput.addEventListener("blur", function (e) {
+        const code = e.target.value.replace(/-/g, "");
+        if (code.length === 7) {
+          searchAddressByPostalCode(e.target.value);
+        }
+      });
+
+      // 住所入力欄が変更された時も距離を計算（郵便番号がある場合）
+      addressInput.addEventListener("blur", function (e) {
+        const postalCode = postalCodeInput.value.trim();
+        if (postalCode) {
+          // 郵便番号がある場合は、郵便番号から距離を再計算
+          const code = postalCode.replace(/-/g, "");
+          if (code.length === 7) {
+            calculateDistanceByPostalCode(postalCode);
+          }
+        } else {
+          // 郵便番号がない場合は距離をリセット
+          calculatedDistance = null;
+          distanceInfo.style.display = "none";
+          runCalc(); // 料金を再計算
+        }
+      });
+
+      // 発送料金計算関数（距離制運賃料金表に基づく）
+      function calculateDeliveryFee() {
+        // 距離が計算されていない場合は0を返す
+        if (!calculatedDistance || calculatedDistance === 0) {
+          return 0;
+        }
+
+        const distance = Math.floor(calculatedDistance); // 1km未満端数切込
+
+        if (distance <= 20) {
+          return 9000; // 基本料金
+        } else if (distance <= 50) {
+          return 9000 + (distance - 20) * 400;
+        } else if (distance <= 100) {
+          return 9000 + 30 * 400 + (distance - 50) * 350;
+        } else if (distance <= 200) {
+          return 9000 + 30 * 400 + 50 * 350 + (distance - 100) * 300;
+        } else {
+          return (
+            9000 + 30 * 400 + 50 * 350 + 100 * 300 + (distance - 200) * 250
+          );
+        }
+      }
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      function applyMobileLineBreaks(elSet, elRent, setText, rentText) {
+        const isMobile572 = window.matchMedia("(max-width: 572px)").matches;
+
+        if (!isMobile572) {
+          elSet.textContent = setText;
+          elRent.textContent = rentText;
+          return;
+        }
+
+        // 572px以下：確実に「（」の前で改行（<br>を挿入）
+        elSet.innerHTML = escapeHtml(setText).replace("（", "<br>（");
+        elRent.innerHTML = escapeHtml(rentText).replace("（", "<br>（");
+      }
+
+      function runCalc() {
+        const startStr = sInput.value;
+        const endStr = eInput.value;
+        const set = "A"; // 固定値：Aセット
+        const type = typeSelect.value;
+
+        if (startStr && endStr) {
+          const start = new Date(startStr);
+          const end = new Date(endStr);
+
+          if (end >= start) {
+            const diffTime = Math.abs(end - start);
+            const days = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            document.getElementById("estim-periodText").textContent =
+              days + "日";
+            document.getElementById("estim-periodBox").style.display = "block";
+            eInput.min = startStr;
+
+            let rentalFee = 0;
+            if (type === "daily") {
+              rentalFee = pricing[`${set}`].daily * days;
+            } else {
+              rentalFee = pricing[`${set}`].monthly * days;
+            }
+
+            // 発送料金の計算（距離に基づく）
+            const deliveryFee = calculateDeliveryFee(); // 発送料金計算関数
+            const total = rentalFee + pricing.deposit + deliveryFee;
+
+            const startLocale = start.toLocaleDateString("ja-JP");
+            const endLocale = end.toLocaleDateString("ja-JP");
+
+            const elDelivery = document.getElementById("estim-res-delivery");
+            const elRent = document.getElementById("estim-res-rent");
+
+            // 距離が計算されていない場合は「-」を表示
+            const deliveryText =
+              deliveryFee > 0 ? deliveryFee.toLocaleString() + "円" : "-";
+            const rentText =
+              rentalFee.toLocaleString() +
+              "円（" +
+              startLocale +
+              " 〜 " +
+              endLocale +
+              " / " +
+              days +
+              (type === "daily" ? "日間" : "ヶ月") +
+              "）";
+
+            // まずPC基準で入れる（安全に初期化）
+            elDelivery.textContent = deliveryText;
+            elRent.textContent = rentText;
+            document.getElementById("estim-res-deposit").textContent =
+              pricing.deposit.toLocaleString() + "円";
+            document.getElementById("estim-res-total").textContent =
+              total.toLocaleString() + "円";
+
+            // 572px以下なら、レンタル料だけ <br> を入れて2行化
+            const isMobile572 = window.matchMedia("(max-width: 572px)").matches;
+            if (isMobile572) {
+              elRent.innerHTML = escapeHtml(rentText).replace("（", "<br>（");
+            }
+
+            resultBox.style.display = "block";
+
+            const estimateData = {
+              rentalType: type === "daily" ? "日割り" : "月割り",
+              startDate: startLocale,
+              endDate: endLocale,
+              period: days,
+              deliveryFee: deliveryFee,
+              rentalFee: rentalFee,
+              deposit: pricing.deposit,
+              total: total,
+            };
+            localStorage.setItem("estimateData", JSON.stringify(estimateData));
+
+            estimUpdateBtn();
+          } else {
+            resultBox.style.display = "none";
+            document.getElementById("estim-periodBox").style.display = "none";
+          }
+        }
+      }
+
+      function estimUpdateBtn() {
+        const isAgreed = agreeCheck.checked;
+
+        const valName = uName.value.trim();
+        const valEmail = uEmail.value.trim();
+        const valPhone = uPhone.value.trim();
+
+        const hasName = valName !== "";
+        const hasEmail = valEmail !== "" && valEmail.indexOf("@") !== -1;
+        const hasPhone = valPhone !== "";
+
+        if (valName === "" && document.activeElement !== uName) {
+          document.getElementById("err-name").style.display = "none";
+        } else if (!hasName) {
+          document.getElementById("err-name").style.display = "block";
+        } else {
+          document.getElementById("err-name").style.display = "none";
+        }
+
+        if (valEmail === "" && document.activeElement !== uEmail) {
+          document.getElementById("err-email").style.display = "none";
+        } else if (!hasEmail) {
+          document.getElementById("err-email").style.display = "block";
+        } else {
+          document.getElementById("err-email").style.display = "none";
+        }
+
+        if (valPhone === "" && document.activeElement !== uPhone) {
+          document.getElementById("err-phone").style.display = "none";
+        } else if (!hasPhone) {
+          document.getElementById("err-phone").style.display = "block";
+        } else {
+          document.getElementById("err-phone").style.display = "none";
+        }
+
+        const btn = document.getElementById("estim-submit-btn");
+
+        if (isAgreed && hasName && hasEmail && hasPhone) {
+          btn.classList.remove("disabled");
+
+          const contactData = {
+            name: valName,
+            company: uCompany.value,
+            email: valEmail,
+            phone: valPhone,
+          };
+          localStorage.setItem("estimContactData", JSON.stringify(contactData));
+        } else {
+          btn.classList.add("disabled");
+        }
+      }
+      window.estimUpdateBtn = estimUpdateBtn;
+
+      [sInput, eInput, typeSelect].forEach((el) =>
+        el.addEventListener("change", runCalc)
+      );
+
+      // 画面幅を変えた時も即反映（572境界での切り替え）
+      window.addEventListener("resize", runCalc);
+
+      [uName, uCompany, uEmail, uPhone].forEach((el) => {
+        el.addEventListener("input", estimUpdateBtn);
+        el.addEventListener("blur", estimUpdateBtn);
+      });
+
+      window.estimToggleAccordion = function () {
+        const content = document.getElementById("estim-acc-content");
+        const icon = document.getElementById("estim-acc-icon");
+        content.classList.toggle("open");
+        icon.style.transform = content.classList.contains("open")
+          ? "rotate(180deg)"
+          : "rotate(0deg)";
+      };
+
+      runCalc();
+    })();
+  </script>
+</div>
