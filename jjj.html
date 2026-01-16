@@ -1458,7 +1458,7 @@
         </h3>
 
         <div class="estim-result-item">
-          <span style="font-size: 16px">発送料金</span>
+          <span style="font-size: 16px">配送料金</span>
           <span
             id="estim-res-delivery"
             style="font-weight: 700; font-size: 18px"
@@ -1719,19 +1719,33 @@
           const data = await response.json();
 
           if (data.success && data.distance) {
-            // 距離を取得（メートル単位）
-            const distanceMeters = data.distance.text;
+            // 距離を取得（メートル単位の数値）
+            let distanceMeters;
+            if (data.distance.value !== undefined) {
+              // valueプロパティが存在する場合はそれを使用
+              distanceMeters = data.distance.value;
+            } else if (data.distance.text) {
+              // textプロパティから数値を抽出（例："12.3 km" → 12300）
+              const text = data.distance.text.replace(/[^\d.]/g, ""); // 数字と小数点のみ抽出
+              const kmValue = parseFloat(text);
+              distanceMeters = kmValue * 1000; // kmをメートルに変換
+            } else {
+              throw new Error("距離データが取得できませんでした");
+            }
+
             // キロメートルに変換
             const distanceKm = distanceMeters / 1000;
             // 時間も取得
-            const durationText = data.duration.text;
+            const durationText = data.duration ? data.duration.text : "";
             // 距離のテキストも取得
             const distanceText_api = data.distance.text;
 
             // 距離を保存
             calculatedDistance = distanceKm;
 
-            distanceText.innerHTML = `<span style="color: #d32f2f; font-size: 16px;">${distanceText_api}</span> <span style="color: #666; font-size: 13px;">（${durationText}）</span>`;
+            distanceText.innerHTML = `<span style="color: #d32f2f; font-size: 16px;">${distanceText_api}</span> <span style="color: #666; font-size: 13px;">${
+              durationText ? `（${durationText}）` : ""
+            }</span>`;
 
             // 距離が計算できたら、料金計算を再実行
             runCalc();
@@ -1849,26 +1863,42 @@
         }
       });
 
-      // 発送料金計算関数（距離制運賃料金表に基づく）
+      // 配送料金計算関数（距離制運賃料金表に基づく）
+      // ～20km: 9,000円（基本料金）
+      // 21km～50km: 400円/km
+      // 51km～100km: 350円/km
+      // 101km～200km: 300円/km
+      // 201km～: 250円/km
+      // 例：90kmの場合 = 9000 + 400 x (50 - 20) + 350 x (90 - 50)
       function calculateDeliveryFee() {
         // 距離が計算されていない場合は0を返す
         if (!calculatedDistance || calculatedDistance === 0) {
           return 0;
         }
 
-        const distance = Math.floor(calculatedDistance); // 1km未満端数切込
+        const distance = Math.ceil(calculatedDistance); // 1km未満端数切上
 
         if (distance <= 20) {
           return 9000; // 基本料金
         } else if (distance <= 50) {
-          return 9000 + (distance - 20) * 400;
+          // 9000 + 400 x (distance - 20)
+          return 9000 + 400 * (distance - 20);
         } else if (distance <= 100) {
-          return 9000 + 30 * 400 + (distance - 50) * 350;
+          // 9000 + 400 x (50 - 20) + 350 x (distance - 50)
+          return 9000 + 400 * (50 - 20) + 350 * (distance - 50);
         } else if (distance <= 200) {
-          return 9000 + 30 * 400 + 50 * 350 + (distance - 100) * 300;
-        } else {
+          // 9000 + 400 x (50 - 20) + 350 x (100 - 50) + 300 x (distance - 100)
           return (
-            9000 + 30 * 400 + 50 * 350 + 100 * 300 + (distance - 200) * 250
+            9000 + 400 * (50 - 20) + 350 * (100 - 50) + 300 * (distance - 100)
+          );
+        } else {
+          // 9000 + 400 x (50 - 20) + 350 x (100 - 50) + 300 x (200 - 100) + 250 x (distance - 200)
+          return (
+            9000 +
+            400 * (50 - 20) +
+            350 * (100 - 50) +
+            300 * (200 - 100) +
+            250 * (distance - 200)
           );
         }
       }
@@ -1922,8 +1952,8 @@
               rentalFee = pricing[`${set}`].monthly * days;
             }
 
-            // 発送料金の計算（距離に基づく）
-            const deliveryFee = calculateDeliveryFee(); // 発送料金計算関数
+            // 配送料金の計算（距離に基づく）
+            const deliveryFee = calculateDeliveryFee(); // 配送料金計算関数
             const total = rentalFee + pricing.deposit + deliveryFee;
 
             const startLocale = start.toLocaleDateString("ja-JP");
@@ -1948,6 +1978,7 @@
 
             // まずPC基準で入れる（安全に初期化）
             elDelivery.textContent = deliveryText;
+
             elRent.textContent = rentText;
             document.getElementById("estim-res-deposit").textContent =
               pricing.deposit.toLocaleString() + "円";
