@@ -1,0 +1,386 @@
+<!-- WordPress Custom HTML Block Start -->
+<div
+  class="hayate-pricing-container"
+  style="
+    background-color: #ebf7ff;
+    padding: 40px 20px;
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN',
+      'Hiragino Sans', Meiryo, sans-serif;
+    color: #333;
+    line-height: 1.6;
+  "
+>
+  <!-- Mobile Responsive & Hover Styles -->
+  <style>
+    .hayate-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4) !important;
+    }
+
+    @media (max-width: 768px) {
+      .hayate-flex-wrapper {
+        flex-direction: column;
+      }
+      .hayate-card {
+        width: 100% !important;
+        margin-bottom: 20px;
+      }
+      .hayate-table th,
+      .hayate-table td {
+        font-size: 23px !important;
+        padding: 10px 5px !important;
+      }
+      /* 右側のCTAカードを非表示 */
+      .hayate-card:last-child {
+        display: none !important;
+      }
+      /* モバイル用CTAエリアを表示 */
+      .hayate-mobile-cta {
+        display: block !important;
+      }
+    }
+
+    /* ▼ 370px以下：CTAテキスト縮小 */
+    @media (max-width: 370px) {
+      .hayate-cta-text {
+        font-size: 21px !important;
+      }
+    }
+  </style>
+
+  <!-- Main Title -->
+  <h2
+    style="
+      text-align: center;
+      margin: 0 0 40px 0;
+      font-size: 44px;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+    "
+  >
+    疾風配送料
+  </h2>
+
+  <!-- Flex Wrapper -->
+  <div
+    class="hayate-flex-wrapper"
+    style="
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: flex-start;
+    "
+  >
+    <!-- Left Card -->
+    <div
+      class="hayate-card"
+      style="
+        flex: 2;
+        background: #fff;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        min-width: 300px;
+        box-sizing: border-box;
+      "
+    >
+      <h3 style="margin: 0 0 5px 0; font-size: 28px; font-weight: bold">
+        配送料金（税込）
+      </h3>
+      <p style="margin: 0 0 20px 0; font-size: 24px; color: #666">
+        距離制運賃料金表<br />
+        <span style="font-size: 22px">(1km未満端数切込)</span>
+      </p>
+
+      <table
+        class="hayate-table"
+        style="
+          width: 100%;
+          border-collapse: collapse;
+          margin-bottom: 20px;
+          table-layout: fixed;
+        "
+      >
+        <thead>
+          <tr style="background-color: #f9f9f9">
+            <th style="border: 1px solid #ddd; padding: 15px 10px; width: 50%">
+              距離
+            </th>
+            <th
+              style="
+                border: 1px solid #ddd;
+                padding: 15px 10px;
+                text-align: right;
+                width: 25%;
+              "
+            >
+              料金
+            </th>
+            <th
+              style="
+                border: 1px solid #ddd;
+                padding: 15px 10px;
+                text-align: right;
+                width: 100px;
+              "
+            ></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 15px 10px; width: 50%">
+              ～20km
+            </td>
+            <td
+              style="
+                border: 1px solid #ddd;
+                padding: 15px 10px;
+                text-align: right;
+                font-weight: bold;
+                color: #0056b3;
+                width: 25%;
+              "
+            >
+              9,000円
+            </td>
+            <td
+              style="
+                border: 1px solid #ddd;
+                padding: 15px 10px;
+                text-align: right;
+                width: 100px;
+              "
+            >
+              基本料金
+            </td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 15px 10px; width: 50%">
+              21km～50km
+            </td>
+            <td
+              style="
+                border: 1px solid #ddd;
+                padding: 15px 10px;
+                text-align: right;
+                font-weight: bold;
+                color: #0056b3;
+                width: 25%;
+              "
+            >
+              400円
+            </td>
+            <td
+              style="
+                border: 1px solid #ddd;
+                padding: 15px 10px;
+                text-align: right;
+                width: 100px;
+              "
+            >
+              / km
+            </td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 15px 10px; width: 50%">
+              51km～100km
+            </td>
+            <td
+              style="
+                border: 1px solid #ddd;
+                padding: 15px 10px;
+                text-align: right;
+                font-weight: bold;
+                color: #0056b3;
+                width: 25%;
+              "
+            >
+              350円
+            </td>
+            <td
+              style="
+                border: 1px solid #ddd;
+                padding: 15px 10px;
+                text-align: right;
+                width: 100px;
+              "
+            >
+              / km
+            </td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 15px 10px; width: 50%">
+              101km～200km
+            </td>
+            <td
+              style="
+                border: 1px solid #ddd;
+                padding: 15px 10px;
+                text-align: right;
+                font-weight: bold;
+                color: #0056b3;
+                width: 25%;
+              "
+            >
+              300円
+            </td>
+            <td
+              style="
+                border: 1px solid #ddd;
+                padding: 15px 10px;
+                text-align: right;
+                width: 100px;
+              "
+            >
+              / km
+            </td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 15px 10px; width: 50%">
+              201km～
+            </td>
+            <td
+              style="
+                border: 1px solid #ddd;
+                padding: 15px 10px;
+                text-align: right;
+                font-weight: bold;
+                color: #0056b3;
+                width: 25%;
+              "
+            >
+              250円
+            </td>
+            <td
+              style="
+                border: 1px solid #ddd;
+                padding: 15px 10px;
+                text-align: right;
+                width: 100px;
+              "
+            >
+              / km
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="font-size: 21px; color: #d9534f">
+        <p style="margin: 0">※距離は実距離に基づいて計算致します。</p>
+        <p style="margin: 0">
+          ※別途配送距離に応じた料金が加算される場合がございます。
+        </p>
+      </div>
+
+      <!-- Mobile CTA Area (shown only on 768px and below) -->
+      <div
+        class="hayate-mobile-cta"
+        style="
+          display: none;
+          margin-top: 30px;
+          text-align: center;
+          padding: 30px 20px;
+          background: #fff;
+          border-radius: 12px;
+        "
+      >
+        <!-- CTA Text -->
+        <p
+          class="hayate-cta-text"
+          style="
+            margin: 0 0 30px 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            line-height: 1.8;
+            text-align: left;
+          "
+        >
+          詳しくはお見積りさせていただきます！<br />
+          是非お気軽にお問い合わせください。
+        </p>
+
+        <!-- Button -->
+        <a
+          href="https://test.high-new.org/test/%e3%81%8a%e8%a6%8b%e7%a9%8d/"
+          class="hayate-btn"
+          style="
+            display: inline-block;
+            background: linear-gradient(90deg, #ff8e53 0%, #ff6b35 100%);
+            color: white;
+            text-decoration: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 26px;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+          "
+        >
+          お見積をする →
+        </a>
+      </div>
+    </div>
+
+    <!-- Right Card -->
+    <div
+      class="hayate-card"
+      style="
+        flex: 1;
+        background: #fff;
+        border-radius: 12px;
+        padding: 40px 30px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        min-width: 280px;
+        box-sizing: border-box;
+      "
+    >
+      <!-- CTA Text -->
+      <p
+        class="hayate-cta-text"
+        style="
+          margin: 0 0 30px 0;
+          font-size: 24px;
+          font-weight: bold;
+          color: #333;
+          line-height: 1.8;
+          text-align: left;
+        "
+      >
+        詳しくはお見積りさせていただきます！<br />
+        是非お気軽にお問い合わせください。
+      </p>
+
+      <!-- Button -->
+      <a
+        href="https://test.high-new.org/test/%e3%81%8a%e8%a6%8b%e7%a9%8d/"
+        class="hayate-btn"
+        style="
+          display: inline-block;
+          background: linear-gradient(90deg, #ff8e53 0%, #ff6b35 100%);
+          color: white;
+          text-decoration: none;
+          padding: 15px 40px;
+          border-radius: 50px;
+          font-weight: bold;
+          font-size: 26px;
+          box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+          transition: all 0.3s ease;
+          white-space: nowrap;
+        "
+      >
+        お見積をする →
+      </a>
+    </div>
+  </div>
+</div>
+<!-- WordPress Custom HTML Block End -->

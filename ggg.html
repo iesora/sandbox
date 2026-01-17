@@ -1,0 +1,558 @@
+<!-- 
+【修正版】WordPress用カスタムHTMLコード
+・ソースコード（index.html）のデザイン（色、フォント、サイズ、余白）を忠実に再現しました。
+・背景色を「#1e3c72 -> #2a5298」のグラデーションに変更。
+・左側の特徴リストを半透明のすりガラス風デザインに変更。
+・右側の地図エリアをソースコード同様のシンプルな白いカードデザインに変更。
+-->
+
+<style>
+  /* --- ベースフォント設定 --- */
+  #combined-delivery-widget {
+    font-family: "Noto Sans JP", "Hiragino Kaku Gothic Pro", sans-serif;
+    box-sizing: border-box;
+
+    /* ▼▼▼ 背景色をソースコードと一致（#1e3c72 -> #2a5298） ▼▼▼ */
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+
+    /* 画面幅いっぱいに広げる設定 */
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* コンテンツを中央寄せ */
+    overflow: hidden; /* 装飾のはみ出し防止 */
+    padding: 60px 12px; /* 上下の余白、左右12pxのパディング */
+  }
+
+  /* --- 背景の装飾（円形グラデーション） --- */
+  #combined-delivery-widget::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 70%
+    );
+    border-radius: 50%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* --- コンテンツ幅制限コンテナ --- */
+  .widget-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* PCは2カラム */
+    gap: 50px;
+    max-width: 1200px;
+    width: 100%;
+    padding: 0 0px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    min-width: 0;
+  }
+
+  .area-text {
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+
+  /* =========================================
+       【左側】テキスト・特徴エリア
+       ========================================= */
+  .area-text h2 {
+    font-size: 60px;
+    font-weight: 900;
+    margin: 0 0 20px 0;
+    line-height: 1.3;
+    color: white;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  .area-text p {
+    font-size: 26px;
+    line-height: 1.7;
+    opacity: 0.95;
+    margin: 0 0 20px 0;
+    color: white;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  /* 特徴リスト（グリッド） */
+  .area-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  @media (min-width: 1024px) {
+    .area-features {
+      margin-bottom: 25px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .area-features {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* 特徴アイテム（半透明すりガラス） */
+  .area-feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-sizing: border-box;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .area-feature-icon {
+    font-size: 50px;
+    line-height: 1;
+  }
+
+  .area-feature-text {
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    white-space: nowrap;
+  }
+
+  /* お見積ボタン */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 32px;
+    /* オレンジグラデーション */
+    background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+    color: white !important; /* 強制的に白 */
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 24px;
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    word-break: keep-all;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(255, 107, 53, 0.5);
+    color: white;
+  }
+
+  /* 1024pxより大きいときに下部ボタンを非表示 */
+  @media (min-width: 1025px) {
+    .btn-primary-bottom {
+      display: none;
+    }
+  }
+
+  /* 配送可能エリアテキスト */
+  .delivery-area-text {
+    display: none;
+    margin-top: 25px;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  /* =========================================
+       【右側】地図・県名エリア（白い箱）
+       ========================================= */
+  .map-container {
+    background: white;
+    border-radius: 25px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .map-wrapper {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .map-wrapper img {
+    max-width: 100%; /* 親要素に収める */
+    width: 500px; /* 最大幅 */
+    height: auto;
+    border-radius: 20px;
+    display: inline-block;
+  }
+
+  /* 県名リスト（グリッド） */
+  .map-regions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  /* 個別の県名アイテム */
+  .region-item {
+    /* 薄いグレーのグラデーション背景 */
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+    box-sizing: border-box;
+    text-decoration: none; /* リンクの場合 */
+    display: block;
+  }
+
+  .region-item:hover {
+    border-color: #ff6b35;
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+  }
+
+  .region-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .region-status {
+    font-size: 14px;
+    color: #28a745;
+    font-weight: 600;
+    display: block;
+  }
+
+  /* =========================================
+       レスポンシブ（スマホ・タブレット）
+       ========================================= */
+  /* ===== PC共通（変更なし） ===== */
+  #combined-delivery-widget {
+    width: 100vw;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 60px 12px;
+  }
+
+  /* ===== 1230px以下：文字を少し小さく ===== */
+  @media (max-width: 1230px) {
+    .area-text h2 {
+      font-size: 56px;
+    }
+    .area-text p {
+      font-size: 24px;
+    }
+    .area-feature-text {
+      font-size: 17px;
+    }
+    .area-feature-icon {
+      font-size: 46px;
+    }
+    .btn-primary {
+      font-size: 22px;
+    }
+  }
+
+  /* ===== タブレット（1024px以下） ===== */
+  @media (max-width: 1024px) {
+    .area-text h2 {
+      font-size: 52px;
+    }
+    .area-text p {
+      font-size: 22px;
+    }
+    .area-feature-text {
+      font-size: 16px;
+    }
+    .area-feature-icon {
+      font-size: 42px;
+    }
+    .btn-primary {
+      font-size: 20px;
+    }
+    .widget-container {
+      gap: 20px;
+    }
+    .delivery-area-text {
+      display: block;
+      font-size: 20px;
+    }
+    .btn-primary-top {
+      display: none;
+    }
+  }
+
+  /* ===== タブレット（768px以下） ===== */
+  @media (max-width: 1024px) {
+    .area-text h2 {
+      font-size: 48px;
+    }
+    .area-text p {
+      font-size: 20px;
+    }
+    .area-feature-text {
+      font-size: 15px;
+      white-space: normal;
+    }
+    .area-feature-icon {
+      font-size: 38px;
+    }
+    .btn-primary {
+      font-size: 18px;
+      padding: 12px 28px;
+    }
+    .delivery-area-text {
+      font-size: 18px;
+    }
+    .map-wrapper img {
+      width: 100%;
+      max-width: 100%;
+    }
+    #combined-delivery-widget {
+      padding: 50px 16px;
+    }
+
+    .widget-container {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+
+    .area-text {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+
+    .map-container {
+      padding: 24px;
+    }
+  }
+  /* ===== モバイル（600px以下） ===== */
+  @media (max-width: 600px) {
+    .area-text h2 {
+      font-size: 42px;
+    }
+    .area-text p {
+      font-size: 18px;
+    }
+    .area-feature-text {
+      font-size: 14px;
+      white-space: normal;
+    }
+    .area-feature-icon {
+      font-size: 32px;
+    }
+    .btn-primary {
+      font-size: 16px;
+      padding: 12px 24px;
+    }
+    .delivery-area-text {
+      font-size: 16px;
+    }
+    .area-features {
+      gap: 12px;
+    }
+    .area-feature {
+      padding: 12px;
+      gap: 10px;
+    }
+  }
+
+  /* ===== モバイル：特徴テキスト＋チェックマークサイズ調整（修正版） ===== */
+  @media (max-width: 432px) {
+    .area-text h2 {
+      font-size: 38px;
+    }
+    .area-text p {
+      font-size: 17px;
+    }
+    .area-feature-text {
+      font-size: 13px;
+      white-space: normal;
+    }
+    .area-feature-icon {
+      font-size: 28px;
+    }
+    .btn-primary {
+      font-size: 15px;
+      padding: 10px 20px;
+    }
+    .delivery-area-text {
+      font-size: 15px;
+      padding: 12px;
+    }
+  }
+
+  @media (max-width: 382px) {
+    .area-text h2 {
+      font-size: 34px;
+    }
+    .area-text p {
+      font-size: 16px;
+    }
+    .area-feature-text {
+      font-size: 11px;
+      white-space: normal;
+    }
+    .area-feature-icon {
+      font-size: 26px;
+    }
+    .btn-primary {
+      font-size: 14px;
+      padding: 10px 18px;
+    }
+    .area-feature {
+      padding: 10px;
+      gap: 8px;
+    }
+    .area-features {
+      gap: 10px;
+    }
+    .delivery-area-text {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+
+  /* ===== 超小型スマホ対応（370px以下） ===== */
+  @media (max-width: 370px) {
+    .area-text h2 {
+      font-size: 32px;
+    }
+    .area-text p {
+      font-size: 15px;
+    }
+    .area-feature-text {
+      font-size: 10px;
+    }
+    .area-feature-icon {
+      font-size: 24px;
+    }
+    .btn-primary {
+      font-size: 13px;
+      padding: 8px 16px;
+    }
+    .region-status {
+      font-size: 11px;
+    }
+    .area-feature {
+      padding: 8px;
+    }
+    .delivery-area-text {
+      font-size: 13px;
+      padding: 8px;
+    }
+  }
+</style>
+
+<div id="combined-delivery-widget">
+  <div class="widget-container">
+    <!-- ▼▼▼ 左側：テキストエリア ▼▼▼ -->
+    <div class="area-text">
+      <h2>中国・四国エリアに<br />迅速配送</h2>
+      <p>
+        岡山、兵庫、香川、広島、鳥取の全域をカバー。<br />
+        経験豊富な自社スタッフが、お客様の現場まで直接お届けします。
+      </p>
+
+      <div class="area-features">
+        <div class="area-feature">
+          <div class="area-feature-icon">✓</div>
+          <div class="area-feature-text">自社スタッフ配送</div>
+        </div>
+        <div class="area-feature">
+          <div class="area-feature-icon">✓</div>
+          <div class="area-feature-text">即日対応可能</div>
+        </div>
+        <div class="area-feature">
+          <div class="area-feature-icon">✓</div>
+          <div class="area-feature-text">設置サポート</div>
+        </div>
+        <div class="area-feature">
+          <div class="area-feature-icon">✓</div>
+          <div class="area-feature-text">緊急対応OK</div>
+        </div>
+      </div>
+
+      <a
+        href="https://test.high-new.org/test/%e3%81%8a%e8%a6%8b%e7%a9%8d/"
+        class="btn-primary btn-primary-top"
+        >お見積をする</a
+      >
+    </div>
+
+    <!-- ▼▼▼ 右側：地図エリア ▼▼▼ -->
+    <div class="map-container">
+      <div class="map-wrapper">
+        <!-- 画像パスは元のコードに合わせています -->
+        <img
+          src="http://test.high-new.org/test/wp-content/uploads/2026/01/3.png"
+        />
+      </div>
+
+      <div class="map-regions">
+        <div class="region-item">
+          <span class="region-name">岡山県</span>
+          <span class="region-status">✓ 対応エリア</span>
+        </div>
+        <div class="region-item">
+          <span class="region-name">兵庫県</span>
+          <span class="region-status">✓ 対応エリア</span>
+        </div>
+        <div class="region-item">
+          <span class="region-name">香川県</span>
+          <span class="region-status">✓ 対応エリア</span>
+        </div>
+        <div class="region-item">
+          <span class="region-name">広島県</span>
+          <span class="region-status">✓ 対応エリア</span>
+        </div>
+        <div class="region-item">
+          <span class="region-name">鳥取県</span>
+          <span class="region-status">✓ 対応エリア</span>
+        </div>
+      </div>
+    </div>
+
+    <a
+      href="https://test.high-new.org/test/%e3%81%8a%e8%a6%8b%e7%a9%8d/"
+      class="btn-primary btn-primary-bottom"
+      >お見積をする</a
+    >
+  </div>
+</div>
